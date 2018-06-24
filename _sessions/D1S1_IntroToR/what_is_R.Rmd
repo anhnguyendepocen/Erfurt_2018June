@@ -16,12 +16,20 @@ output:
 ---
 
 <div class="my-footer"><span>
+<<<<<<< HEAD
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Erfurt, June 2018</font></a>
+=======
 <a href="https://therbootcamp.github.io/"><font color="#646464">Erfurt, June 2018</font></a>
+>>>>>>> 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
+<<<<<<< HEAD
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
+=======
 <a href="https://therbootcamp.github.io/"><font color="#646464">www.therbootcamp.com</font></a>
+>>>>>>> 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 </span></div> 
 
 ---
@@ -43,7 +51,7 @@ options(digits = 4)
 ```
 
 
-# Why R?
+# Why R
 
 .pull-left3[
 R steadily **grows in popularity**. 
@@ -290,7 +298,7 @@ class(some_name)
 ]
 
 .pull-right5[
-```{r, error=TRUE}
+```{r, error=TRUE,tidy=T}
 # no argument
 mean()
 
