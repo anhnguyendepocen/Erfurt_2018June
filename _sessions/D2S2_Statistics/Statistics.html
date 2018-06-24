@@ -217,6 +217,121 @@ t.test(formula = age ~ sex,
 
 ]
 
+
+
+---
+
+.pull-left45[
+
+## Simple hypothesis tests
+
+All of the basic one and two sample hypothesis tests are included in the stats package
+
+| Hypothesis Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+
+These tests are unique because they can take either formula arguments, or individual vector arguments `x`, and `y`
+
+]
+
+
+.pull-right5[
+
+### T-Test with t.test()
+
+
+```r
+# 1-sample t-test
+t.test(x = baselers$age, 
+       mu = 40)  # Mean under H0
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  baselers$age
+## t = 28, df = 10000, p-value &lt;2e-16
+## alternative hypothesis: true mean is not equal to 40
+## 95 percent confidence interval:
+##  44.29 44.93
+## sample estimates:
+## mean of x 
+##     44.61
+```
+
+
+```r
+# 2-sample t-test
+t.test(formula = income ~ sex,
+       data = baselers)
+
+# Note: Output hidden
+```
+
+
+]
+
+
+
+---
+
+.pull-left45[
+
+## Simple hypothesis tests
+
+All of the basic one and two sample hypothesis tests are included in the stats package
+
+| Hypothesis Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+
+These tests are unique because they can take either formula arguments, or individual vector arguments `x`, and `y`
+
+]
+
+
+.pull-right5[
+
+### Correlation test with cor.test()
+
+
+```r
+# Correlation test
+cor.test(x = baselers$age,
+         y = baselers$income)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  baselers$age and baselers$income
+## t = 180, df = 8500, p-value &lt;2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.8882 0.8968
+## sample estimates:
+##    cor 
+## 0.8926
+```
+
+
+
+```r
+# Version using formula (same result as above)
+cor.test(formula = ~ age + income,
+         data = baselers)
+```
+
+
+]
+
 ---
 
 ## Regression with glm(), lm()

@@ -242,6 +242,90 @@ t.test(formula = age ~ sex,
 
 ]
 
+
+
+---
+
+.pull-left45[
+
+## Simple hypothesis tests
+
+All of the basic one and two sample hypothesis tests are included in the stats package
+
+| Hypothesis Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+
+These tests are unique because they can take either formula arguments, or individual vector arguments `x`, and `y`
+
+]
+
+
+.pull-right5[
+
+### T-Test with t.test()
+
+```{r}
+# 1-sample t-test
+t.test(x = baselers$age, 
+       mu = 40)  # Mean under H0
+
+```
+
+```{r, eval = FALSE}
+# 2-sample t-test
+t.test(formula = income ~ sex,
+       data = baselers)
+
+# Note: Output hidden
+```
+
+
+]
+
+
+
+---
+
+.pull-left45[
+
+## Simple hypothesis tests
+
+All of the basic one and two sample hypothesis tests are included in the stats package
+
+| Hypothesis Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+
+These tests are unique because they can take either formula arguments, or individual vector arguments `x`, and `y`
+
+]
+
+
+.pull-right5[
+
+### Correlation test with cor.test()
+
+```{r}
+# Correlation test
+cor.test(x = baselers$age,
+         y = baselers$income)
+```
+
+
+```{r, eval = FALSE}
+# Version using formula (same result as above)
+cor.test(formula = ~ age + income,
+         data = baselers)
+```
+
+
+]
+
 ---
 
 ## Regression with glm(), lm()
