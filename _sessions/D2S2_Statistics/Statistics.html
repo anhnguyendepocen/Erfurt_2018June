@@ -24,7 +24,6 @@ class: center, middle, inverse, title-slide
 
 ## If you want to do statistics in R, there is a package for that!
 
-
 .pull-left5[
 &lt;br&gt;&lt;br&gt;
 
@@ -111,103 +110,97 @@ lm(formula = y ~ .,
 
 ]
 
-
 ---
 # Basic structure of statistical functions
 
-.pull-left45[
+.pull-left4[
 
 Virtually all statistical functions try to model a dependent variable (y) as a function of one or more independent variables (x1, x2, ...).
 
 In R, those variables should all be in a dataframe.
 
-The two most important arguments to any statistical function are `formula` and `data`
-
-| Argument| Description|
-|:------|:----|
-|     `formula`|The dependent variable and one or more independent variables|
-|     `data`|  The dataframe containing variables|
-
-&lt;br&gt;
-&lt;font size = 6&gt;formula = y ~ x1 + x2 + ...&lt;/font&gt;&lt;br&gt;
-
-
-]
-
-.pull-right5[
-
-Use the statistical function `STAT_FUN` and model income (dependent) as a function of sex, age and height (independent)
-
-
-```r
-# Load STAT_PACKAGE containing STAT_FUN
-library(STAT_PACKAGE)
-
-STAT_FUN(formula = income ~ sex + age + height,
-         data = baselers)
-```
-
-
-`baselers`
 
 |sex    | age| height| weight| income|
 |:------|---:|------:|------:|------:|
-|male   |  44|  174.3|  113.4|   5900|
-|male   |  65|  180.3|   75.2|   7300|
-|female |  66|  168.3|   55.5|   6600|
+|male   |  44|  174.3|  113.4|   5800|
+|male   |  65|  180.3|   75.2|   7100|
+|female |  31|  168.3|   55.5|   6400|
+
+The three most important elements to any statistical function are the function name `STAT_FUN`, a `formula` specifying the variables and a dataframe `data` containing the data
+
 
 ]
 
+.pull-right55[
 
----
-
-.pull-left45[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-## Different tests have different arguments
-
-- Individual tests may have many optional arguments (look at help menus!)
-
-- Each of these have *default* values. If you don't specify them, the function will use the default.
-
-- Customize a test by specifying arguments directly.
-
-]
-
-
-.pull-right5[
-
-### Customised t-test
-
-
-
-```rm
-# Additional arguments to t.test
-
-t.test(formula = t_primary ~ arm,
-       data = trial_X,
-       alternative = "greater", # One-sided
-       mu = 10,                 # H0
-       conf.level = .90)        # Conf level
-
-```
-
-### Customised regression
+Use the statistical function `glm` and model income (dependent) as a function of `sex`, `age` and `height` (independent)
 
 
 ```r
-# Additional arguments to glm
-
-# Include -1 to not have an intercept!
-glm(formula = y_secondary ~ arm + sex + age - 1,
-    data = trial_X,
-    family = "binomial")     # Logistic Reg
+my_glm &lt;- glm(formula = income ~ age + education,
+              data = baselers)
 ```
 
+
+![](../_image/formula_description.png)&lt;!-- --&gt;
+
+]
+
+---
+ 
+.pull-left4[
+
+## Different tests have different arguments
+
+Individual tests may have many optional arguments (look at help menus!)
+
+Each of these have *default* values. If you don't specify them, the function will use the default.
+
+To customise a test, look at the help menu and specifying arguments directly.
+
+### ?glm()
+
+&lt;img src="../_image/glm_help.jpg" width="1885" /&gt;
 
 ]
 
 
+.pull-right55[
+
+Default vs. Customised Generalized linear model (GLM)
+
+
+```r
+# GLM
+
+# Default
+glm(formula = income ~ age + education,
+    data = baselers)
+
+# Customised
+glm(formula = eyecor ~ age + education,
+    data = baselers,
+    family = "binomial")  # Logistic regression
+```
+
+Default vs. Customised t-test
+
+
+```r
+# T-test
+
+# Default
+t.test(formula = age ~ sex,
+       data = baselers)
+
+# Customised
+t.test(formula = age ~ sex,
+       data = baselers,
+       alternative = "less", # One sided test
+       var.equal = TRUE)     # Assume equal variance
+```
+
+]
 
 ---
 ## 1 or 2 sample hypothesis tests
@@ -216,317 +209,55 @@ glm(formula = y_secondary ~ arm + sex + age - 1,
 
 ---
 
-.pull-left5[
-&lt;br&gt;&lt;br&gt;
-## Common 1 or 2 sample hypothesis tests
-
-| Test| R Function|
-|------:|----:|
-|     T-test|    `t.test()`|
-|     Correlation Test|    `cor.test()`|
-|     Chi-Square Test|   `chisq.test()`|
-
-]
-
-.pull-right5[
-
-#### Always check help menus!
-
-`?t.test`
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-## t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### Two sample t-test
-
-&gt; Is the mean weight of the chicks on Diet 1 different from Diet 2?
-
-
-```r
-t.test(formula = weight ~ Diet,     # Formula
-       data = ChickWeight %&gt;%       # Data in Chickweight
-                filter(Diet %in% c(1, 2)))
-```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  weight by Diet
-## t = -2.6, df = 200, p-value = 0.009
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -34.900  -5.042
-## sample estimates:
-## mean in group 1 mean in group 2 
-##           102.6           122.6
-```
-
-]
-
----
-## Correlation test with `cor.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### Correlation Test
-
-&gt; Is there a correlation between weight and Time?
-
-- For `cor.test()`, formula looks like `formula = ~ a + b`
-
-
-```r
-cor.test(formula = ~ weight + Time, # Formula
-         data = ChickWeight)          # Data in Chickweight
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  weight and Time
-## t = 37, df = 580, p-value &lt;2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.8109 0.8599
-## sample estimates:
-##    cor 
-## 0.8371
-```
-
-]
-
-
----
-## Chi-Square test with `chisq.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-
-]
-
-.pull-right65[
-
-### Chi-Square test
-
-&gt; Are there more observations from one Diet than another?
-
-- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
-
-
-```r
-table(ChickWeight$Diet)   # Look at a table of frequencies
-```
-
-```
-## 
-##   1   2   3   4 
-## 220 120 120 118
-```
-
-```r
-chisq.test(x = table(ChickWeight$Diet)) # Run test on table
-```
-
-```
-## 
-## 	Chi-squared test for given probabilities
-## 
-## data:  table(ChickWeight$Diet)
-## X-squared = 53, df = 3, p-value = 2e-11
-```
-
-]
-
-
----
-.pull-left45[
-
-## Assigning hypothesis test objects
-
-- Hypothesis tests return an object of class `"htest"`
-- Can assign a hypothesis test to an object, and then extract info with `$`:
-
-#### Examples of what's in htest objects
-
-| Element| Result|
-|------:|----:|
-|    `x$statistic`|    A test statistic|
-|     `x$parameter`|    Degrees of freedom|
-|     `x$p.value`|   The p-value|
-|     `x$conf.int`|  Confidence interval|
-]
-
-.pull-right5[
-### What's in an htest object?
-
-
-```r
-# One-sample t-test
-
-weight_tt &lt;- t.test(x = ChickWeight$weight,
-                    mu = 120,
-                    alternative = "two.sided")
-
-# What's in the weight_tt object?
-names(weight_tt)
-```
-
-```
-## [1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"    "null.value"  "alternative"
-## [8] "method"      "data.name"
-```
-
-```r
-# Get the p.value
-weight_tt$p.value
-```
-
-```
-## [1] 0.5387
-```
-
-```r
-# Get the confidence interval
-weight_tt$conf.int
-```
-
-```
-## [1] 116.0 127.6
-## attr(,"conf.level")
-## [1] 0.95
-```
-
-
-]
-
----
+## Regression with glm(), lm()
 
 .pull-left4[
 
-## Regression example with `glm()`
+Part of the `baselers` dataframe:
 
 
-```r
-head(ChickWeight)
-```
+| food| income| alcohol| tattoos|
+|----:|------:|-------:|-------:|
+|  360|   5800|      40|       0|
+|  460|   7100|      24|       5|
+|  500|   6400|       0|       0|
+|  450|   6200|      39|       6|
+|  460|   6300|      19|       4|
 
-```
-##   weight Time Chick Diet
-## 1     42    0     1    1
-## 2     51    2     1    1
-## 3     59    4     1    1
-## 4     64    6     1    1
-## 5     76    8     1    1
-## 6     93   10     1    1
-```
-
-**Goal**: Create a regression model predicting `weight` as a function of Time
+**Goal**: Create a regression model predicting how much money people spend on `food` as a function of `income`
 
 &lt;br&gt;
-`$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$`
+`$$\Large food = \beta_{0} + \beta_{1} \times income + \epsilon$$`
 ]
 
 .pull-right55[
 
 - Function: `glm()`
-- Formula: `formula = weight ~ Time`
+- Formula: `formula = food ~ income`
 - Data: `data = ChickWeight`
 
 
 ```r
-# Create a glm object 
-
-# formula: weight ~ Time
-# data: ChickWeight
-
-chick_glm &lt;- glm(formula = weight ~ Time,
-                 data = ChickWeight)
+my_glm &lt;- glm(formula = food ~ income,
+              data = baselers)
 
 
 # Print the object
-chick_glm
+my_glm
 ```
 
 ```
 ## 
-## Call:  glm(formula = weight ~ Time, data = ChickWeight)
+## Call:  glm(formula = food ~ income, data = baselers)
 ## 
 ## Coefficients:
-## (Intercept)         Time  
-##        27.5          8.8  
+## (Intercept)       income  
+##    4.39e+02    -7.50e-05  
 ## 
-## Degrees of Freedom: 577 Total (i.e. Null);  576 Residual
-## Null Deviance:	    2910000 
-## Residual Deviance: 872000 	AIC: 5880
+## Degrees of Freedom: 8509 Total (i.e. Null);  8508 Residual
+##   (1490 observations deleted due to missingness)
+## Null Deviance:	    54600000 
+## Residual Deviance: 54600000 	AIC: 98800
 ```
 ]
 

@@ -30,7 +30,8 @@ options(width=110)
 options(digits = 4)
 library(tidyverse)
 ChickWeight <- as.data.frame(ChickWeight)
-
+library(baselers)
+baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 
 trial_X <- data.frame(id = 1:5,
            sex = c("m", "f", "f", "m", "f"),
@@ -40,10 +41,11 @@ trial_X <- data.frame(id = 1:5,
            y_secondary = c(1, 1, 0, 1, 1)
            )
 
+knitr::opts_chunk$set(warning = FALSE)
+
 ```
 
 ## If you want to do statistics in R, there is a package for that!
-
 
 .pull-left5[
 <br><br>
@@ -132,99 +134,96 @@ lm(formula = y ~ .,
 
 ]
 
-
 ---
 # Basic structure of statistical functions
 
-.pull-left45[
+.pull-left4[
 
 Virtually all statistical functions try to model a dependent variable (y) as a function of one or more independent variables (x1, x2, ...).
 
 In R, those variables should all be in a dataframe.
 
-The two most important arguments to any statistical function are `formula` and `data`
-
-| Argument| Description|
-|:------|:----|
-|     `formula`|The dependent variable and one or more independent variables|
-|     `data`|  The dataframe containing variables|
-
-<br>
-<font size = 6>formula = y ~ x1 + x2 + ...</font><br>
-
-
-]
-
-.pull-right5[
-
-Use the statistical function `STAT_FUN` and model income (dependent) as a function of sex, age and height (independent)
-
-```{r, eval = FALSE}
-# Load STAT_PACKAGE containing STAT_FUN
-library(STAT_PACKAGE)
-
-STAT_FUN(formula = income ~ sex + age + height,
-         data = baselers)
-
-```
-
-
-`baselers`
 ```{r, echo = FALSE}
 baselers %>%
   slice(1:3) %>% select(2:6) %>% knitr::kable(format = 'markdown')
 ```
 
+The three most important elements to any statistical function are the function name `STAT_FUN`, a `formula` specifying the variables and a dataframe `data` containing the data
+
+
 ]
 
+.pull-right55[
+
+Use the statistical function `glm` and model income (dependent) as a function of `sex`, `age` and `height` (independent)
+
+```{r}
+my_glm <- glm(formula = income ~ age + education,
+              data = baselers)
+```
+
+
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/formula_description.png")
+```
+
+]
 
 ---
+ 
+.pull-left4[
 
-.pull-left45[
-
-<br><br><br>
 ## Different tests have different arguments
 
-- Individual tests may have many optional arguments (look at help menus!)
+Individual tests may have many optional arguments (look at help menus!)
 
-- Each of these have *default* values. If you don't specify them, the function will use the default.
+Each of these have *default* values. If you don't specify them, the function will use the default.
 
-- Customize a test by specifying arguments directly.
+To customise a test, look at the help menu and specifying arguments directly.
+
+### ?glm()
+
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/glm_help.jpg")
+```
 
 ]
 
 
-.pull-right5[
+.pull-right55[
 
-### Customised t-test
-
-
-```{rm, eval = FALSE}
-# Additional arguments to t.test
-
-t.test(formula = t_primary ~ arm,
-       data = trial_X,
-       alternative = "greater", # One-sided
-       mu = 10,                 # H0
-       conf.level = .90)        # Conf level
-
-```
-
-### Customised regression
+Default vs. Customised Generalized linear model (GLM)
 
 ```{r, eval = FALSE}
-# Additional arguments to glm
+# GLM
 
-# Include -1 to not have an intercept!
-glm(formula = y_secondary ~ arm + sex + age - 1,
-    data = trial_X,
-    family = "binomial")     # Logistic Reg
+# Default
+glm(formula = income ~ age + education,
+    data = baselers)
+
+# Customised
+glm(formula = eyecor ~ age + education,
+    data = baselers,
+    family = "binomial")  # Logistic regression
 ```
 
+Default vs. Customised t-test
+
+```{r, eval = FALSE}
+# T-test
+
+# Default
+t.test(formula = age ~ sex,
+       data = baselers)
+
+# Customised
+t.test(formula = age ~ sex,
+       data = baselers,
+       alternative = "less", # One sided test
+       var.equal = TRUE)     # Assume equal variance
+```
 
 ]
-
-
 
 ---
 ## 1 or 2 sample hypothesis tests
@@ -235,214 +234,38 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ---
 
-.pull-left5[
-<br><br>
-## Common 1 or 2 sample hypothesis tests
-
-| Test| R Function|
-|------:|----:|
-|     T-test|    `t.test()`|
-|     Correlation Test|    `cor.test()`|
-|     Chi-Square Test|   `chisq.test()`|
-
-]
-
-.pull-right5[
-
-#### Always check help menus!
-
-`?t.test`
-
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
-```
-
-]
-
----
-## t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-```{r, eval = FALSE}
-ChickWeight
-```
-
-```{r, echo = FALSE}
-set.seed(102)
-x <- ChickWeight[sample(nrow(ChickWeight)),]
-rownames(x) <- NULL
-head(x)
-```
-
-]
-
-.pull-right65[
-
-### Two sample t-test
-
-> Is the mean weight of the chicks on Diet 1 different from Diet 2?
-
-```{r, eval = TRUE}
-t.test(formula = weight ~ Diet,     # Formula
-       data = ChickWeight %>%       # Data in Chickweight
-                filter(Diet %in% c(1, 2)))
-```
-
-]
-
----
-## Correlation test with `cor.test()`
-
-.pull-left3[
-
-### ChickWeight data
-```{r, eval = FALSE}
-ChickWeight
-```
-
-
-```{r, echo = FALSE}
-set.seed(102)
-x <- ChickWeight[sample(nrow(ChickWeight)),]
-rownames(x) <- NULL
-head(x)
-```
-
-]
-
-.pull-right65[
-
-### Correlation Test
-
-> Is there a correlation between weight and Time?
-
-- For `cor.test()`, formula looks like `formula = ~ a + b`
-
-```{r, eval = TRUE}
-cor.test(formula = ~ weight + Time, # Formula
-         data = ChickWeight)          # Data in Chickweight
-
-```
-
-]
-
-
----
-## Chi-Square test with `chisq.test()`
-
-.pull-left3[
-
-### ChickWeight data
-```{r, eval = FALSE}
-ChickWeight
-```
-
-
-```{r, echo = FALSE}
-set.seed(102)
-x <- ChickWeight[sample(nrow(ChickWeight)),]
-rownames(x) <- NULL
-head(x)
-```
-
-
-]
-
-.pull-right65[
-
-### Chi-Square test
-
-> Are there more observations from one Diet than another?
-
-- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
-
-```{r, eval = TRUE}
-table(ChickWeight$Diet)   # Look at a table of frequencies
-
-chisq.test(x = table(ChickWeight$Diet)) # Run test on table
-```
-
-]
-
-
----
-.pull-left45[
-
-## Assigning hypothesis test objects
-
-- Hypothesis tests return an object of class `"htest"`
-- Can assign a hypothesis test to an object, and then extract info with `$`:
-
-#### Examples of what's in htest objects
-
-| Element| Result|
-|------:|----:|
-|    `x$statistic`|    A test statistic|
-|     `x$parameter`|    Degrees of freedom|
-|     `x$p.value`|   The p-value|
-|     `x$conf.int`|  Confidence interval|
-]
-
-.pull-right5[
-### What's in an htest object?
-
-```{r}
-# One-sample t-test
-
-weight_tt <- t.test(x = ChickWeight$weight,
-                    mu = 120,
-                    alternative = "two.sided")
-
-# What's in the weight_tt object?
-names(weight_tt)
-
-# Get the p.value
-weight_tt$p.value
-
-# Get the confidence interval
-weight_tt$conf.int
-
-```
-
-
-]
-
----
+## Regression with glm(), lm()
 
 .pull-left4[
 
-## Regression example with `glm()`
+Part of the `baselers` dataframe:
 
-```{r}
-head(ChickWeight)
+```{r, echo = FALSE}
+baselers %>% 
+  select(food, income, alcohol, tattoos) %>%
+  slice(1:5) %>% 
+  knitr::kable(format = "markdown")
 ```
 
-**Goal**: Create a regression model predicting `weight` as a function of Time
+**Goal**: Create a regression model predicting how much money people spend on `food` as a function of `income`
 
 <br>
-$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$
+$$\Large food = \beta_{0} + \beta_{1} \times income + \epsilon$$
 ]
 
 .pull-right55[
 
 - Function: `glm()`
-- Formula: `formula = weight ~ Time`
+- Formula: `formula = food ~ income`
 - Data: `data = ChickWeight`
 
 ```{r}
-# Create a glm object 
-
-# formula: weight ~ Time
-# data: ChickWeight
-
-chick_glm <- glm(formula = weight ~ Time,
-                 data = ChickWeight)
+my_glm <- glm(formula = food ~ income,
+              data = baselers)
 
 
 # Print the object
-chick_glm
+my_glm
 ```
 ]
 
