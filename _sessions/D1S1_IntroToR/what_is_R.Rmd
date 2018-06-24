@@ -18,12 +18,12 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#F7F8FA">Erfurt, June 2018</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Erfurt, June 2018</font></a>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
-<a href="https://therbootcamp.github.io/"><font color="#F7F8FA">www.therbootcamp.com</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
 </span></div> 
 
 ---
@@ -42,7 +42,7 @@ options(digits = 4)
 ```
 
 
-# Why R?
+# Why R
 
 .pull-left3[
 R steadily **grows in popularity**. 
@@ -289,7 +289,7 @@ class(some_name)
 ]
 
 .pull-right5[
-```{r, error=TRUE}
+```{r, error=TRUE,tidy=T}
 # no argument
 mean()
 
