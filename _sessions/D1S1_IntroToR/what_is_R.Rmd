@@ -5,7 +5,7 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 date: "June 2018"
 output:
   xaringan::moon_reader:
-    css: ["default", "my-theme.css"]
+    css: ["default", "../_css/my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -15,20 +15,21 @@ output:
 
 ---
 
-layout: true
-
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#F7F8FA">Erfurt, June 2018</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#646464">Erfurt, June 2018</font></a>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
-<a href="https://therbootcamp.github.io/"><font color="#F7F8FA">www.therbootcamp.com</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#646464">www.therbootcamp.com</font></a>
 </span></div> 
 
 ---
 
-
+```{r, eval = FALSE, echo = FALSE}
+# Code to knit slides
+xaringan::inf_mr('_sessions/D1S1_IntroToR/what_is_R.Rmd')
+```
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)

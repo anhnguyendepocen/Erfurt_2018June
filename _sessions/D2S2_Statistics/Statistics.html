@@ -18,6 +18,19 @@ class: center, middle, inverse, title-slide
 ---
 
 
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#F7F8FA"&gt;Erfurt, June 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#F7F8FA"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+---
+
 
 
 
@@ -111,6 +124,7 @@ lm(formula = y ~ .,
 ]
 
 ---
+
 # Basic structure of statistical functions
 
 .pull-left4[
@@ -525,7 +539,7 @@ sample(x = c("H", "T"),
 ```
 
 ```
-##  [1] "H" "H" "H" "T" "T" "T" "H" "T" "H" "H"
+##  [1] "H" "H" "T" "H" "T" "H" "H" "H" "T" "T"
 ```
 
 ```r
@@ -535,7 +549,7 @@ rand_samp # Print the sample
 ```
 
 ```
-## [1]  1.80077  0.05261  0.92688  1.00398 -0.95148
+## [1] -0.4435 -1.2006  0.7197  1.1285 -1.2489
 ```
 
 ```r
@@ -547,13 +561,13 @@ t.test(x = rand_samp) # Perform 1 sample t-test
 ## 	One Sample t-test
 ## 
 ## data:  rand_samp
-## t = 1.2, df = 4, p-value = 0.3
+## t = -0.43, df = 4, p-value = 0.7
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.7376  1.8707
+##  -1.565  1.147
 ## sample estimates:
 ## mean of x 
-##    0.5666
+##   -0.2089
 ```
 
 ]
