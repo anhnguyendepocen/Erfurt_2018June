@@ -440,9 +440,9 @@ baselers %>%
 26. Now let's check the major differences between the treatment arms. For each arm, calculate the following:
 
    - Mean days until a a major negative event (`days`)
-   - Mean CD4 T cell count at baseline.
-   - Mean CD4 T cell count at 20 weeks.
-   - Mean CD4 T cell count at 96 weeks.
+   - Mean CD4 T cell count at baseline. (`cd40`)
+   - Mean CD4 T cell count at 20 weeks. (`cd420`)
+   - Mean CD4 T cell count at 96 weeks. (`cd496`)
    - Mean *change* in CD4 T cell count between baseline and 96 weeks
    - Number of patients in each arm
 
