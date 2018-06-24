@@ -17,7 +17,7 @@ output:
 layout: true
 
 <div class="my-footer"><span>
-<a href="https://therbootcamp.github.io/"><font color="#646464">Erfurt, June 2018</font></a>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Erfurt, June 2018</font></a>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -1103,7 +1103,7 @@ stock_l
 
 .pull-left45[
 
-### gather()
+## gather()
 
 <font size=5>Use gather() to convert wide to long</font>
 
