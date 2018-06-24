@@ -15,21 +15,15 @@ output:
 
 ---
 
+layout: true
+
 <div class="my-footer"><span>
-<<<<<<< HEAD
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Erfurt, June 2018</font></a>
-=======
-<a href="https://therbootcamp.github.io/"><font color="#646464">Erfurt, June 2018</font></a>
->>>>>>> 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;
-<<<<<<< HEAD
 <a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
-=======
-<a href="https://therbootcamp.github.io/"><font color="#646464">www.therbootcamp.com</font></a>
->>>>>>> 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 </span></div> 
 
 ---
@@ -37,7 +31,9 @@ output:
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D1S1_IntroToR/what_is_R.Rmd')
+baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 ```
+
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
@@ -316,71 +312,100 @@ mean(c(1, 2, 3, NA), na.rm = TRUE)
 
 ---
 
-## 1. Everything is an object<br>2. Use <- (assignment) to create/change objects
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
 
-R programs evolve through functions: Every action entails **passing on arguments (aka objects) to a function**, **calling (aka executing) the function**, and **printing or storing its output**. And this goes deep, many operations are functions in disguise.
-
-.pull-left45[
-```{r}
-# a prototypical function
-some_function <- function(argument_1, argument_2){ 
-  
-  # do something with arguments
-  result <- argument_1 + argument_2 
-  
-  # return result
-  result
-  }
-
-
-```
-
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. <b><font style="color:#52D998">Functions expect certain object classes</font></b>
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
 ]
 
-.pull-right45[
-```{r}
-# Expressions
-some_function(2, 2)
-2 + 2
+.pull-right5[
+```{r, error=TRUE,warning=F}
+# mean works also for logical
+mean(c(TRUE, FALSE, TRUE))
 
-# Assignments
-my_object1 <- some_function(2, 2)
-my_object2 <- 2 + 2 
+# but not for character
+mean(c("a", "b", "c"))
 
-```
-]
-
-
-<!---
-# Object-orientation
-
-R is an object-oriented language. For us this entails:<br> 
->(a) **Everything is an object** (including functions).<br>
->(b) **Generic functions** that respond to the **object's class**.<br>
->(c) R **always copies deep**, implying that we always need to assign the output of a result.<br>
-
-.pull-left45[
-```{r}
-# creating a vector and testing its class
-my_vector <- c(1, 5, 2)
-class(my_vector)
-
-# testing the class of an object
-print(my_vector)
+# classes relevant for all arg's
+mean(c(1, 2, 3), na.rm = "test")
 
 ```
 ]
 
-.pull-right45[
-```{r}
-# Sorting a vector
-sort(my_vector)  
-print(my_vector) # still unsorted
+---
 
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. <b><font style="color:#52D998">View help files using `?`</font></b>
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500" height="400"></p>
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. <b><font style="color:#52D998">Data is stored in data frames</font></b>
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+```{r, echo=FALSE,eval=T,warning=F,message=F}
+baselers <- readr::read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
+require(tibble)
+options(tibble.width = 50, tibble.max_extra_cols = 0)
+baselers
 ```
 ]
 
---->
 
 ---
 

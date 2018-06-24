@@ -18,24 +18,19 @@ class: center, middle, inverse, title-slide
 ---
 
 
+layout: true
+
 &lt;div class="my-footer"&gt;&lt;span&gt;
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Erfurt, June 2018&lt;/font&gt;&lt;/a&gt;
-=======
-&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#646464"&gt;Erfurt, June 2018&lt;/font&gt;&lt;/a&gt;
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 &lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
-=======
-&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#646464"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8c6a0dbcb6f399c5f014ec30bf0e6ac63288d790
 &lt;/span&gt;&lt;/div&gt; 
 
 ---
+
 
 
 
@@ -374,104 +369,127 @@ mean(c(1, 2, 3, NA), na.rm = TRUE)
 
 ---
 
-## 1. Everything is an object&lt;br&gt;2. Use &lt;- (assignment) to create/change objects
+# Essentials: The 2&lt;sup&gt;4&lt;/sup&gt; Rules of the R Bootcamp
 
-R programs evolve through functions: Every action entails **passing on arguments (aka objects) to a function**, **calling (aka executing) the function**, and **printing or storing its output**. And this goes deep, many operations are functions in disguise.
-
-.pull-left45[
-
-```r
-# a prototypical function
-some_function &lt;- function(argument_1, argument_2){ 
-  
-  # do something with arguments
-  result &lt;- argument_1 + argument_2 
-  
-  # return result
-  result
-  }
-```
-
+.pull-left4[
+1. Everything is an object
+2. Use `&lt;-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions&lt;/font&gt;&lt;/b&gt;
+6. Functions have arguments
+7. Arguments can have defaults
+8. &lt;b&gt;&lt;font style="color:#52D998"&gt;Functions expect certain object classes&lt;/font&gt;&lt;/b&gt;
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
 ]
 
-.pull-right45[
+.pull-right5[
 
 ```r
-# Expressions
-some_function(2, 2)
+# mean works also for logical
+mean(c(TRUE, FALSE, TRUE))
 ```
 
 ```
-## [1] 4
-```
-
-```r
-2 + 2
-```
-
-```
-## [1] 4
+## [1] 0.6667
 ```
 
 ```r
-# Assignments
-my_object1 &lt;- some_function(2, 2)
-my_object2 &lt;- 2 + 2 
-```
-]
-
-
-&lt;!---
-# Object-orientation
-
-R is an object-oriented language. For us this entails:&lt;br&gt; 
-&gt;(a) **Everything is an object** (including functions).&lt;br&gt;
-&gt;(b) **Generic functions** that respond to the **object's class**.&lt;br&gt;
-&gt;(c) R **always copies deep**, implying that we always need to assign the output of a result.&lt;br&gt;
-
-.pull-left45[
-
-```r
-# creating a vector and testing its class
-my_vector &lt;- c(1, 5, 2)
-class(my_vector)
+# but not for character
+mean(c("a", "b", "c"))
 ```
 
 ```
-## [1] "numeric"
+## [1] NA
 ```
 
 ```r
-# testing the class of an object
-print(my_vector)
+# classes relevant for all arg's
+mean(c(1, 2, 3), na.rm = "test")
 ```
 
 ```
-## [1] 1 5 2
+## Error in if (na.rm) x &lt;- x[!is.na(x)]: argument is not interpretable as logical
 ```
 ]
 
-.pull-right45[
+---
 
-```r
-# Sorting a vector
-sort(my_vector)  
-```
+# Essentials: The 2&lt;sup&gt;4&lt;/sup&gt; Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `&lt;-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions&lt;/font&gt;&lt;/b&gt;
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. &lt;b&gt;&lt;font style="color:#52D998"&gt;View help files using `?`&lt;/font&gt;&lt;/b&gt;
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500" height="400"&gt;&lt;/p&gt;
+]
+
+---
+
+# Essentials: The 2&lt;sup&gt;4&lt;/sup&gt; Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `&lt;-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions&lt;/font&gt;&lt;/b&gt;
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. &lt;b&gt;&lt;font style="color:#52D998"&gt;Data is stored in data frames&lt;/font&gt;&lt;/b&gt;
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
 
 ```
-## [1] 1 2 5
-```
-
-```r
-print(my_vector) # still unsorted
-```
-
-```
-## [1] 1 5 2
+## # A tibble: 10,000 x 20
+##       id sex      age height weight income
+##    &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1 male      44   174.  113.   6300.
+##  2     2 male      65   180.   75.2 10900.
+##  3     3 female    31   168.   55.5  5100.
+##  4     4 male      27   209.   93.8  4200.
+##  5     5 male      24   177.   NA    4000.
+##  6     6 male      63   187.   67.4 11400.
+##  7     7 male      71   152.   83.3 12000.
+##  8     8 female    41   156.   67.8  7600.
+##  9     9 male      43   176.   69.3  8500.
+## 10    10 female    31   166.   66.3  6100.
+## # ... with 9,990 more rows, and 14 more variables
 ```
 ]
 
----&gt;
 
 ---
 
