@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="BaselRBootcamp April 2018" />
+<meta name="author" content="The R Bootcamp @ Erfurt www.therbootcamp.com @therbootcamp" />
 
 
 <title>Statistics</title>
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Statistics</h1>
-<h4 class="author"><em>BaselRBootcamp April 2018</em></h4>
+<h4 class="author"><em>The R Bootcamp @ Erfurt<br /><a href="https://therbootcamp.github.io">www.therbootcamp.com</a><br /><a href="https://twitter.com/therbootcamp"><span class="citation">@therbootcamp</span></a></em></h4>
 
 </div>
 
@@ -147,9 +147,60 @@ Source: <a href="https://cdn.lynda.com/course/495322/495322-636154038826424503-1
 <li>Use sampling functions such as <code>rnorm()</code> to conduct simulations</li>
 </ol>
 </div>
-<div id="glossary-and-packages" class="section level3">
-<h3>Glossary and Packages</h3>
-<p>Here are the main descriptive statistics functions we will be covering.</p>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Package</th>
+<th align="left">Installation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>tidyverse</code></td>
+<td align="left"><code>install.packages(&quot;tidyverse&quot;)</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>broom</code></td>
+<td align="left"><code>install.packages(&quot;broom&quot;)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="datasets" class="section level3">
+<h3>Datasets</h3>
+<table>
+<colgroup>
+<col width="8%"></col>
+<col width="9%"></col>
+<col width="11%"></col>
+<col width="59%"></col>
+<col width="11%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">File</th>
+<th align="left">Rows</th>
+<th align="left">Columns</th>
+<th align="left">Description</th>
+<th align="left">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>kc_house_data.csv</code></td>
+<td align="left">21613</td>
+<td align="left">21</td>
+<td align="left">House sale prices for King County between May 2014 and May 2015.</td>
+<td align="left"><a href="https://www.kaggle.com/harlfoxem/housesalesprediction/home">Kaggle: House Sales Prediction</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="glossary" class="section level3">
+<h3>Glossary</h3>
+<p><em>Descriptive Statistics</em></p>
 <table>
 <thead>
 <tr class="header">
@@ -180,44 +231,34 @@ Source: <a href="https://cdn.lynda.com/course/495322/495322-636154038826424503-1
 </tr>
 </tbody>
 </table>
-<p>Here are the main statistical functions we will be covering.</p>
-<table style="width:49%;">
-<colgroup>
-<col width="11%"></col>
-<col width="29%"></col>
-<col width="8%"></col>
-</colgroup>
+<p><em>Statistical Tests</em></p>
+<table>
 <thead>
 <tr class="header">
 <th align="left">Function</th>
 <th align="left">Hypothesis Test</th>
-<th align="left">Additional Help</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left"><code>t.test()</code></td>
 <td align="left">One and two sample t-test</td>
-<td align="left"><a href="https://bookdown.org/ndphillips/YaRrr/htests.html#t-test-t.test" class="uri">https://bookdown.org/ndphillips/YaRrr/htests.html#t-test-t.test</a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>cor.test()</code></td>
 <td align="left">Correlation test</td>
-<td align="left"><a href="https://bookdown.org/ndphillips/YaRrr/htests.html#correlation-cor.test" class="uri">https://bookdown.org/ndphillips/YaRrr/htests.html#correlation-cor.test</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>chisq.test()</code></td>
 <td align="left">Chi-Square test</td>
-<td align="left"><a href="https://bookdown.org/ndphillips/YaRrr/htests.html#chi-square-chsq.test" class="uri">https://bookdown.org/ndphillips/YaRrr/htests.html#chi-square-chsq.test</a></td>
 </tr>
 <tr class="even">
-<td align="left"><code>glm()</code></td>
-<td align="left">Regression</td>
-<td align="left"><a href="https://bookdown.org/ndphillips/YaRrr/regression.html" class="uri">https://bookdown.org/ndphillips/YaRrr/regression.html</a></td>
+<td align="left"><code>glm()</code>, <code>lm()</code></td>
+<td align="left">Generalized linear model and linear model</td>
 </tr>
 </tbody>
 </table>
-<p>Here are the random sampling functions we will use</p>
+<p><em>Sampling Functions</em></p>
 <table>
 <thead>
 <tr class="header">
@@ -245,15 +286,13 @@ Source: <a href="https://cdn.lynda.com/course/495322/495322-636154038826424503-1
 </tbody>
 </table>
 </div>
-<div id="examples" class="section level3">
-<h3>Examples</h3>
-<ul>
-<li>The following examples will take you through the steps of doing basic hypothesis tests. Follow along and try to see how piece of code works!</li>
-</ul>
+<div id="example-code" class="section level3">
+<h3>Example Code</h3>
 <pre class="r"><code># -----------------------------------------------
 # Examples of hypothesis tests on the diamonds
 # ------------------------------------------------
 library(tidyverse)
+library(broom)
 
 # First few rows of the diamonds data
 
@@ -320,21 +359,10 @@ price_glm &lt;- glm(formula = price ~ carat + depth + table + x,
                   data = diamonds)
 
 # Print coefficients
-price_glm
+price_glm$coefficients
 
-# Q: Predict the price of the following 3 diamonds:
-
-diamonds_new &lt;- tibble(carat = c(.2, .6, .5),
-                       depth = c(50, 46, 90),
-                       table = c(40, 65, 70),
-                       x = c(3.7, 4.2, 4.3))
-
-predict(price_glm, 
-        newdata = diamonds_new)
-
-#       1         2         3 
-# 4190.453  6088.398 -4471.817 
-
+# Tidy version
+tidy(price_glm)
 
 # -----
 # Simulation
@@ -351,89 +379,193 @@ mean(samp_A)
 sd(samp_A)
 
 mean(samp_B)
-sd(samp_B)</code></pre>
+sd(samp_B)
+
+# Combine samples (plus tw new ones) in a tibble
+
+my_sim &lt;- tibble(A = samp_A,
+                 B = samp_B,
+                 C = rnorm(n = 100, mean = 0, sd = 1),
+                 error = rnorm(n = 100, mean = 5, sd = 10))
+
+# Add y, a linear function of A and B to my_sim
+my_sim &lt;- my_sim %&gt;%
+  mutate(y = 3 * A -8 * B + error)
+
+# Regress y on A, B and C
+my_glm &lt;- glm(y ~ A + B + C,
+              data = my_sim)
+
+# Look at results!
+tidy(my_glm)</code></pre>
 </div>
-<div id="tasks" class="section level2">
-<h2>Tasks</h2>
-<div id="data" class="section level3">
-<h3>Data</h3>
-<p>You’ll use one dataset in this practical: <code>ACTG175.csv</code>. It is available in the <code>data_BaselRBootcamp_Day2.zip</code> file available through the main course page. If you haven’t already, download the <code>data_BaselRBootcamp_Day2.zip</code> folder and unzip it to get the <code>ACTG175.csv</code> file.</p>
-</div>
+<div id="tasks" class="section level1">
+<h1>Tasks</h1>
 <div id="getting-setup" class="section level3">
 <h3>Getting setup</h3>
-<p>A. Open your <code>BaselRBootcamp</code> project. This project should have the folders <code>R</code> and <code>data</code> in the working directory. The <code>ACTG175.csv</code> file should already be in the <code>data</code> folder. (If it isn’t, you’ll need to get it from the <code>data_BaselRBootcamp_Day2.zip</code> folder and move it to the <code>data</code> folder).</p>
-<p>A. Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>statistics_practical.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> and <code>speff2trial</code> packages with <code>library()</code>. Here’s how the top of your script should look:</p>
-<pre class="r"><code>## NAME
-## DATE
-## Statistics Practical
-
-library(tidyverse)     # For tidyverse
-library(speff2trial)   # For the ACTG175 data documentation</code></pre>
-<p>B. For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. Using the following template, load the data into R and store it as a new object called <code>trial_act</code>.</p>
-<pre class="r"><code># Load ACTG175.csv from the data folder 
-# The ACTG175.csv file MUST be in a folder called data in your working directory!!
-
-trial_act &lt;- read_csv(file = &quot;data/ACTG175.csv&quot;)</code></pre>
-<p>C. First thing’s first, take a look at the data by printing it. It should look like this</p>
-<pre><code># A tibble: 6 x 27
-  pidnum   age  wtkg  hemo  homo drugs karnof oprior   z30 zprior preanti
-   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt;
-1  10056    48  89.8     0     0     0    100      0     0      1       0
-2  10059    61  49.4     0     0     0     90      0     1      1     895
-3  10089    45  88.5     0     1     1     90      0     1      1     707
-4  10093    47  85.3     0     1     0    100      0     1      1    1399
-5  10124    43  66.7     0     1     0    100      0     1      1    1352
-6  10140    46  88.9     0     1     1    100      0     1      1    1181
-# ... with 16 more variables: race &lt;int&gt;, gender &lt;int&gt;, str2 &lt;int&gt;,
-#   strat &lt;int&gt;, symptom &lt;int&gt;, treat &lt;int&gt;, offtrt &lt;int&gt;, cd40 &lt;int&gt;,
-#   cd420 &lt;int&gt;, cd496 &lt;int&gt;, r &lt;int&gt;, cd80 &lt;int&gt;, cd820 &lt;int&gt;,
-#   cens &lt;int&gt;, days &lt;int&gt;, arms &lt;int&gt;</code></pre>
-<p>D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the <code>arms</code> column is a factor, <em>not</em> an integer. Run the following code to make this change.</p>
-<pre class="r"><code># traial_act data cleaning
-
-trial_act &lt;- trial_act %&gt;%
-  mutate(
-    
-    # Convert arms to a factor
-    
-    arms = factor(arms, 
-                  levels = c(0, 1, 2, 3),
-                  labels = c(&quot;zid&quot;, &quot;zid_did&quot;, &quot;zid_zal&quot;, &quot;did&quot;))
-  )</code></pre>
-<p>E. (Optional): If you’d like to, try converting other columns such as <code>race</code> and <code>gender</code> to factors with appropriate labels. Look at the help menu for the <code>ACTG175</code> by running <code>?ACTG175</code> to see how these columns are coded.</p>
+<p>A. Open your R project. It should already have the folders <code>0_Data</code> and <code>1_Code</code>. Make sure that all of the data files listed above are contained in the folder</p>
+<p>B. Open a new R script and save it as a new file called <code>statistics_practical.R</code> in the <code>2_Code</code> folder. At the top of the script, using comments, write your name and the date. The, load the set of packages listed above with <code>library()</code>.</p>
+<p>C. For this practical, we’ll use the <code>kc_house_data.csv</code> data. This dataset contains house sale prices for King County, Washington. It includes homes sold between May 2014 and May 2015. Using the following template, load the data into R and store it as a new object called <code>kc_house</code>.</p>
+<pre class="r"><code>kc_house &lt;- read_csv(file = &quot;data/kc_house_data.csv&quot;)</code></pre>
+<p>C. Using <code>print()</code>, <code>summary()</code>, <code>head()</code> and <code>skim()</code>, explore the data to make sure it was loaded correctly.</p>
 </div>
 <div id="descriptive-statistics" class="section level3">
 <h3>Descriptive statistics</h3>
 <ol style="list-style-type: decimal">
-<li><p>What was the mean age (<code>age</code>) of all patients?</p></li>
-<li><p>What was the median weight (<code>wtkg</code>) of all patients?</p></li>
-<li><p>What was the mean CD4 T cell count at baseline (<code>cd40</code>) ? What was it at 20 weeks (<code>cd420</code>)?</p></li>
-<li><p>How many patients have a history of intravenous drug use (<code>drugs</code>) and how many do not? (Hint: use <code>table()</code>)</p></li>
+<li>What was the mean price (<code>price</code>) of all houses?</li>
 </ol>
+<pre><code>[1] 540088.1</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>What was the median price (<code>price</code>) of all houses?</li>
+</ol>
+<pre><code>[1] 450000</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What was the standard deviation price (<code>price</code>) of all houses?</li>
+</ol>
+<pre><code>[1] 367127.2</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>What were the minimum and maximum prices? Try using <code>min()</code>, <code>max()</code>, and <code>range()</code></li>
+</ol>
+<pre><code>[1]   75000 7700000</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>How many houses were on the waterfront (<code>waterfront</code>) and how many were not? (Hint: use <code>table()</code>)</li>
+</ol>
+<pre><code>
+    0     1 
+21450   163 </code></pre>
+<p><em>Note: For all remaining analyses, you will be conducting statistical tests that return statistical objects. For each question, assign the result of the statistical test to an apporpriately named object, and then try exploring the object</em></p>
 </div>
 <div id="t-tests-with-t.test" class="section level3">
 <h3>T tests with t.test()</h3>
-<ol start="5" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
+<li>Do houses on the waterfront sell for more than those not on the waterfront? Answer this by creating an object called <code>water_htest</code> which contains the result of the appropriate t-test using <code>t.test()</code></li>
+</ol>
+<pre class="r"><code>water_htest &lt;- t.test(formula = price ~ waterfront,
+                      data = kc_house)</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Print your <code>water_htest</code> object to see summary results</p></li>
+<li><p>Look at the names of the <code>water_htest</code> with <code>names()</code>. What are the named elements of the object?</p></li>
+<li><p>Using the <code>$</code> operator, print the exact test statistic of the t-test.</p></li>
+<li><p>Again using the <code>$</code> operator, print the exact p-value of the test.</p></li>
+<li><p>Use the <code>tidy()</code> function to return a dataframe containing the main results of the test.</p></li>
 <li><p>Conduct a one-sample t-test comparing the age (<code>age</code>) of the patients versus a null hypothesis of 40 years.</p></li>
-<li><p>Now, compare the mean age to a null hypothesis of 35 years. What has changed?</p></li>
-<li><p>A researcher wants to make sure that men and women in the clinical study are similar in terms of age. Conduct a two-sample t-test comparing the age of men versus women to test if they are indeed similar or not.</p></li>
+</ol>
+<pre><code>
+    One Sample t-test
+
+data:  trial_act$age
+t = -25.234, df = 2138, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 40
+95 percent confidence interval:
+ 34.87896 35.61753
+sample estimates:
+mean of x 
+ 35.24825 </code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Now, compare the mean age to a null hypothesis of 35 years. What has changed?</li>
+</ol>
+<pre><code>
+    One Sample t-test
+
+data:  trial_act$age
+t = 1.3183, df = 2138, p-value = 0.1875
+alternative hypothesis: true mean is not equal to 35
+95 percent confidence interval:
+ 34.87896 35.61753
+sample estimates:
+mean of x 
+ 35.24825 </code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>A researcher wants to make sure that men and women in the clinical study are similar in terms of age. Conduct a two-sample t-test comparing the age of men versus women to test if they are indeed similar or not.</li>
 </ol>
 <ul>
 <li>Women are coded as 0 in <code>gender</code>, and men are coded as 1.</li>
 <li>Be sure to use the formula notation <code>formula = age ~ gender</code></li>
 </ul>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  age by gender
+t = -2.3524, df = 554.82, p-value = 0.019
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.0618384 -0.1854089
+sample estimates:
+mean in group 0 mean in group 1 
+       34.31793        35.44156 </code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Do people with a history of intravenous drug use have different numbers of <code>days</code> than those who do not have a history of intravenous drug use? Answer this with a two-sample t-test.</li>
 </ol>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  days by drugs
+t = 1.0058, df = 368.61, p-value = 0.3152
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -18.05634  55.86764
+sample estimates:
+mean in group 0 mean in group 1 
+       881.5818        862.6762 </code></pre>
 </div>
 <div id="correlation-test-with-cor.test" class="section level3">
 <h3>Correlation test with cor.test()</h3>
 <ol start="9" style="list-style-type: decimal">
-<li><p>Do heavier people tend to have fewer days until a major negative event? Conduct a correlation test between weight (<code>wtkg</code>) and age (<code>days</code>). What is your conclusion?</p></li>
-<li><p>We would expect a correlation between CD4 T cell count at baseline (<code>cd40</code>) and at 20 weeks (<code>cd420</code>). But how strong is the correlation? Answer this question by conducting a correlation test between CD4 T cell count at baseline (<code>cd40</code>) and CD4 T cell count at 20 weeks (<code>cd420</code>).</p></li>
-<li><p>Only considering men, is there a correlation between CD4 T cell count at baseline (<code>cd40</code>)and CD8 T cell count at baseline (<code>cd80</code>)? (Hint: Include the argument <code>subset = gender == 0</code> to restrict the analysis to men)</p></li>
-<li><p>Now, repeat the previous test, but only for women. How do the results compare?</p></li>
+<li>Do heavier people tend to have fewer days until a major negative event? Conduct a correlation test between weight (<code>wtkg</code>) and age (<code>days</code>). What is your conclusion?</li>
 </ol>
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  days and wtkg
+t = 0.42646, df = 2137, p-value = 0.6698
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.03317080  0.05158712
+sample estimates:
+        cor 
+0.009224728 </code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>We would expect a correlation between CD4 T cell count at baseline (<code>cd40</code>) and at 20 weeks (<code>cd420</code>). But how strong is the correlation? Answer this question by conducting a correlation test between CD4 T cell count at baseline (<code>cd40</code>) and CD4 T cell count at 20 weeks (<code>cd420</code>).</li>
+</ol>
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  cd40 and cd420
+t = 33.221, df = 2137, p-value &lt; 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.5549209 0.6108523
+sample estimates:
+      cor 
+0.5835783 </code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>Only considering men, is there a correlation between CD4 T cell count at baseline (<code>cd40</code>)and CD8 T cell count at baseline (<code>cd80</code>)? (Hint: Include the argument <code>subset = gender == 0</code> to restrict the analysis to men)</li>
+</ol>
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  cd40 and cd80
+t = 5.3518, df = 366, p-value = 1.54e-07
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.1719038 0.3616702
+sample estimates:
+      cor 
+0.2694002 </code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>Now, repeat the previous test, but only for women. How do the results compare?</li>
+</ol>
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  cd40 and cd80
+t = 8.8997, df = 1769, p-value &lt; 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.1619967 0.2511713
+sample estimates:
+      cor 
+0.2070139 </code></pre>
 </div>
 <div id="chi-square-test-with-chisq.test" class="section level3">
 <h3>Chi-square test with chisq.test()</h3>
@@ -443,23 +575,186 @@ trial_act &lt;- trial_act %&gt;%
 <ul>
 <li>Be sure to create a table of gender and race values with <code>table(trial_act$gender, trial_act$race)</code></li>
 </ul>
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  table(trial_act$gender, trial_act$race)
+X-squared = 180.86, df = 1, p-value &lt; 2.2e-16</code></pre>
 <ol start="14" style="list-style-type: decimal">
 <li>Is there a relationship between a history of intravenous drug use (<code>drugs</code>) and hemophilia (<code>hemo</code>)? Answer this by conducting a chi-square test.</li>
 </ol>
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  table(trial_act$hemo, trial_act$drugs)
+X-squared = 17.505, df = 1, p-value = 2.866e-05</code></pre>
 </div>
 <div id="linear-regression-with-glm" class="section level3">
 <h3>Linear Regression with glm()</h3>
 <ol start="15" style="list-style-type: decimal">
 <li><p>Which demographic variables predict days until the first occurrence of a major negative event (<code>days</code>)? To answer this, conduct a linear regression analysis predicting <code>days</code> as a function of age (<code>age</code>), weight (<code>wtkg</code>), race (<code>race</code>) and gender (<code>gender</code>). Call the object <code>days_A_glm</code>.</p></li>
 <li><p>Print the <code>days_A_glm</code> object to see the coefficients.</p></li>
-<li><p>Using the <code>summary()</code> function, explore the <code>days_A_glm</code> object to see which coefficients are significant.</p></li>
-<li><p>Using the <code>names()</code> function, look at what the named elements in the <code>days_A_glm</code> object are.</p></li>
-<li><p>Using the <code>days_A_glm$</code> notation, print a vector of the model coefficients.</p></li>
+</ol>
+<pre><code>
+Call:  glm(formula = days ~ age + wtkg + race + gender, data = trial_act)
+
+Coefficients:
+(Intercept)          age         wtkg         race       gender  
+  856.99143      0.72094      0.02547    -30.59783      4.35692  
+
+Degrees of Freedom: 2138 Total (i.e. Null);  2134 Residual
+Null Deviance:      182600000 
+Residual Deviance: 182100000    AIC: 30360</code></pre>
+<ol start="17" style="list-style-type: decimal">
+<li>Using the <code>summary()</code> function, explore the <code>days_A_glm</code> object to see which coefficients are significant.</li>
+</ol>
+<pre><code>
+Call:
+glm(formula = days ~ age + wtkg + race + gender, data = trial_act)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-870.6  -160.6   120.7   211.6   370.8  
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 856.99143   43.60167  19.655   &lt;2e-16 ***
+age           0.72094    0.73470   0.981   0.3266    
+wtkg          0.02547    0.49450   0.052   0.9589    
+race        -30.59783   14.63215  -2.091   0.0366 *  
+gender        4.35692   17.96571   0.243   0.8084    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 85316.48)
+
+    Null deviance: 182637111  on 2138  degrees of freedom
+Residual deviance: 182065366  on 2134  degrees of freedom
+AIC: 30364
+
+Number of Fisher Scoring iterations: 2</code></pre>
+<ol start="18" style="list-style-type: decimal">
+<li>Using the <code>names()</code> function, look at what the named elements in the <code>days_A_glm</code> object are.</li>
+</ol>
+<pre><code> [1] &quot;coefficients&quot;      &quot;residuals&quot;         &quot;fitted.values&quot;    
+ [4] &quot;effects&quot;           &quot;R&quot;                 &quot;rank&quot;             
+ [7] &quot;qr&quot;                &quot;family&quot;            &quot;linear.predictors&quot;
+[10] &quot;deviance&quot;          &quot;aic&quot;               &quot;null.deviance&quot;    
+[13] &quot;iter&quot;              &quot;weights&quot;           &quot;prior.weights&quot;    
+[16] &quot;df.residual&quot;       &quot;df.null&quot;           &quot;y&quot;                
+[19] &quot;converged&quot;         &quot;boundary&quot;          &quot;model&quot;            
+[22] &quot;call&quot;              &quot;formula&quot;           &quot;terms&quot;            
+[25] &quot;data&quot;              &quot;offset&quot;            &quot;control&quot;          
+[28] &quot;method&quot;            &quot;contrasts&quot;         &quot;xlevels&quot;          </code></pre>
+<ol start="19" style="list-style-type: decimal">
+<li>Using the <code>days_A_glm$</code> notation, print a vector of the model coefficients.</li>
+</ol>
+<pre><code> (Intercept)          age         wtkg         race       gender 
+856.99143293   0.72093510   0.02547379 -30.59783308   4.35691955 </code></pre>
+<ol start="20" style="list-style-type: decimal">
 <li><p>Look at the <code>$data</code>, <code>$fitted.values</code> and <code>$residuals</code> elements of the <code>days_A_glm</code> object. What do you think these are? (Bonus: can you calculate the mean squared residual?)</p></li>
 <li><p>Now create a new regression object <code>days_B_glm</code> where you model <code>days</code> as a function of the treatment arm (<code>arms</code>). Explore the object. Do you find that there was an effect of the treatment arm on <code>days</code>?</p></li>
-<li><p>Does the effect of treatment arm on days hold if you only consider men (<code>gender == 1</code>) above the age of 30 (<code>age &gt; 30</code>)? To answer this, repeat your previous regression, but include the appropriate arguments to <code>subset</code></p></li>
-<li><p>Now create a regression object <code>days_C_glm</code> that predicts <code>days</code> based on <em>all</em> variables in the dataset. Explore the object. What do you find?</p></li>
-<li><p>Create a fictional dataset of 10 new patients called <code>trial_new</code> by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the <code>trial_new</code> object to see how it looks</p></li>
+</ol>
+<pre><code>
+Call:
+glm(formula = days ~ arms, data = trial_act)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-904.0  -158.6   117.3   211.6   391.9  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  839.105     10.558  79.476  &lt; 2e-16 ***
+arms          26.298      5.577   4.716 2.56e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 84584.09)
+
+    Null deviance: 182637111  on 2138  degrees of freedom
+Residual deviance: 180756191  on 2137  degrees of freedom
+AIC: 30342
+
+Number of Fisher Scoring iterations: 2</code></pre>
+<ol start="22" style="list-style-type: decimal">
+<li>Does the effect of treatment arm on days hold if you only consider men (<code>gender == 1</code>) above the age of 30 (<code>age &gt; 30</code>)? To answer this, repeat your previous regression, but include the appropriate arguments to <code>subset</code></li>
+</ol>
+<pre><code>
+Call:
+glm(formula = days ~ arms, data = trial_act, subset = age &gt; 30)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-864.7  -117.4   113.7   205.5   379.9  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  851.080     12.645  67.308  &lt; 2e-16 ***
+arms          25.218      6.684   3.773 0.000168 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 83379.66)
+
+    Null deviance: 123421566  on 1467  degrees of freedom
+Residual deviance: 122234587  on 1466  degrees of freedom
+AIC: 20804
+
+Number of Fisher Scoring iterations: 2</code></pre>
+<ol start="23" style="list-style-type: decimal">
+<li>Now create a regression object <code>days_C_glm</code> that predicts <code>days</code> based on <em>all</em> variables in the dataset. Explore the object. What do you find?</li>
+</ol>
+<pre><code>
+Call:
+glm(formula = days ~ ., data = trial_act)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-662.78   -55.86     8.16    66.73   435.75  
+
+Coefficients: (2 not defined because of singularities)
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  9.072e+02  7.305e+01  12.419  &lt; 2e-16 ***
+pidnum      -4.418e-05  2.061e-05  -2.144  0.03223 *  
+age          1.270e-01  4.508e-01   0.282  0.77828    
+wtkg         4.789e-01  3.160e-01   1.515  0.12991    
+hemo         2.711e+01  2.052e+01   1.321  0.18681    
+homo        -1.828e+00  1.340e+01  -0.136  0.89153    
+drugs       -1.368e+01  1.217e+01  -1.124  0.26117    
+karnof      -4.152e-01  6.813e-01  -0.609  0.54238    
+oprior      -1.000e+00  2.704e+01  -0.037  0.97049    
+z30          2.426e+01  1.916e+01   1.266  0.20564    
+zprior              NA         NA      NA       NA    
+preanti     -2.129e-02  1.629e-02  -1.307  0.19140    
+race        -7.569e+00  9.221e+00  -0.821  0.41188    
+gender       1.130e+01  1.531e+01   0.738  0.46046    
+str2        -3.422e+01  2.623e+01  -1.305  0.19217    
+strat        4.000e+01  1.542e+01   2.594  0.00959 ** 
+symptom      8.133e+00  1.004e+01   0.810  0.41790    
+treat        3.143e+01  1.390e+01   2.261  0.02389 *  
+offtrt      -8.253e+01  9.588e+00  -8.608  &lt; 2e-16 ***
+cd40        -3.797e-03  4.524e-02  -0.084  0.93312    
+cd420        5.482e-02  4.154e-02   1.320  0.18721    
+cd496        1.789e-01  3.432e-02   5.213 2.16e-07 ***
+r                   NA         NA      NA       NA    
+cd80        -3.961e-02  1.333e-02  -2.971  0.00302 ** 
+cd820        3.594e-02  1.418e-02   2.535  0.01135 *  
+cens        -3.802e+02  1.051e+01 -36.154  &lt; 2e-16 ***
+arms        -3.230e+00  5.207e+00  -0.620  0.53516    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 18032.54)
+
+    Null deviance: 74984714  on 1341  degrees of freedom
+Residual deviance: 23748861  on 1317  degrees of freedom
+  (797 observations deleted due to missingness)
+AIC: 16987
+
+Number of Fisher Scoring iterations: 2</code></pre>
+<ol start="24" style="list-style-type: decimal">
+<li>Create a fictional dataset of 10 new patients called <code>trial_new</code> by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the <code>trial_new</code> object to see how it looks</li>
 </ol>
 <pre class="r"><code># Draw 10 patients at random from trial_act
 #  and store as trial_new
@@ -468,6 +763,23 @@ trial_new &lt;- trial_act %&gt;%
   sample_n(10)
 
 trial_new</code></pre>
+<pre><code># A tibble: 10 x 27
+   pidnum   age  wtkg  hemo  homo drugs karnof oprior   z30 zprior preanti
+    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt;
+ 1 260828    27  67.7     0     1     0    100      0     1      1     262
+ 2 211235    37  92.5     0     1     0     90      0     0      1       0
+ 3  42069    40  79.8     0     0     0    100      0     1      1     615
+ 4 270744    33  84.4     0     1     0    100      0     1      1     888
+ 5 170868    30  90.0     0     1     0    100      0     1      1     106
+ 6 160223    24  79.9     0     1     0    100      0     1      1     988
+ 7 140786    27  63.6     0     1     0     90      0     1      1     600
+ 8 960025    25  73.5     1     0     0     90      0     1      1     683
+ 9 580039    33  66.5     0     0     0    100      0     0      1       0
+10 120921    26  61.8     0     1     0     90      0     1      1     140
+# ... with 16 more variables: race &lt;int&gt;, gender &lt;int&gt;, str2 &lt;int&gt;,
+#   strat &lt;int&gt;, symptom &lt;int&gt;, treat &lt;int&gt;, offtrt &lt;int&gt;, cd40 &lt;int&gt;,
+#   cd420 &lt;int&gt;, cd496 &lt;int&gt;, r &lt;int&gt;, cd80 &lt;int&gt;, cd820 &lt;int&gt;,
+#   cens &lt;int&gt;, days &lt;int&gt;, arms &lt;int&gt;</code></pre>
 <ol start="25" style="list-style-type: decimal">
 <li>Now, using <code>days_C_glm</code>, predict the number of days until a major negative event for these 10 randomly selected patients using the following template:</li>
 </ol>
@@ -476,6 +788,10 @@ trial_new</code></pre>
 
 predict(object = ___, 
         newdata = ___)</code></pre>
+<pre><code>       1        2        3        4        5        6        7        8 
+851.0795 876.2976 926.7337 851.0795 851.0795 876.2976 926.7337 901.5156 
+       9       10 
+926.7337 851.0795 </code></pre>
 </div>
 <div id="logistic-regression" class="section level3">
 <h3>Logistic regression</h3>
@@ -488,16 +804,82 @@ predict(object = ___,
 drugs_glm_binom &lt;- glm(formula = ___,
                        data = ___,
                        family = &quot;___&quot;)</code></pre>
+<pre><code>
+Call:
+glm(formula = drugs ~ age + gender + race, family = &quot;binomial&quot;, 
+    data = trial_act)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.0597  -0.5323  -0.4677  -0.4113   2.3384  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -2.41495    0.30425  -7.937 2.07e-15 ***
+age          0.02994    0.00721   4.152 3.29e-05 ***
+gender      -0.85074    0.15387  -5.529 3.22e-08 ***
+race         0.33542    0.14367   2.335   0.0196 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1664.1  on 2138  degrees of freedom
+Residual deviance: 1605.9  on 2135  degrees of freedom
+AIC: 1613.9
+
+Number of Fisher Scoring iterations: 4</code></pre>
 <ol start="27" style="list-style-type: decimal">
 <li>A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurrence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called <code>days_1000_bin</code> that is a binary variable indicating whether or not <code>days &gt; 1000</code>. You can do this using <code>mutate()</code>)</li>
 </ol>
+<pre><code>Warning: package 'bindrcpp' was built under R version 3.4.4</code></pre>
+<pre><code>
+Call:
+glm(formula = days_1000_bin ~ arms, family = &quot;binomial&quot;, data = trial_act %&gt;% 
+    mutate(days_1000_bin = days &gt; 1000))
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.233  -1.140  -1.094   1.169   1.263  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept) -0.19901    0.07288  -2.731  0.00632 **
+arms         0.10925    0.03847   2.840  0.00452 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2964.7  on 2138  degrees of freedom
+Residual deviance: 2956.6  on 2137  degrees of freedom
+AIC: 2960.6
+
+Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 <div id="generating-random-samples-from-distributions" class="section level3">
 <h3>Generating random samples from distributions</h3>
 <ol start="28" style="list-style-type: decimal">
 <li><p>You can easily generate random samples from statistical distributions in R. To see all of them, run <code>?distributions</code>. For example, to generate samples from the well known Normal distribution, you can use <code>rnorm()</code>. Look at the help menu for <code>rnorm()</code> to see its arguments.</p></li>
 <li><p>Using <code>rnorm()</code>,create a new object <code>samp_10</code> which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results?</p></li>
-<li><p>Look at the code below. Before you run it, what do you expect the value of the <code>coefficients</code> of the regression equation will be? Test your prediction by running the code and exploring the <code>my_glm</code> object.</p></li>
+</ol>
+<pre><code> [1] 16.054592 26.965738 11.244641 15.606186 16.310885 12.884833 18.071698
+ [8]  8.070313 12.446116 15.107456</code></pre>
+<pre><code>[1] 15.27625</code></pre>
+<pre><code>[1] 5.035212</code></pre>
+<pre><code>
+    One Sample t-test
+
+data:  samp_10
+t = 2.0576, df = 9, p-value = 0.06975
+alternative hypothesis: true mean is not equal to 12
+95 percent confidence interval:
+ 11.67427 18.87822
+sample estimates:
+mean of x 
+ 15.27625 </code></pre>
+<ol start="30" style="list-style-type: decimal">
+<li>Look at the code below. Before you run it, what do you expect the value of the <code>coefficients</code> of the regression equation will be? Test your prediction by running the code and exploring the <code>my_glm</code> object.</li>
 </ol>
 <pre class="r"><code># Generate independent variables
 x1 &lt;- rnorm(n = 100, mean = 10, sd = 1)
@@ -544,22 +926,22 @@ glm(formula = y ~ ., data = my_data)
 
 Deviance Residuals: 
      Min        1Q    Median        3Q       Max  
--1.66213  -0.55951  -0.01822   0.68138   1.99547  
+-2.59797  -0.81223  -0.07904   0.67140   2.79520  
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -49.92642    1.08431  -46.05   &lt;2e-16 ***
-x1           -2.99908    0.10342  -29.00   &lt;2e-16 ***
-x2            9.98863    0.00848 1177.93   &lt;2e-16 ***
-x3          -15.02720    0.01808 -831.04   &lt;2e-16 ***
+(Intercept) -47.74204    1.21348  -39.34   &lt;2e-16 ***
+x1           -3.20842    0.11378  -28.20   &lt;2e-16 ***
+x2           10.00571    0.01177  850.09   &lt;2e-16 ***
+x3          -14.96560    0.01945 -769.43   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for gaussian family taken to be 0.7824771)
+(Dispersion parameter for gaussian family taken to be 1.119643)
 
-    Null deviance: 2.0680e+06  on 99  degrees of freedom
-Residual deviance: 7.5118e+01  on 96  degrees of freedom
-AIC: 265.18
+    Null deviance: 1709116.83  on 99  degrees of freedom
+Residual deviance:     107.49  on 96  degrees of freedom
+AIC: 301.01
 
 Number of Fisher Scoring iterations: 2</code></pre>
 </div>

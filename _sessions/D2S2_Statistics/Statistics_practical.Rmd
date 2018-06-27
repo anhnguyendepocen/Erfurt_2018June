@@ -1,11 +1,11 @@
 ---
 title: "Statistics"
-author: "BaselRBootcamp April 2018"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(comment = NA, fig.width = 6, fig.height = 6, echo = FALSE, eval = FALSE)
+knitr::opts_chunk$set(comment = NA, fig.width = 6, fig.height = 6, echo = FALSE, eval = TRUE)
 ```
 
 
@@ -28,9 +28,29 @@ In this practical you'll do basic statistics in R. By the end of this practical 
 4. Explore statistical objects with `names()`, `summary()`, `print()`, `predict()`
 5. Use sampling functions such as `rnorm()` to conduct simulations
 
-### Glossary and Packages
+### Packages
 
-Here are the main descriptive statistics functions we will be covering.
+|Package| Installation|
+|:------|:------|
+|`tidyverse`|`install.packages("tidyverse")`|
+|`broom`|`install.packages("broom")`|
+
+
+### Datasets
+
+```{r, eval = TRUE, message = FALSE}
+library(tidyverse)
+house <- read_csv("../_data/kc_house_data.csv")
+```
+
+|File | Rows | Columns | Description |Source
+|:----|:-----|:------|:-----------------------------------------|:------|
+|`kc_house_data.csv` | 21613 | 21|House sale prices for King County between May 2014 and May 2015. |[Kaggle: House Sales Prediction](https://www.kaggle.com/harlfoxem/housesalesprediction/home)
+
+
+### Glossary
+
+*Descriptive Statistics*
 
 | Function| Description|
 |:------|:--------|
@@ -40,16 +60,16 @@ Here are the main descriptive statistics functions we will be covering.
 |     `max(), min()`|    Extreme values|
 | `summary()`| Several summary statistics |
 
-Here are the main statistical functions we will be covering.
+*Statistical Tests*
 
-| Function| Hypothesis Test| Additional Help |
-|:------|:-------------------|:----|
-|     `t.test()`|    One and two sample t-test| https://bookdown.org/ndphillips/YaRrr/htests.html#t-test-t.test
-|     `cor.test()`|    Correlation test| https://bookdown.org/ndphillips/YaRrr/htests.html#correlation-cor.test
-|     `chisq.test()`|    Chi-Square test| https://bookdown.org/ndphillips/YaRrr/htests.html#chi-square-chsq.test
-|     `glm()`|    Regression| https://bookdown.org/ndphillips/YaRrr/regression.html|
+| Function| Hypothesis Test|
+|:------|:-------------------|
+|     `t.test()`|    One and two sample t-test|
+|     `cor.test()`|    Correlation test|
+|     `chisq.test()`|    Chi-Square test|
+|     `glm()`, `lm()`|    Generalized linear model and linear model|
 
-Here are the random sampling functions we will use
+*Sampling Functions*
 
 | Function| Description| Additional Help |
 |:------|:--------|:----|
@@ -57,16 +77,15 @@ Here are the random sampling functions we will use
 |     `rnorm()`|    Draw random values from a Normal distribution| `?rnorm()`
 |     `runif`|    Draw random values from a Uniform distribution| `?runif()`
 
+### Example Code
 
-### Examples
-
-- The following examples will take you through the steps of doing basic hypothesis tests. Follow along and try to see how piece of code works!
 
 ```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 # -----------------------------------------------
 # Examples of hypothesis tests on the diamonds
 # ------------------------------------------------
 library(tidyverse)
+library(broom)
 
 # First few rows of the diamonds data
 
@@ -133,21 +152,10 @@ price_glm <- glm(formula = price ~ carat + depth + table + x,
                   data = diamonds)
 
 # Print coefficients
-price_glm
+price_glm$coefficients
 
-# Q: Predict the price of the following 3 diamonds:
-
-diamonds_new <- tibble(carat = c(.2, .6, .5),
-                       depth = c(50, 46, 90),
-                       table = c(40, 65, 70),
-                       x = c(3.7, 4.2, 4.3))
-
-predict(price_glm, 
-        newdata = diamonds_new)
-
-#       1         2         3 
-# 4190.453  6088.398 -4471.817 
-
+# Tidy version
+tidy(price_glm)
 
 # -----
 # Simulation
@@ -166,106 +174,109 @@ sd(samp_A)
 mean(samp_B)
 sd(samp_B)
 
+# Combine samples (plus tw new ones) in a tibble
+
+my_sim <- tibble(A = samp_A,
+                 B = samp_B,
+                 C = rnorm(n = 100, mean = 0, sd = 1),
+                 error = rnorm(n = 100, mean = 5, sd = 10))
+
+# Add y, a linear function of A and B to my_sim
+my_sim <- my_sim %>%
+  mutate(y = 3 * A -8 * B + error)
+
+# Regress y on A, B and C
+my_glm <- glm(y ~ A + B + C,
+              data = my_sim)
+
+# Look at results!
+tidy(my_glm)
 ```
 
-## Tasks
 
-### Data
-
-You'll use one dataset in this practical: `ACTG175.csv`. It is available in the `data_BaselRBootcamp_Day2.zip` file available through the main course page. If you haven't already, download the `data_BaselRBootcamp_Day2.zip` folder and unzip it to get the `ACTG175.csv` file.
+# Tasks
 
 ### Getting setup
 
-A. Open your `BaselRBootcamp` project. This project should have the folders `R` and `data` in the working directory. The `ACTG175.csv` file should already be in the `data` folder. (If it isn't, you'll need to get it from the  `data_BaselRBootcamp_Day2.zip` folder and move it to the `data` folder).
+A. Open your R project. It should already have the folders `0_Data` and `1_Code`. Make sure that all of the data files listed above are contained in the folder
 
 ```{r}
 # Done!
 ```
 
-A. Open a new R script and save it in the `R` folder you just created as a new file called `statistics_practical.R`. At the top of the script, using comments, write your name and the date. The, load the set of `tidyverse` and `speff2trial` packages with `library()`. Here's how the top of your script should look:
+B. Open a new R script and save it as a new file called `statistics_practical.R` in the `2_Code` folder. At the top of the script, using comments, write your name and the date. The, load the set of packages listed above with `library()`.
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE}
-## NAME
-## DATE
-## Statistics Practical
-
-library(tidyverse)     # For tidyverse
-library(speff2trial)   # For the ACTG175 data documentation
-```
-
-
-```{r, eval = TRUE, echo = FALSE}
-trial_act <- ACTG175
-```
-
-B. For this practical, we'll use the `ACTG175` data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. Using the following template, load the data into R and store it as a new object called `trial_act`.
+C. For this practical, we'll use the `kc_house_data.csv` data. This dataset contains house sale prices for King County, Washington. It includes homes sold between May 2014 and May 2015.
+Using the following template, load the data into R and store it as a new object called `kc_house`.
 
 ```{r, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
-# Load ACTG175.csv from the data folder 
-# The ACTG175.csv file MUST be in a folder called data in your working directory!!
-
-trial_act <- read_csv(file = "data/ACTG175.csv")
+kc_house <- read_csv(file = "data/kc_house_data.csv")
 ```
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, message = FALSE}
+kc_house <- read_csv("../_data/kc_house_data.csv")
+
+trial_act <- read_csv("../_data/trial_act.csv")
 trial_act <- as_tibble(trial_act)
 ```
 
-C. First thing's first, take a look at the data by printing it. It should look like this
-
-```{r, eval = TRUE, echo = FALSE}
-# Print trial_act
-head(trial_act)
-```
-
-D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the `arms` column is a factor, *not* an integer. Run the following code to make this change.
-
-```{r, echo = TRUE}
-# traial_act data cleaning
-
-trial_act <- trial_act %>%
-  mutate(
-    
-    # Convert arms to a factor
-    
-    arms = factor(arms, 
-                  levels = c(0, 1, 2, 3),
-                  labels = c("zid", "zid_did", "zid_zal", "did"))
-  )
-```
-
-E. (Optional): If you'd like to, try converting other columns such as `race` and `gender` to factors with appropriate labels. Look at the help menu for the `ACTG175` by running `?ACTG175` to see how these columns are coded.
-
+C. Using `print()`, `summary()`, `head()` and `skim()`, explore the data to make sure it was loaded correctly.
 
 ### Descriptive statistics
 
-1. What was the mean age (`age`) of all patients?
+1. What was the mean price (`price`) of all houses?
 
 ```{r}
-mean(trial_act$age)
+mean(kc_house$price)
 ```
 
-2. What was the median weight (`wtkg`) of all patients?
+2. What was the median price (`price`) of all houses?
 
 ```{r}
-mean(trial_act$wtkg)
+median(kc_house$price)
 ```
 
-3. What was the mean CD4 T cell count at baseline (`cd40`) ? What was it at 20 weeks (`cd420`)?
+3. What was the standard deviation price (`price`) of all houses?
 
 ```{r}
-mean(trial_act$cd40)
-
-mean(trial_act$cd420)
+sd(kc_house$price)
 ```
 
-4. How many patients have a history of intravenous drug use (`drugs`) and how many do not? (Hint: use `table()`)
+4. What were the minimum and maximum prices? Try using `min()`, `max()`, and `range()`
 
 ```{r}
-table(trial_act$drugs)
+range(kc_house$price)
 ```
+
+4. How many houses were on the waterfront (`waterfront`) and how many were not? (Hint: use `table()`)
+
+```{r}
+table(kc_house$waterfront)
+```
+
+*Note: For all remaining analyses, you will be conducting statistical tests that return statistical objects. For each question, assign the result of the statistical test to an apporpriately named object, and then try exploring the object*
+
 
 ### T tests with t.test()
+
+6. Do houses on the waterfront sell for more than those not on the waterfront? Answer this by creating an object called `water_htest` which contains the result of the appropriate t-test using `t.test()`
+
+```{r, eval = FALSE, echo = TRUE}
+water_htest <- t.test(formula = price ~ waterfront,
+                      data = kc_house)
+```
+
+7. Print your `water_htest` object to see summary results
+
+8. Look at the names of the `water_htest` with `names()`. What are the named elements of the object?
+
+9. Using the `$` operator, print the exact test statistic of the t-test.
+
+10. Again using the `$` operator, print the exact p-value of the test.
+
+11. Use the `tidy()` function to return a dataframe containing the main results of the test.
+
+
 
 5. Conduct a one-sample t-test comparing the age (`age`) of the patients versus a null hypothesis of 40 years.
 

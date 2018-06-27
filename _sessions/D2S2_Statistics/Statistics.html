@@ -818,8 +818,7 @@ birthdays &lt;- c()
 while(all(!duplicated(birthdays))) {
   
   # Get new birthday
-  new_day &lt;- sample(x = 1:365, 
-                    size = 1)
+  new_day &lt;- sample(x = 1:365, size = 1)
   
   # Add new_day to birthdays
   birthdays &lt;- c(birthdays, new_day)
@@ -837,38 +836,83 @@ length(birthdays)
 
 ]
 
-
-
 ---
 
-.pull-left45[
+.pull-left5[
+
+### rnorm(), runif()...
+
+Use the `rnorm()`, `runif()`... functions to draw random samples from probability distributions
+
+
+
+```r
+# Random sample from Normal distribution
+
+mysamp &lt;- rnorm(n = 100,   # Number of samples
+                mean = 10, # Mean of pop
+                sd = 5)    # SD of pop ...
+
+mysamp[1:5]  # First 5 values
+```
+
+```
+## [1]  5.243  6.950 13.287 15.182  9.787
+```
+
+```r
+mean(mysamp) # Mean
+```
+
+```
+## [1] 9.992
+```
+
+```r
+sd(mysamp)   # Standard deviation
+```
+
+```
+## [1] 4.588
+```
+
+
+]
+
+.pull-right45[
+
+
+```r
+ggplot(data = tibble(x = mysamp),
+       aes(x = x, y = ..density..)) +
+  geom_histogram(col = "white", 
+                 bins = 10) + 
+  geom_density(col = "red", size = 1.5) + 
+  theme_minimal()
+```
+
+&lt;img src="Statistics_files/figure-html/unnamed-chunk-40-1.png" width="100%" /&gt;
 
 
 
 ]
 
-.pull-right5[
-
-
-]
-
 
 ---
 
 .pull-left45[
-
+&lt;br&gt;&lt;br&gt;
 ## Summary
 
+R has a package for every statistical procedure you can imagine.
 
-- There are tons of statistical packages in R
+Most require a formula, data, and other optional arguments
 
-- Most require a formula, data, and other optional arguments
+Use help menus to understand arguments and syntax!
 
-- Use help menus to understand arguments and syntax!
+Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
 
-- Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
-
-- Use random sampling functions to run simulations
+Use random sampling functions to run simulations
 
 ]
 

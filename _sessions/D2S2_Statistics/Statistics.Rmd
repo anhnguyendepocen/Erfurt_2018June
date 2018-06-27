@@ -696,8 +696,7 @@ birthdays <- c()
 while(all(!duplicated(birthdays))) {
   
   # Get new birthday
-  new_day <- sample(x = 1:365, 
-                    size = 1)
+  new_day <- sample(x = 1:365, size = 1)
   
   # Add new_day to birthdays
   birthdays <- c(birthdays, new_day)
@@ -706,44 +705,66 @@ while(all(!duplicated(birthdays))) {
 
 # Done! How many are in the room??
 length(birthdays)
-
 ```
 
 
 ]
 
-
-
 ---
 
-.pull-left45[
+.pull-left5[
+
+### rnorm(), runif()...
+
+Use the `rnorm()`, `runif()`... functions to draw random samples from probability distributions
+
+
+```{r, fig.width = 5, fig.height = 5, message = FALSE, warning = FALSE, out.width = "90%"}
+# Random sample from Normal distribution
+
+mysamp <- rnorm(n = 100,   # Number of samples
+                mean = 10, # Mean of pop
+                sd = 5)    # SD of pop ...
+
+mysamp[1:5]  # First 5 values
+mean(mysamp) # Mean
+sd(mysamp)   # Standard deviation
+```
+
+
+]
+
+.pull-right45[
+
+```{r, fig.width = 3, fig.height = 3, message = FALSE, warning = FALSE, out.width = "100%",dpi=300}
+ggplot(data = tibble(x = mysamp),
+       aes(x = x, y = ..density..)) +
+  geom_histogram(col = "white", 
+                 bins = 10) + 
+  geom_density(col = "red", size = 1.5) + 
+  theme_minimal()
+```
 
 
 
 ]
 
-.pull-right5[
-
-
-]
-
 
 ---
 
 .pull-left45[
-
+<br><br>
 ## Summary
 
+R has a package for every statistical procedure you can imagine.
 
-- There are tons of statistical packages in R
+Most require a formula, data, and other optional arguments
 
-- Most require a formula, data, and other optional arguments
+Use help menus to understand arguments and syntax!
 
-- Use help menus to understand arguments and syntax!
+Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
 
-- Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
-
-- Use random sampling functions to run simulations
+Use random sampling functions to run simulations
 
 ]
 
