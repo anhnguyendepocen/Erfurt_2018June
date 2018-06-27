@@ -750,6 +750,15 @@ ggplot(data = tibble(x = mysamp),
 ]
 
 
+
+
+
+---
+## Other great packages
+
+afex, lmer, BayesFactor
+
+
 ---
 
 .pull-left45[
