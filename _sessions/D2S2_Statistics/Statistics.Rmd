@@ -26,6 +26,7 @@ layout: true
 </span></div> 
 
 ---
+
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D2S2_Statistics/Statistics.Rmd')
