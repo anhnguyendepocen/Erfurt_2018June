@@ -473,7 +473,7 @@ time_htest &lt;- cor.test(formula = ~ XX + XX,
 <div id="linear-regression-with-lm-and-glm" class="section level3">
 <h3>Linear Regression with lm() and glm()</h3>
 <ol start="10" style="list-style-type: decimal">
-<li>In the previous question, you used a correlation test to see if newer houses tend to sell for more than older houses. Now let’s repeat the same analysis using a regression analsis with <code>lm()</code>. Do to this, use the following template:</li>
+<li>In the previous question, you used a correlation test to see if newer houses tend to sell for more than older houses. Now let’s repeat the same analysis using a regression analysis with <code>lm()</code>. Do to this, use the following template:</li>
 </ol>
 <pre class="r"><code>time_lm &lt;- lm(formula = XX ~ XX,
                  data = XX)</code></pre>
@@ -557,7 +557,7 @@ ggplot(data = prices_results,
 kc_house &lt;- kc_house %&gt;%
   mutate(million = price &gt; 1e6)</code></pre>
 <ol start="16" style="list-style-type: decimal">
-<li>Using the following tempate, use the <code>glm()</code> function to conduct a logistic regression to see which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>floors</code>, <code>waterfront</code>, <code>yr_built</code> predict whether or not a house will sell for over 1 Million. Be sure toinclude the argument <code>family = 'binomial'</code> to tell <code>glm()</code> that we are conducting a logistic regression analysis.</li>
+<li>Using the following template, use the <code>glm()</code> function to conduct a logistic regression to see which of the variables <code>bedrooms</code>, <code>bathrooms</code>, <code>floors</code>, <code>waterfront</code>, <code>yr_built</code> predict whether or not a house will sell for over 1 Million. Be sure to include the argument <code>family = 'binomial'</code> to tell <code>glm()</code> that we are conducting a logistic regression analysis.</li>
 </ol>
 <pre class="r"><code># Logistic regression analysis predicting which houses will sell for
 #   more than 1 Million
@@ -650,7 +650,7 @@ predict(object = year_lm,
 <ol start="23" style="list-style-type: decimal">
 <li><p>Do houses on the waterfront tend to have smaller lots than those not on the waterfront? Do this once using a correlation test with <code>cor.test()</code> and once using <code>lm()</code>. Do your results differ?</p></li>
 <li><p>Which variables in the dataset significantly predict the grade of a house? Answer this with a regression analysis.</p></li>
-<li><p>Is there an interaction between waterfront and year built (<code>yr_built</code>) on price? In other words, is the relationship bewteen year built and price the same for homes on the waterfront and homes not on the waterfront? Answer this by conducting the appropriate regression analysis and interpret the results. Note: to include an interaction in a model, use the formula <code>y ~ X1 * X2</code> instead of <code>y ~ X1 + X2</code>.</p></li>
+<li><p>Is there an interaction between waterfront and year built (<code>yr_built</code>) on price? In other words, is the relationship between year built and price the same for homes on the waterfront and homes not on the waterfront? Answer this by conducting the appropriate regression analysis and interpret the results. Note: to include an interaction in a model, use the formula <code>y ~ X1 * X2</code> instead of <code>y ~ X1 + X2</code>.</p></li>
 <li><p>How well can a regression analysis based on houses sold in 2014 predict housing costs in the 2015? To answer this we’ll create a regression model based on houses sold in 2014 and then use that model to predict the prices of houses sold in 2015. To start, we’ll need to create two new dataframes <code>kc_house_2014</code> and <code>kc_house_2015</code>. Run the code in the following chunk to do this.</p></li>
 </ol>
 <pre class="r"><code># Just run it!
@@ -699,7 +699,7 @@ t.test(x = XX,   # Vector of values
 <ol start="35" style="list-style-type: decimal">
 <li><p>Repeat the previous block of code several times and look at how the output changes. How do the p-values change when you keep drawing random samples?</p></li>
 <li><p>Change the mean under the null hypothesis to 15 instead of 10 and run the code again several times. What happens to the p-values?</p></li>
-<li><p>Look at the code below. As you can see, I generate 4 variables x1, x2, x3 and noise. I then create a dependent variable y that is a function of these variables. Finally, I conduct a regression analsis. <em>Before you run the code</em>, what do you expect the value of the <code>coefficients</code> of the regression equation will be? Test your prediction by running the code and exploring the <code>my_lm</code> object.</p></li>
+<li><p>Look at the code below. As you can see, I generate 4 variables x1, x2, x3 and noise. I then create a dependent variable y that is a function of these variables. Finally, I conduct a regression analysis. <em>Before you run the code</em>, what do you expect the value of the <code>coefficients</code> of the regression equation will be? Test your prediction by running the code and exploring the <code>my_lm</code> object.</p></li>
 </ol>
 <pre class="r"><code># Generate independent variables
 x1 &lt;- rnorm(n = 100, mean = 10, sd = 1)
