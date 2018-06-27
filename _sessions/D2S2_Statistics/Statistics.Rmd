@@ -572,6 +572,65 @@ my_glm$residuals[1:5]
 
 ---
 
+.pull-left35[
+## predict()
+
+Many (but not all) statistical objects have an associated `predict()` method.
+
+`predict()` allows you to use the model to make predictions for new data, and understand how the model works.
+
+
+
+```{r, echo = FALSE}
+lastyear <- baselers %>% slice(1:100)
+thisyear <- baselers %>% slice(101:200)
+```
+
+
+```{r, eval = FALSE}
+lastyear
+```
+
+```{r, echo = FALSE}
+lastyear  %>% select(id, age, fitness, tattoos, income) %>% 
+  slice(1:3) %>% knitr::kable(format = "markdown")
+```
+
+]
+
+
+.pull-right6[
+Create model based on old data
+
+```{r}
+# Create regression model predicting income
+mod <- lm(formula = income ~ age + fitness + tattoos,
+          data = lastyear)
+
+mod$coefficients
+```
+
+```{r, eval = FALSE}
+thisyear
+```
+
+```{r, echo = FALSE}
+thisyear  %>% select(id, age, fitness, tattoos) %>% slice(1:3) %>% knitr::kable(format = "markdown")
+```
+
+
+```{r}
+# Predict the income of people in thisyear
+predict(object = mod, 
+        newdata = thisyear)[1:3]
+```
+
+
+
+]
+
+---
+
 .pull-left4[
 
 ## broom::tidy()
@@ -754,10 +813,37 @@ ggplot(data = tibble(x = mysamp),
 
 
 ---
-## Other great packages
 
-afex, lmer, BayesFactor
+.pull-left45[
+<br><br>
+## Other great statistics packages
+<br>
 
+|package|Description|
+|:----|:-----|
+|`afex`|Factorial experiments|
+|`lmer`|Linear mixed effects models|
+|`BayesFactor`|Bayesian Models|
+|`forecast`|Time series| 
+|`lavaan`|Latent variable and structural equation modelling| 
+
+
+]
+
+
+.pull-right5[
+
+```{r, echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("../_image/lavaan_ss.jpg")
+```
+
+
+```{r, echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("../_image/BayesFactor_ss.png")
+```
+
+
+]
 
 ---
 
