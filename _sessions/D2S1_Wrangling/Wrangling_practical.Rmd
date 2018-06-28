@@ -139,7 +139,7 @@ A. Open your R project. It should already have the folders `0_Data` and `1_Code`
 # Done!
 ```
 
-B. Open a new R script and save it as a new file called `wrangling_practical.R` in the `2_Code` folder. At the top of the script, using comments, write your name and the date. The, load the set of `tidyverse` and `speff2trial` packages with `library()`. Here's how the top of your script should look:
+B. Open a new R script and save it as a new file called `wrangling_practical.R` in the `2_Code` folder. At the top of the script, using comments, write your name and the date. Then, load the set of `tidyverse` and `speff2trial` packages with `library()`. Here's how the top of your script should look:
 
 ```{r, eval = FALSE, echo = TRUE}
 ## NAME

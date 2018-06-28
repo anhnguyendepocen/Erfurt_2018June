@@ -3,7 +3,7 @@
   <head>
     <title>Machine Learning</title>
     <meta charset="utf-8">
-    <meta name="author" content="The R Bootcamp www.therbootcamp.com" />
+    <meta name="author" content="The R Bootcamp @ Erfurt www.therbootcamp.com @therbootcamp" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="../_css/my-theme.css" type="text/css" />
   </head>
@@ -12,11 +12,25 @@
 class: center, middle, inverse, title-slide
 
 # Machine Learning
-### The R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>
+### The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+### June 2018
 
 ---
 
 
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Erfurt, June 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#646464"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+---
+  
 
 
 
@@ -45,20 +59,18 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 ]
 
 ---
+
 # Everyone uses machine learning
 
 .pull-left6[
 
-### Everyone!
+How does Google know what search results you want?
 
-- How does Google know what search results you want?
+How does Amazon know what products to recommend?
 
-- How does Amazon know what products to recommend?
+How does Netflix decide what shows you'll want to watch next?
 
-- How does Netflix decide what shows you'll want to watch next?
-
-- How do Tesla cars recognize objects and predict accidents?
-
+How do Tesla cars recognize objects and predict accidents?
 
 &gt; Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
 
@@ -69,104 +81,36 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlexamples.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-
-
-
 ]
 
 
 ---
-# Predicting Disease
 
-
+## Two types of prediction tasks
 
 .pull-left45[
 
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-### Past "Training" Data
-
-| id|sex | age|fam_history |smoking | disease|
-|--:|:---|---:|:-----------|:-------|-------:|
-|  1|m   |  46|Yes         |TRUE    |       0|
-|  2|m   |  47|Yes         |FALSE   |       1|
-|  3|f   |  42|No          |FALSE   |       1|
-|  4|m   |  49|No          |FALSE   |       1|
-|  5|m   |  41|No          |TRUE    |       1|
-|  6|m   |  43|Yes         |FALSE   |       0|
-|  7|f   |  45|Yes         |FALSE   |       1|
-|  8|m   |  45|No          |TRUE    |       1|
 
 ]
 
 
 .pull-right45[
 
-### Future "Test" Data
-
-| id|sex | age|fam_history |smoking |disease |
-|--:|:---|---:|:-----------|:-------|:-------|
-| 91|m   |  39|No          |TRUE    |?       |
-| 92|m   |  46|No          |FALSE   |?       |
-| 93|m   |  45|No          |FALSE   |?       |
-| 94|m   |  54|No          |FALSE   |?       |
-| 95|m   |  44|No          |TRUE    |?       |
-| 96|m   |  44|No          |FALSE   |?       |
-| 97|f   |  42|No          |FALSE   |?       |
-| 98|m   |  44|Yes         |TRUE    |?       |
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
-# Predicting Sales
 
-
-
-.pull-left45[
-
-
-### Past "Training" Data
-
-|product    | last_month| tweets|sentiment | sales|
-|:----------|----------:|------:|:---------|-----:|
-|speaker    |        950|     17|++        |   956|
-|tv         |       1013|     64|--        |  1076|
-|cable      |        992|    109|-         |  1026|
-|headphones |       1089|    110|--        |  1077|
-|phones     |       1012|     80|+         |   919|
-|movies     |       1032|    174|-         |   956|
-|games      |        942|    112|--        |   928|
-|drone      |       1071|     97|+         |  1023|
-
-]
-
-
-.pull-right45[
-
-### Future "Test" Data
-
-|product | last_month| tweets|sentiment |sales |
-|:-------|----------:|------:|:---------|:-----|
-|camera  |        884|    118|++        |?     |
-|office  |       1025|    142|-         |?     |
-|network |        991|    207|--        |?     |
-|storage |       1176|    197|+         |?     |
-|watch   |        986|     90|++        |?     |
-|jewelry |        989|    240|++        |?     |
-|glasses |        931|    -78|--        |?     |
-|vape    |        978|    162|++        |?     |
-
-]
-
-
----
 # What is the basic machine learning process?
 
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="95%" /&gt;
-
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="90%" /&gt;
 
 
 ---
+
 # Why do we separate training from prediction?
 
 .pull-left4[
@@ -197,9 +141,8 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 ]
 
-
-
 ---
+
 # What do you think?
 
 &lt;font size = 5&gt;Can anyone come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
@@ -245,28 +188,12 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 
 ---
-# Training (fitting) vs. Testing (prediction)
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_A.png" width="70%" style="display: block; margin: auto;" /&gt;
 
----
-# Training (fitting) vs. Testing (prediction)
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_B.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-# Training (fitting) vs. Testing (prediction)
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_C.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-# Training (fitting) vs. Testing (prediction)
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_D.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
----
 ## What machine learning algorithms are there?
 
 .pull-left55[
 
-There thousands of machine learning algorithms from many different fields.
+There are thousands of machine learning algorithms from many different fields.
   - Computer vision, natural language processing, reinforcement learning...
 
 Wikipedia lists 57 *categories* (!) of machine learning algorithms
@@ -280,34 +207,13 @@ Wikipedia lists 57 *categories* (!) of machine learning algorithms
 
 ### 3 Algorithims
 
-We will focus on 3 algorithms that apply to most tasks:
+We will focus on 3 algorithms that apply to most ML tasks:
 
 | Algorithm|Complexity|
 |:------|:----|
-|     Regression| Low / Medium | 
 |     Decision Trees| Low |
+|     Regression| Low / Medium | 
 |     Random Forests| High |
-
-]
-
-
-
----
-## Two types of prediction tasks
-
-.pull-left45[
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-
-.pull-right45[
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
 
 ]
 
@@ -335,13 +241,10 @@ We will focus on 3 algorithms that apply to most tasks:
 &lt;br&gt;
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-
 ]
 
-
-
-
 ---
+
 # How do you fit and evaluate models in R?
 
 .pull-left45[
@@ -389,11 +292,8 @@ plot(A_model)     # Visualize the model
 
 ]
 
-
-
-
-
 ---
+
 ## Regression with `glm()`
 
 .pull-left5[
@@ -434,15 +334,18 @@ loan_glm_pred &lt;- predict(loan_glm_model,
                          newdata = data_test)
 ```
 
+### Regularised regression with glmnet
 
+We will also play with 'regularised' ridge regression with the `glmnet` package
 
 ]
 
 
 ---
-## Decision Trees with `FFTrees::FFTrees()`
 
-.pull-left5[
+## Decision Trees with `rpart::rpart()`
+
+.pull-left45[
 
 In decision trees, the criterion is modeled as a sequence of logical Yes or No questions.
 
@@ -455,27 +358,29 @@ In decision trees, the criterion is modeled as a sequence of logical Yes or No q
 
 .pull-right5[
 
-Create decision trees using the `FFTrees` package
+Create decision trees using the `rpart` package
 
 
 ```r
-# Load the FFTrees package
-library(FFTrees)
+# Load the rpart package
+library(rpart)
 
-# Train FFTrees model
-loan_FFTrees_mod &lt;- FFTrees(formula = risk ~ ., 
-                            data = loan_data)
+# Train rpart model
+loan_rpart_mod &lt;- rpart(formula = risk ~ ., 
+                        data = loan_data,
+                        rpart.control)
 
-# Predict new data with FFTrees model
-loan_FFTrees_pred &lt;- predict(loan_FFTrees_mod,
-                             newdata = loan_test)
+# Predict new data with rpart model
+loan_rpart_pred &lt;- predict(loan_rpart_mod,
+                           newdata = loan_test)
 ```
 
+### Fast-and-frugal trees with FFTrees
 
-]
-
+We will also play with 'fast-and-frugal trees' with the `FFTrees` package]
 
 ---
+
 ## Random Forests with `randomForest::randomForest()`
 
 .pull-left5[
@@ -503,12 +408,12 @@ randomForest(formula = y ~.,    # Formula
              ntree, mtry)       # Optional
 
 # Train randomForest model
-loan_rf_model &lt;- randomForest(formula = risk ~ ., 
-                              data = loan_data)
+rf_model &lt;- randomForest(formula = risk ~ ., 
+                         data = loan_data)
 
 # Predict new data with model
-loan_rf_pred &lt;- predict(loan_rf_model,
-                        newdata = loan_test)
+rf_pred &lt;- predict(rf_model,
+                   newdata = loan_test)
 ```
 
 
@@ -516,41 +421,292 @@ loan_rf_pred &lt;- predict(loan_rf_model,
 
 
 ---
-# How do I do machine learning in R?
 
-.pull-left6[
+# 2 Ways to do machine learning in R
 
-In the practical, we will go through the basic steps "by hand" so you can see the process:
+.pull-left45[
+
+### Raw method
+
+Call individual packages and functions directly
 
 
 ```r
-# Create training and test data
-data_train &lt;- ...
-data_test &lt;- ...
+# LOAD LIBRARIES
+library(randomForest)
+library(ada)
+library(elasticnet)
 
 # Train models on training data
-model_A &lt;- A_fun(formula = y ~ ., 
-                 data = data_train)
+rf_mod &lt;- randomForest(...)
+boost_mod &lt;- ada(...)
+rlr_mod &lt;- ridge(...)
 
-# Model A predictions
-pred_A &lt;- predict(model_A, 
-                  newdata = data_test)
+# Predictions
+rf_pred &lt;- predict(rf_mod, ...)
+boost_pred &lt;- predict(rf_mod, ...)
 
-# Calculate Model A error
-pred_err_A &lt;- mean(abs(pred_A - data_test$y))
-
-# Compare to Models B, C, D...
+#...
 ```
+
+]
+
+.pull-right5[
+
+### Meta Method 
+
+Use a "meta" package like `caret` (or `mlr`):
+
+`caret` is a 'wrapper' packages that automates much of the the machine learning process.
+
+Use hundreds of different ML algorithms using a common language and set of functions. Change one "string' (not line!) to use a different model
+
+
+```r
+library(caret)
+
+train(..., method = "lm") # Regression!
+train(..., method = "rf") # Random forests!
+train(..., method = "ada") # Boosted regression trees
+```
+
+
+&lt;img src="../_image/caretlogo.jpeg" width="80%" style="display: block; margin: auto;" /&gt;
+
+Benefit: Makes it *extremely* easy to perform very complex machine learning procedures in a few lines of code
+
+
+]
+
+---
+
+.pull-left55[
+
+# Caret
+
+
+&lt;img src="https://vignette.wikia.nocookie.net/joke-battles/images/2/21/Bugs-Bunny-4.png/revision/latest?cb=20151231234917" width="35%" style="display: block; margin: auto;" /&gt;
+
+Caret stands for Classification And REgression Training.
+
+Do very complex machine learning tasks with a few simple functions
+
+Knows each model's meta parameters and chooses the best ones with cross validation.
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2014/09/Caret-package-in-R.png" alt="The almighty Caret!" width="90%" /&gt;
+&lt;p class="caption"&gt;The almighty Caret!&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+.pull-left5[
+
+# Caret
+
+
+As always, you can install `caret` from CRAN
+
+
+```r
+# Install caret
+install.packages("caret")
+
+# Load the caret package
+library("caret")
+```
+
+Once you've installed `caret`, look at the vignette for a nice overview of the package
+
+
+```r
+# Open the main package vignette
+vignette("caret")
+```
+
+
+Today we will go over the main functions in the package
+
+
+]
+
+.pull-right45[
+
+### Caret Vignette
+
+&lt;img src="caret_vignette.jpg" width="90%" /&gt;
+
+
+]
+
+
+---
+
+.pull-left5[
+# Caret
+
+
+Here are the main functions in the `caret` package
+
+| Function| Purpose|
+|--------|----------|
+| `trainControl()` | Determine how training (in general) will be done|
+| `train()` | Specify a model and find *best* parameters |
+| `varImp()` | Determine variable importance |
+
+]
+
+
+.pull-right45[
+
+### Caret Vignette
+
+&lt;img src="caret_vignette.jpg" width="90%" /&gt;
+
+]
+
+---
+
+# Caret
+
+### trainControl()
+
+- Use `trainControl()` to define a general fitting process.
+
+
+
+```r
+# Get ready for 10 fold cross validation!
+
+mycontrol &lt;- trainControl(method = "repeatedcv", # Do repeated cross validation
+                          number = 10,           # 10 folds
+                          repeats = 50)         # Repeat 50 times (!)
+```
+
+
+- Can specify cross validation with `method = "repeatedcv"`
+    - Many other methods are available too!
+    
+- Can *repeat* cross validation many times with `repeats`
+
+---
+
+.pull-left6[
+
+# Caret
+
+### train()
+
+- Use `train()` to fit **any** of over 200 models **and** get best parameters
+
+
+```r
+train(form = price ~ .,      # Criterion
+      data = data_train,     # Training data
+      method = "lm",         # Specify a model
+      trControl = mycontrol) # Use mycontrol parameters
+```
+
+- Specify the criterion to be predicted as a formula with `form`
+
+- Specify training data with `data`
+
+- Choose a model with `method`
+    - `method = 'lm'` = Linear regression
+    - `method = 'rf` = Random forest
 
 ]
 
 .pull-right35[
 
-When you do lots of machine learning, the `caret` and `mlr` packages can automate much of the the machine learning process.
+See all &gt;280 models at [http://topepo.github.io/caret/available-models.html](http://topepo.github.io/caret/available-models.html)
 
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="caret_models.jpg" width="1699" /&gt;
+
 
 ]
+
+---
+
+.pull-left5[
+
+# Caret
+
+### varImp()
+
+- Use `varImp()` to extract **variable importance** from a model
+
+
+```r
+# Look at variable importance with varImp
+varImp(diamonds_lm_train)
+```
+
+- Result will be a vector showing how important each variable was in predicting the criterion.
+
+- Specific outputs depend on the model
+    - Regression: Regression weights
+    - Decision trees: Mean *gini* index.
+    
+]
+
+
+.pull-right45[
+
+![](varimp_ss.jpg)&lt;!-- --&gt;
+
+
+]
+
+
+---
+
+
+&lt;br&gt;&lt;br&gt;
+.pull-left5[
+
+# Caret
+
+
+- There are *many* other great features of caret we haven't touched
+   - Splitting data with `createDataPartition()`
+   - Imputing (replacing) missing values and transforming predictors with `preProcess()`
+   - Add your own custom model
+   
+
+- Be sure to check out the **excellent** documentation site to learn all the details
+
+
+]
+
+.pull-right45[
+
+### http://topepo.github.io/caret/index.html
+
+
+&lt;img src="caret_package_md.jpg" width="2251" /&gt;
+
+]
+
+---
+
+## Machine Learning II Live Demo &amp; Practical
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html"&gt;Link to Machine Learning II practical&lt;/a&gt;
+
+
+
+
+
 
 ---
 
@@ -594,7 +750,7 @@ When you do lots of machine learning, the `caret` and `mlr` packages can automat
 - Data comes from two processes: *Signal* and *Noise* (aka Error).
 &lt;br&gt;
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -606,7 +762,7 @@ When you do lots of machine learning, the `caret` and `mlr` packages can automat
 - A bad model is one that captures too much unpredictable noise,
     
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

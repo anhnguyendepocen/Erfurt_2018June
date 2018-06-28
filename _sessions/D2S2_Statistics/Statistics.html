@@ -664,6 +664,81 @@ my_glm$residuals[1:5]
 
 ---
 
+.pull-left35[
+## predict()
+
+Many (but not all) statistical objects have an associated `predict()` method.
+
+`predict()` allows you to use the model to make predictions for new data, and understand how the model works.
+
+
+
+
+
+
+
+```r
+lastyear
+```
+
+
+| id| age| fitness| tattoos| income|
+|--:|---:|-------:|-------:|------:|
+|  1|  44|       7|       6|   6300|
+|  2|  65|       8|       5|  10900|
+|  3|  31|       6|       3|   5100|
+
+]
+
+
+.pull-right6[
+Create model based on old data
+
+
+```r
+# Create regression model predicting income
+mod &lt;- lm(formula = income ~ age + fitness + tattoos,
+          data = lastyear)
+
+mod$coefficients
+```
+
+```
+## (Intercept)         age     fitness     tattoos 
+##       994.1       146.8        75.1      -173.3
+```
+
+
+```r
+thisyear
+```
+
+
+|  id| age| fitness| tattoos|
+|---:|---:|-------:|-------:|
+| 101|  21|       3|       4|
+| 102|  23|       6|       8|
+| 103|  26|       6|       3|
+
+
+
+```r
+# Predict the income of people in thisyear
+predict(object = mod, 
+        newdata = thisyear)[1:3]
+```
+
+```
+##    1    2    3 
+## 3610 3436 4742
+```
+
+
+
+]
+
+---
+
 .pull-left4[
 
 ## broom::tidy()
@@ -818,8 +893,7 @@ birthdays &lt;- c()
 while(all(!duplicated(birthdays))) {
   
   # Get new birthday
-  new_day &lt;- sample(x = 1:365, 
-                    size = 1)
+  new_day &lt;- sample(x = 1:365, size = 1)
   
   # Add new_day to birthdays
   birthdays &lt;- c(birthdays, new_day)
@@ -837,38 +911,115 @@ length(birthdays)
 
 ]
 
+---
+
+.pull-left5[
+
+### rnorm(), runif()...
+
+Use the `rnorm()`, `runif()`... functions to draw random samples from probability distributions
+
+
+
+```r
+# Random sample from Normal distribution
+
+mysamp &lt;- rnorm(n = 100,   # Number of samples
+                mean = 10, # Mean of pop
+                sd = 5)    # SD of pop ...
+
+mysamp[1:5]  # First 5 values
+```
+
+```
+## [1]  5.243  6.950 13.287 15.182  9.787
+```
+
+```r
+mean(mysamp) # Mean
+```
+
+```
+## [1] 9.992
+```
+
+```r
+sd(mysamp)   # Standard deviation
+```
+
+```
+## [1] 4.588
+```
+
+
+]
+
+.pull-right45[
+
+
+```r
+ggplot(data = tibble(x = mysamp),
+       aes(x = x, y = ..density..)) +
+  geom_histogram(col = "white", 
+                 bins = 10) + 
+  geom_density(col = "red", size = 1.5) + 
+  theme_minimal()
+```
+
+&lt;img src="Statistics_files/figure-html/unnamed-chunk-47-1.png" width="100%" /&gt;
+
+
+
+]
+
+
+
 
 
 ---
 
 .pull-left45[
+&lt;br&gt;&lt;br&gt;
+## Other great statistics packages
+&lt;br&gt;
 
+|package|Description|
+|:----|:-----|
+|`afex`|Factorial experiments|
+|`lmer`|Linear mixed effects models|
+|`BayesFactor`|Bayesian Models|
+|`forecast`|Time series| 
+|`lavaan`|Latent variable and structural equation modelling| 
 
 
 ]
+
 
 .pull-right5[
 
+&lt;img src="../_image/lavaan_ss.jpg" width="1277" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="../_image/BayesFactor_ss.png" style="display: block; margin: auto;" /&gt;
+
 
 ]
-
 
 ---
 
 .pull-left45[
-
+&lt;br&gt;&lt;br&gt;
 ## Summary
 
+R has a package for every statistical procedure you can imagine.
 
-- There are tons of statistical packages in R
+Most require a formula, data, and other optional arguments
 
-- Most require a formula, data, and other optional arguments
+Use help menus to understand arguments and syntax!
 
-- Use help menus to understand arguments and syntax!
+Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
 
-- Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
-
-- Use random sampling functions to run simulations
+Use random sampling functions to run simulations
 
 ]
 
