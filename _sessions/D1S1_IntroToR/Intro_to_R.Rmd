@@ -30,7 +30,7 @@ layout: true
 
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D1S1_IntroToR/what_is_R.Rmd')
+xaringan::inf_mr('_sessions/D1S1_IntroToR/Intro_to_R.Rmd')
 baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 ```
 
@@ -371,7 +371,40 @@ mean(c(1, 2, 3), na.rm = "test")
 ]
 
 .pull-right5[
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500" height="400"></p>
+```{r}
+?mean
+```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/help.png" width="500"></p>
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. <b><font style="color:#52D998">View help files using `?`</font></b>
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+```{r}
+?cor
+```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/help_cor.png" width="500"></p>
 ]
 
 ---
@@ -398,94 +431,251 @@ mean(c(1, 2, 3), na.rm = "test")
 ]
 
 .pull-right5[
-```{r, echo=FALSE,eval=T,warning=F,message=F}
-baselers <- readr::read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
+```{r, echo=FALSE,eval=T,warning=F,message=F,error=T}
+baselers <- load("baselers.RData")
 require(tibble)
-options(tibble.width = 50, tibble.max_extra_cols = 0)
-baselers
-```
-]
-
-
----
-
-# Syntax style
-
-Programming languages have different expressive styles. R uses...
-
-.pull-left35[
-+ **Comment** symbol `#`
-<br2>
-+ **Quotations** with either `" "` or ' '
-<br2>
-+ Curly brackets `{}` **enclose expressions** explicitly
-<br2>
-+ Parentheses `()` **call functions**
-<br2>
-+ Semicolon `;` **separates expressions**
-<br2>
-+ `<`,`>`,`|`,`&`,`==`, `!=` define **logical statements**
-]
-
-
-.pull-right55[
-```{r, eval = F}
-# This is a comment
-
-# Quotes are used to define strings
-"a" == 'a'
-
-# Expression and calls
-my_fun(x,y){ x  + y }
-
-# two expression in one line
-2 + 2 ; 3 + 3
-
-# are these equal/different
-2 == 2 ; 2 != 2
-
+options(tibble.width = 48, tibble.max_extra_cols = 0)
 ```
 
+```{r, error=T}
+print(baselers)
+```
 ]
 
 ---
 
-# Help
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
 
-.pull-left5[
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. <b><font style="color:#52D998">Select variables (vectors) using `$`</font></b>
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
 
-R provides extremely helpful **help files** and **vignettes**. 
->**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).<br>
->**Vignettes** are long tutorials sometimes provided by the authors of a package.     
+.pull-right5[
+```{r, echo=FALSE,eval=T,warning=F,message=F}
+options(max.print=8,width=48)
+```
 
-```{r, eval = F}
-# To access help files
-help("name_of_function")
-?name_of_function
+```{r}
+# select sex veriable using $
+baselers$sex
 
-# find help files
-??name_of_function
+# Wherever possible, AVOID...
+baselers[['sex']]
+baselers[[2]]
+```
 
-# To list and access vignettes
-vignette(package="name_of_package")
-vignette(package="name_of_vignette")
+```{r, echo=FALSE,eval=T,warning=F,message=F}
+options(max.print=100,width=110)
+```
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. <b><font style="color:#52D998">Use RStudio and projects</font></b>
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+### Projects help...
+save workspace and history &#9679; set project specific options &#9679; access files &#9679; version control &#9679; etc.
+<p align="left"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/projects_1.png" width="360"></p>
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. <b><font style="color:#52D998">Code in the editor</font></b>
+14. <b><font style="color:#52D998">First load packages and data</font></b>
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+
+
+.pull-right5[
+
+```{r, eval=F}
+# import packages
+library(tidyverse)
+library(yarrr)
+library(lme4)
+
+# import data
+baselers <- read_delim("baselers.txt",
+                       delim = '\t')
+
+```
+<br>
+### The goal is...
+... to create self-contained scripts that run uninterrupted from  beginning to start.
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. <b><font style="color:#52D998">Comment and format for readability</font></b>
+16. Struggle, ask for help, struggle...
+]
+
+.pull-right5[
+## Bad
+```{r, eval=F}
+mean(subset((data.frame(c('a','b'),runif(1000,
+0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
+```
+
+## Good
+```{r, eval=F}
+# create my data.frame
+my_data <- data.frame('group' = c('a','b'), 
+                      'value' = runif(1000,0,1))
+
+# subset data to group a
+# and compute average value
+my_data %>% 
+  filter(group == 'a') %>%
+  summarize(mean(value))
 ```
 
 ]
-.pull-right45[
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"></p>
 
-<!---
-<br><br><iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"></iframe>
---->
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. <b><font style="color:#52D998">Comment and format for readability</font></b>
+16. Struggle, ask for help, struggle...
 ]
 
+.pull-right5[
+### Short style guide
+```{r, eval=F}
+# Choose appropriate names
+analyze_baselers.R
+trial_id
 
-<!---
-## The workflow of R
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudio_workings.png" height="500" align="center"></p>
+# Leave spaces around operators
+var_rt <- var(rt, na.rm = TRUE)
 
---->
+# indent code
+if (var_rt < 2){
+  print('small variance')
+} else {
+  print('large variance')
+}
+
+# Crete sections using
+# Data wrangling section --------------------------
+
+```
+
+]
+
+---
+
+# Essentials: The 2<sup>4</sup> Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `<-` to create/change objects
+3. Objects have classes
+4. Name objects using `_`
+5. Everything happens through functions</font></b>
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. <b><font style="color:#52D998">Struggle, ask for help, struggle...</font></b>
+]
+
+.pull-right5[
+<p align="center">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/struggle.png" width="420">
+</p>
+]
 
 ---
 
