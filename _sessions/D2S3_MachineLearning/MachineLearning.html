@@ -117,27 +117,16 @@ How do Tesla cars recognize objects and predict accidents?
 
 Just because an algorithm can fit past (training) data well, does *not* necessarily mean that it will *predict* new data well.
 
-&lt;br&gt; 
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stockpen.jpg" alt="Anyone can come up with a model of past stock performance. Predicting future performance is much more difficult." width="70%" /&gt;
-&lt;p class="caption"&gt;Anyone can come up with a model of past stock performance. Predicting future performance is much more difficult.&lt;/p&gt;
-&lt;/div&gt;
-
-]
-
-.pull-right6[
-
-&gt; "Prediction is difficult, especially when it is about the future" ~ Niels Bohr
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/bohr.jpg" alt="Niels Bohr, Nobel Laureate in Physics" width="20%" /&gt;
-&lt;p class="caption"&gt;Niels Bohr, Nobel Laureate in Physics&lt;/p&gt;
-&lt;/div&gt;
+Anyone can come up with a model of *past* data (e.g.; stock performance, lottery winnings). Predicting future performance is much more difficult.
 
 &gt; "An economist is an expert who will know tomorrow why the things he predicted yesterday didn't happen today." ~ Evan Esar
 
-&lt;!-- &gt; "A prediction about the direction of the stock market tells you nothing about where stocks are headed, but a whole lot about the person doing the predicting" ~ Warren Buffett --&gt;
+]
+ 
+.pull-right6[
+
+&lt;img src="../_image/prediction_collage.png" width="80%" /&gt;
+
 
 ]
 
@@ -145,7 +134,7 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 # What do you think?
 
-&lt;font size = 5&gt;Can anyone come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;Can you come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
 
 
 
@@ -157,14 +146,11 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 | id|sex | age|fam_history |smoking | disease|
 |--:|:---|---:|:-----------|:-------|-------:|
-|  1|m   |  46|Yes         |TRUE    |       0|
-|  2|m   |  47|Yes         |FALSE   |       1|
-|  3|f   |  42|No          |FALSE   |       1|
-|  4|m   |  49|No          |FALSE   |       1|
-|  5|m   |  41|No          |TRUE    |       1|
-|  6|m   |  43|Yes         |FALSE   |       0|
-|  7|f   |  45|Yes         |FALSE   |       1|
-|  8|m   |  45|No          |TRUE    |       1|
+|  1|m   |  45|No          |FALSE   |       0|
+|  2|m   |  43|Yes         |FALSE   |       1|
+|  3|f   |  40|Yes         |FALSE   |       1|
+|  4|m   |  51|Yes         |FALSE   |       1|
+|  5|m   |  44|No          |TRUE    |       0|
 
 ]
 
@@ -175,14 +161,11 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 | id|sex | age|fam_history |smoking |disease |
 |--:|:---|---:|:-----------|:-------|:-------|
-| 91|m   |  39|No          |TRUE    |?       |
-| 92|m   |  46|No          |FALSE   |?       |
-| 93|m   |  45|No          |FALSE   |?       |
-| 94|m   |  54|No          |FALSE   |?       |
-| 95|m   |  44|No          |TRUE    |?       |
-| 96|m   |  44|No          |FALSE   |?       |
-| 97|f   |  42|No          |FALSE   |?       |
-| 98|m   |  44|Yes         |TRUE    |?       |
+| 91|m   |  51|Yes         |TRUE    |?       |
+| 92|f   |  47|No          |TRUE    |?       |
+| 93|m   |  39|No          |TRUE    |?       |
+| 94|f   |  51|Yes         |TRUE    |?       |
+| 95|f   |  50|Yes         |FALSE   |?       |
 
 ]
 
@@ -271,7 +254,6 @@ A_model &lt;- A_fun(formula = y ~.,
 
 .pull-right5[
 
-
 ### Evaluating a model
 
 
@@ -294,7 +276,42 @@ plot(A_model)     # Visualize the model
 
 ---
 
-## Regression with `glm()`
+## How do we evaluate ML models?
+
+.pull-left4[
+
+ML models are always evaluated based on their ability to *predict new, unseen data*.
+
+U
+
+&lt;b&gt; 1) Validation set&lt;/b&gt;
+
+Train on one or more historical dataset(s) (i.e.; previous year's stock changes)
+
+Test on new data (i.e.; what happens this year)
+
+&lt;b&gt; 2) K-Fold Cross Validation &lt;/b&gt;
+
+Uses only 
+
+Split data into &lt;i&gt;X%&lt;/i&gt; training and &lt;i&gt;1 - X%&lt;/i&gt; test data.
+
+Fit model to training data and evaluate prediction accuracy on test data
+
+Repeat several times.
+
+]
+
+.pull-right5[
+
+### Cross Validation
+&lt;img src="../_image/crossvalidation.jpg" width="701" /&gt;
+
+]
+
+---
+
+## Ridge Regression with `elasticnet::glmnet()`
 
 .pull-left5[
 
@@ -310,20 +327,20 @@ Training a model means finding values of `\(\beta_{Age}\)` and `\(\beta_{Income}
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression.png" width="50%" style="display: block; margin: auto;" /&gt;
 
-
 ]
-
 
 .pull-right5[
 
-Create regressions using the `glm()` function (part of base-R)
+Regularised ridge regression using the `elasticnet::glmnet()` function
 
 
 ```r
+library(elasticnet)
+
 # glm() function for regression
-glm(formula = y ~.,     # Formula
-    data = data_train,  # Training data
-    family, ...)        # Optional arguments
+glmnet(formula = y ~.,     # Formula
+       data = data_train,  # Training data
+       family, ...)        # Optional arguments
 
 # Train glm model
 loan_glm_model &lt;- glm(formula = risk ~ ., 
@@ -484,14 +501,24 @@ Benefit: Makes it *extremely* easy to perform very complex machine learning proc
 
 # Caret
 
-
 &lt;img src="https://vignette.wikia.nocookie.net/joke-battles/images/2/21/Bugs-Bunny-4.png/revision/latest?cb=20151231234917" width="35%" style="display: block; margin: auto;" /&gt;
 
-Caret stands for Classification And REgression Training.
+Caret stands for &lt;b&gt;C&lt;/b&gt;lassification &lt;b&gt;A&lt;/b&gt;nd &lt;b&gt;RE&lt;/b&gt;gression &lt;b&gt;T&lt;/b&gt;raining.
 
 Do very complex machine learning tasks with a few simple functions
 
-Knows each model's meta parameters and chooses the best ones with cross validation.
+Use anye of hundreds of different ML algorithms by changing one "string' (not line!) to use a different model
+
+
+```r
+library(caret)
+
+train(..., method = "lm") # Regression!
+train(..., method = "rf") # Random forests!
+train(..., method = "ada") # Boosted regression trees
+```
+
+Knows each model's meta parameters and chooses the best ones for your data using cross validation (or other method).
 
 ]
 
@@ -533,76 +560,85 @@ Once you've installed `caret`, look at the vignette for a nice overview of the p
 vignette("caret")
 ```
 
-
 Today we will go over the main functions in the package
-
 
 ]
 
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 &lt;img src="caret_vignette.jpg" width="90%" /&gt;
 
-
 ]
-
 
 ---
 
 .pull-left5[
 # Caret
 
-
-Here are the main functions in the `caret` package
+Here are the main functions we will cover in the `caret` package
 
 | Function| Purpose|
 |--------|----------|
 | `trainControl()` | Determine how training (in general) will be done|
-| `train()` | Specify a model and find *best* parameters |
+| `train()` | Specify a model and find *best* parameters|
 | `varImp()` | Determine variable importance |
 
 ]
 
-
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 &lt;img src="caret_vignette.jpg" width="90%" /&gt;
 
 ]
 
 ---
-
-# Caret
-
+.pull-left55[
 ### trainControl()
 
-- Use `trainControl()` to define a general fitting process.
+Use `trainControl()` to define how `carat` should select the best parameters for any ML model (that you will specify later with `train()`)
 
+Many methods are available in the `method` argument, look at the help menu with `?trainControl` for additional details
 
 
 ```r
-# Get ready for 10 fold cross validation!
+# Define how caraet should 
+#  select best model parameters
 
-mycontrol &lt;- trainControl(method = "repeatedcv", # Do repeated cross validation
-                          number = 10,           # 10 folds
-                          repeats = 50)         # Repeat 50 times (!)
+ctrl &lt;- trainControl(method = "repeatedcv",
+                     number = 10,  # 10 folds
+                     repeats = 50) # Repeat 50 times
 ```
 
+### trainControl methods
 
-- Can specify cross validation with `method = "repeatedcv"`
-    - Many other methods are available too!
-    
-- Can *repeat* cross validation many times with `repeats`
+|method|Description|
+|:----|:----|
+|`"repeatedcv"` | Repeated cross-validation|
+|`"LOOCV"`| Leave one out cross-validation|
+|`"none"` | Fit one model with default parameters |
+
+
+]
+
+.pull-right4[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### Cross Validation
+&lt;img src="../_image/crossvalidation.jpg" width="701" /&gt;
+
+
+]
 
 ---
 
 .pull-left6[
-
-# Caret
 
 ### train()
 
@@ -750,7 +786,7 @@ varImp(diamonds_lm_train)
 - Data comes from two processes: *Signal* and *Noise* (aka Error).
 &lt;br&gt;
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -762,7 +798,7 @@ varImp(diamonds_lm_train)
 - A bad model is one that captures too much unpredictable noise,
     
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

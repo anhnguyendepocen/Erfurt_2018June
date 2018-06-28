@@ -139,25 +139,18 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 Just because an algorithm can fit past (training) data well, does *not* necessarily mean that it will *predict* new data well.
 
-<br> 
-
-```{r, fig.cap = "Anyone can come up with a model of past stock performance. Predicting future performance is much more difficult.", echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stockpen.jpg")
-```
-
-]
-
-.pull-right6[
-
-> "Prediction is difficult, especially when it is about the future" ~ Niels Bohr
-
-```{r, fig.cap = "Niels Bohr, Nobel Laureate in Physics", echo = FALSE, out.width = "20%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/bohr.jpg")
-```
+Anyone can come up with a model of *past* data (e.g.; stock performance, lottery winnings). Predicting future performance is much more difficult.
 
 > "An economist is an expert who will know tomorrow why the things he predicted yesterday didn't happen today." ~ Evan Esar
 
-<!-- > "A prediction about the direction of the stock market tells you nothing about where stocks are headed, but a whole lot about the person doing the predicting" ~ Warren Buffett -->
+]
+ 
+.pull-right6[
+
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("../_image/prediction_collage.png")
+```
+
 
 ]
 
@@ -165,24 +158,24 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 # What do you think?
 
-<font size = 5>Can anyone come up with a model that will perfectly match past data but is worthless in predicting future data?</font><br><br>
+<font size = 5>Can you come up with a model that will perfectly match past data but is worthless in predicting future data?</font><br><br>
 
 
 ```{r, echo = FALSE}
 set.seed(100)
-past <- tibble(id = 1:8,
-               sex = sample(c("m", "f"), size  = 8, replace = TRUE),
-               age = round(rnorm(8, mean = 45, sd = 5), 0),
-               fam_history = sample(c("Yes", "No"), size = 8, replace = TRUE),
-               smoking = sample(c(TRUE, FALSE), size = 8, replace = TRUE),
-               disease = sample(c(0, 1), size = 8, replace = TRUE))
+past <- tibble(id = 1:5,
+               sex = sample(c("m", "f"), size  = 5, replace = TRUE),
+               age = round(rnorm(5, mean = 45, sd = 5), 0),
+               fam_history = sample(c("Yes", "No"), size = 5, replace = TRUE),
+               smoking = sample(c(TRUE, FALSE), size = 5, replace = TRUE),
+               disease = sample(c(0, 1), size = 5, replace = TRUE))
 
-present <- tibble(id = 91:98,
-                  sex = sample(c("m", "f"), size  = 8, replace = TRUE),
-               age = round(rnorm(8, mean = 45, sd = 5), 0),
-               fam_history = sample(c("Yes", "No"), size = 8, replace = TRUE),
-               smoking = sample(c(TRUE, FALSE), size = 8, replace = TRUE),
-               disease = rep("?", 8))
+present <- tibble(id = 91:95,
+                  sex = sample(c("m", "f"), size  = 5, replace = TRUE),
+               age = round(rnorm(5, mean = 45, sd = 5), 0),
+               fam_history = sample(c("Yes", "No"), size = 5, replace = TRUE),
+               smoking = sample(c(TRUE, FALSE), size = 5, replace = TRUE),
+               disease = rep("?", 5))
 ```
 
 .pull-left45[
@@ -294,7 +287,6 @@ A_model <- A_fun(formula = y ~.,
 
 .pull-right5[
 
-
 ### Evaluating a model
 
 ```{r, eval = FALSE}
@@ -316,7 +308,44 @@ plot(A_model)     # Visualize the model
 
 ---
 
-## Regression with `glm()`
+## How do we evaluate ML models?
+
+.pull-left4[
+
+ML models are always evaluated based on their ability to *predict new, unseen data*.
+
+U
+
+<b> 1) Validation set</b>
+
+Train on one or more historical dataset(s) (i.e.; previous year's stock changes)
+
+Test on new data (i.e.; what happens this year)
+
+<b> 2) K-Fold Cross Validation </b>
+
+Uses only 
+
+Split data into <i>X%</i> training and <i>1 - X%</i> test data.
+
+Fit model to training data and evaluate prediction accuracy on test data
+
+Repeat several times.
+
+]
+
+.pull-right5[
+
+### Cross Validation
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/crossvalidation.jpg")
+```
+
+]
+
+---
+
+## Ridge Regression with `elasticnet::glmnet()`
 
 .pull-left5[
 
@@ -334,19 +363,19 @@ Training a model means finding values of $\beta_{Age}$ and $\beta_{Income}$ that
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression.png")
 ```
 
-
 ]
-
 
 .pull-right5[
 
-Create regressions using the `glm()` function (part of base-R)
+Regularised ridge regression using the `elasticnet::glmnet()` function
 
 ```{r, eval = FALSE}
+library(elasticnet)
+
 # glm() function for regression
-glm(formula = y ~.,     # Formula
-    data = data_train,  # Training data
-    family, ...)        # Optional arguments
+glmnet(formula = y ~.,     # Formula
+       data = data_train,  # Training data
+       family, ...)        # Optional arguments
 
 # Train glm model
 loan_glm_model <- glm(formula = risk ~ ., 
@@ -509,16 +538,25 @@ Benefit: Makes it *extremely* easy to perform very complex machine learning proc
 
 # Caret
 
-
 ```{r, echo = FALSE, fig.align = 'center', out.width = "35%"}
 knitr::include_graphics("https://vignette.wikia.nocookie.net/joke-battles/images/2/21/Bugs-Bunny-4.png/revision/latest?cb=20151231234917")
 ```
 
-Caret stands for Classification And REgression Training.
+Caret stands for <b>C</b>lassification <b>A</b>nd <b>RE</b>gression <b>T</b>raining.
 
 Do very complex machine learning tasks with a few simple functions
 
-Knows each model's meta parameters and chooses the best ones with cross validation.
+Use anye of hundreds of different ML algorithms by changing one "string' (not line!) to use a different model
+
+```{r, eval = FALSE}
+library(caret)
+
+train(..., method = "lm") # Regression!
+train(..., method = "rf") # Random forests!
+train(..., method = "ada") # Boosted regression trees
+```
+
+Knows each model's meta parameters and chooses the best ones for your data using cross validation (or other method).
 
 ]
 
@@ -560,44 +598,42 @@ Once you've installed `caret`, look at the vignette for a nice overview of the p
 vignette("caret")
 ```
 
-
 Today we will go over the main functions in the package
-
 
 ]
 
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 ```{r, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("caret_vignette.jpg")
 ```
 
-
 ]
-
 
 ---
 
 .pull-left5[
 # Caret
 
-
-Here are the main functions in the `caret` package
+Here are the main functions we will cover in the `caret` package
 
 | Function| Purpose|
 |--------|----------|
 | `trainControl()` | Determine how training (in general) will be done|
-| `train()` | Specify a model and find *best* parameters |
+| `train()` | Specify a model and find *best* parameters|
 | `varImp()` | Determine variable importance |
 
 ]
 
-
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 ```{r, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("caret_vignette.jpg")
@@ -606,34 +642,46 @@ knitr::include_graphics("caret_vignette.jpg")
 ]
 
 ---
-
-# Caret
-
+.pull-left55[
 ### trainControl()
 
-- Use `trainControl()` to define a general fitting process.
+Use `trainControl()` to define how `carat` should select the best parameters for any ML model (that you will specify later with `train()`)
 
+Many methods are available in the `method` argument, look at the help menu with `?trainControl` for additional details
 
 ```{r, echo = TRUE, out.width = "90%", eval = FALSE}
+# Define how caraet should 
+#  select best model parameters
 
-# Get ready for 10 fold cross validation!
+ctrl <- trainControl(method = "repeatedcv",
+                     number = 10,  # 10 folds
+                     repeats = 50) # Repeat 50 times
+```
 
-mycontrol <- trainControl(method = "repeatedcv", # Do repeated cross validation
-                          number = 10,           # 10 folds
-                          repeats = 50)         # Repeat 50 times (!)
+### trainControl methods
+
+|method|Description|
+|:----|:----|
+|`"repeatedcv"` | Repeated cross-validation|
+|`"LOOCV"`| Leave one out cross-validation|
+|`"none"` | Fit one model with default parameters |
+
+
+]
+
+.pull-right4[
+<br><br><br><br>
+### Cross Validation
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/crossvalidation.jpg")
 ```
 
 
-- Can specify cross validation with `method = "repeatedcv"`
-    - Many other methods are available too!
-    
-- Can *repeat* cross validation many times with `repeats`
+]
 
 ---
 
 .pull-left6[
-
-# Caret
 
 ### train()
 
