@@ -78,15 +78,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-left6[
 
-How does Google know what search results you want?
-
-How does Amazon know what products to recommend?
-
-How does Netflix decide what shows you'll want to watch next?
-
-How does Tesla autopilot recognize objects and predict accidents?
-
-> Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
+> ### Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
 
 ]
 
@@ -133,10 +125,8 @@ knitr::include_graphics("../_image/prediction_collage.png")
 ]
 
 ---
-
-# What do you think?
-
-<font size = 5>Can you come up with a model that will perfectly match past data but is worthless in predicting future data?</font><br><br>
+<br><br>
+<font size = 6>Can you come up with a model that will perfectly match past data but is worthless in predicting future data?</font><br><br>
 
 
 ```{r, echo = FALSE}
@@ -160,6 +150,7 @@ present <- tibble(id = 91:95,
 
 
 ### Past "Training" Data
+<br>
 ```{r, results = 'asis', echo = FALSE}
 knitr::kable(past, format = "markdown")
 ```
@@ -170,6 +161,8 @@ knitr::kable(past, format = "markdown")
 .pull-right45[
 
 ### Future "Test" Data
+<br>
+
 ```{r, echo = FALSE}
 knitr::kable(present, format = "markdown")
 
@@ -239,7 +232,7 @@ We will focus on 3 algorithms that apply to most ML tasks:
 
 ---
 
-# How do you fit and evaluate ML models in R?
+## How do you fit and evaluate ML models in R?
 
 .pull-left45[
 
@@ -256,15 +249,21 @@ library(glmnet)
 ?glmnet
 ```
 
-Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
+<b>Important!</b> Look at the help file for each function!
 
-The trick is looking at the help file for additional arguments and data requirements
+Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
 
 ]
 
 .pull-right5[
 
-```{r, echo = FALSE}
+```{r, eval = FALSE}
+# Help file for glmnet
+?glmnet
+```
+
+
+```{r, echo = FALSE, out.width = "80%"}
 knitr::include_graphics("../_image/glmnet_help.jpg")
 ```
 
@@ -294,16 +293,16 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right5[
 
-### Standard regression with `glm()`
+### Standard regression with glm()
 
-The `glm()` function in the base stats package performs standard regression.
+The `glm()` function in the base stats package performs standard regression
 
 ```{r, eval = FALSE}
 glm_mod <- glm(formula = happiness ~ .,
                data = baselers)
 ```
 
-### Regularised regression with glmnet
+### Regularised regression with glmnet()
 
 To perform regularised regression, which tries to reduce overfitting by penalising large coefficients, use the `glmnet()` package:
 

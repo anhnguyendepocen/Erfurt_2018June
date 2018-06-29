@@ -63,15 +63,7 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 
 .pull-left6[
 
-How does Google know what search results you want?
-
-How does Amazon know what products to recommend?
-
-How does Netflix decide what shows you'll want to watch next?
-
-How does Tesla autopilot recognize objects and predict accidents?
-
-&gt; Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
+&gt; ### Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
 
 ]
 
@@ -112,10 +104,8 @@ Anyone can come up with a model of *past* data (e.g.; stock performance, lottery
 ]
 
 ---
-
-# What do you think?
-
-&lt;font size = 5&gt;Can you come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 6&gt;Can you come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
 
 
 
@@ -124,6 +114,7 @@ Anyone can come up with a model of *past* data (e.g.; stock performance, lottery
 
 
 ### Past "Training" Data
+&lt;br&gt;
 
 | id|sex | age|fam_history |smoking | disease|
 |--:|:---|---:|:-----------|:-------|-------:|
@@ -139,6 +130,8 @@ Anyone can come up with a model of *past* data (e.g.; stock performance, lottery
 .pull-right45[
 
 ### Future "Test" Data
+&lt;br&gt;
+
 
 | id|sex | age|fam_history |smoking |disease |
 |--:|:---|---:|:-----------|:-------|:-------|
@@ -206,7 +199,7 @@ We will focus on 3 algorithms that apply to most ML tasks:
 
 ---
 
-# How do you fit and evaluate ML models in R?
+## How do you fit and evaluate ML models in R?
 
 .pull-left45[
 
@@ -224,15 +217,22 @@ library(glmnet)
 ?glmnet
 ```
 
-Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
+&lt;b&gt;Important!&lt;/b&gt; Look at the help file for each function!
 
-The trick is looking at the help file for additional arguments and data requirements
+Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
 
 ]
 
 .pull-right5[
 
-&lt;img src="../_image/glmnet_help.jpg" width="1501" /&gt;
+
+```r
+# Help file for glmnet
+?glmnet
+```
+
+
+&lt;img src="../_image/glmnet_help.jpg" width="80%" /&gt;
 
 ]
 
@@ -268,7 +268,7 @@ glm_mod &lt;- glm(formula = happiness ~ .,
                data = baselers)
 ```
 
-### Regularised regression with glmnet
+### Regularised regression with glmnet()
 
 To perform regularised regression, which tries to reduce overfitting by penalising large coefficients, use the `glmnet()` package:
 
@@ -761,7 +761,7 @@ plot(rpart_train$finalModel)
 text(rpart_train$finalModel)
 ```
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -819,7 +819,7 @@ varImp(rpart_train)
 plot(varImp(rpart_train))
 ```
 
-![](MachineLearning_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
+![](MachineLearning_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -881,7 +881,7 @@ ggplot(data = results,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
