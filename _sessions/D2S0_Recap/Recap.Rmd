@@ -243,7 +243,7 @@ Organisation functions help you shuffle your data by sorting rows by columns, fi
 
 Organise the `combined_df` dataframe
 
-```{r}
+```{r, eval =F }
 combined_df %>%
   
   # Sort rows by arm then in 
@@ -260,6 +260,7 @@ combined_df %>%
 ]
 
 ---
+
 .pull-left4[
 
 # Aggregation functions
@@ -283,13 +284,13 @@ combined_df %>%
 .pull-right55[
 <br>
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = F}
 combined_df <- combined_df %>%
   select(id, age, arm_char, t1, t2) %>%
   rename(arm = arm_char)
 ```
 
-```{r}
+```{r, eval = F}
 # First 2 rows of raw data
 combined_df %>% slice(1:2)
 
@@ -304,9 +305,99 @@ combined_df %>%
   )
 ```
 
+]
+
+---
+
+
+## If you want to do statistics in R, there is a package for that!
+
+.pull-left5[
+<br><br>
+
+| Package| Models|
+|------:|:----|
+| `stats`|Generalized linear model|
+|     `afex`|   Anovas|
+|     `lme4`|   Mixed effects regression|
+|     `rpart`|    Decision Trees|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Network analysis|
+|     `neuralnet`| Neural networks|
+|     `MatchIt`| Matching and causal inference|
+|     `survival`| Longitudinal survival analysis|
+|     ...| Anything you can ever want!|
+
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
+```
+
+]
+
+---
+
+
+## Customising formulas
+
+You can keep adding terms to formulas by "adding"" them with `+` 
 
 ```{r}
+# Include multiple terms with +
+my_glm <- glm(formula = income ~ food + alcohol + happiness + hiking,
+              data = baselers)
+```
 
+To include *all* variables in a dataframe, use the catch-all notation <b>`formula = y ~ .`</b>
+
+```{r}
+# Use  y ~ . to include ALL variables
+my_glm <- glm(formula = income ~ .,
+              data = baselers)
+```
+
+To include *interaction terms* use `x1 * x2` instead of `x1 + x2`
+
+```{r}
+# Include an interaction term between food and alcohol
+my_glm <- glm(formula = income ~ food * alcohol,
+              data = baselers)
+```
+
+---
+
+
+.pull-left45[
+<br><br>
+## Other great statistics packages
+<br>
+
+|package|Description|
+|:----|:-----|
+|`afex`|Factorial experiments|
+|`lmer`|Linear mixed effects models|
+|`BayesFactor`|Bayesian Models|
+|`forecast`|Time series| 
+|`lavaan`|Latent variable and structural equation modelling| 
+
+
+]
+
+
+.pull-right5[
+
+```{r, echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/lavaan_ss.jpg")
+```
+
+
+```{r, echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/BayesFactor_ss.png")
 ```
 
 
