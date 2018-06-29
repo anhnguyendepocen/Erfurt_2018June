@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recap</title>
+    <meta charset="utf-8">
+    <meta name="author" content="The R Bootcamp @ Erfurt www.therbootcamp.com @therbootcamp" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Recap
+### The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+### June 2018
+
+---
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#7E7E7E"&gt;Erfurt, June 2018&lt;/font&gt;&lt;/a&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;a href="https://therbootcamp.github.io/"&gt;&lt;font color="#646464"&gt;www.therbootcamp.com&lt;/font&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+
+
+
+
+# Essentials: The 2&lt;sup&gt;4&lt;/sup&gt; Rules of the R Bootcamp
+
+.pull-left4[
+1. Everything is an object
+2. Use `&lt;-` to create/change objects
+3. Name objects using `_`
+4. Objects have classes
+5. Everything happens through functions
+6. Functions have arguments
+7. Arguments can have defaults
+8. Functions expect certain object classes
+9. View help files using `?`
+10. Data is stored in data frames
+11. Select variables (vectors) using `$`
+12. Use RStudio and projects
+13. Code in the editor
+14. First load packages and data
+15. Comment and format for readability
+16. Struggle, ask for help, struggle...
+]
+
+---
+
+# The almighty **tidyverse**
+
+Among its many packages, R contains a collection of high-performance, easy-to-use packages (libraries) designed specifically for handling data know as the [tidyverse](https://www.tidyverse.org/). The tidyverse includes:
+1. `ggplot2` -- creating graphics.
+2. `dplyr` -- data manipulation.
+3. `tidyr` -- tidying data.
+4. `readr` -- read wild data.
+5. `purrr` -- functional programming.
+6. `tibble` -- modern data frame.
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="http://d33wubrfki0l68.cloudfront.net/0ab849ed51b0b866ef6895c253d3899f4926d397/dbf0f/images/hex-ggplot2.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/5f8c22ec53a1ac61684f3e8d59c623d09227d6b9/b15de/images/hex-tidyr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/9221ddead578362bd17bafae5b85935334984429/37a68/images/hex-purrr.png" height="200px" /&gt;&lt;img src="http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b985e2547fe868e5e2b3f9621/720bb/images/hex-tibble.png" height="200px" /&gt;
+
+
+
+---
+
+.pull-left5[
+
+# What is Wrangling?
+
+Transform
+- Adding new columns
+- Combining columns
+- Splitting columns
+
+Organise
+- Moving data between columns and rows
+- Merging several dataframes
+- Sorting data by columns
+
+Aggregation
+- Aggregate data according to variables
+- Summarizing data across groups
+
+]
+
+
+.pull-right5[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+.pull-left35[
+# dplyr
+
+`dplyr` is a combination of 3 things:
+
+1. **`objects`** like dataframes
+2. **`functions`** that **do** things to objects.
+3. **`pipes`** `%&gt;%` that string together objects and verbs
+
+&lt;br&gt;
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## The pipe %&gt;%
+&lt;br2&gt;
+
+`dplyr` makes extensive use of the 'pipe' `%&gt;%` which passes objects between functions.
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+data %&gt;%    # Start with data, AND THEN...
+  FUN1 %&gt;% # Do FUN1, AND THEN...
+  FUN2 %&gt;% # Do FUN2, AND THEN...
+  FUN3 %&gt;% # Do FUN3, AND THEN...
+  group_by(x, y) %&gt;%  # Group by variables x, y
+    summarise(
+      VAR_A_New = FUN4(X),
+      VAR_B_New = FUN5(Y),
+      VAR_C_New = FUN6(Z),
+    )
+  )
+```
+
+]
+
+
+
+
+---
+
+## There are tons of statistical packages in R!
+
+
+.pull-left35[
+&lt;br&gt;&lt;br&gt;
+
+| Package| Models|
+|------:|:----|
+|     `afex`|   Anovas|
+|     `rpart`|    Decision Trees|
+|     `lme4`|   Mixed effects regression|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Cluster analyses|
+|     `neuralnet`| Neural networks|
+
+]
+
+.pull-right6[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+# Statistics
+
+.pull-left5[
+
+
+| Test| R Function|
+|:------|:----|
+|     `formula`|The dependent variable and one or more independent variables|
+|     `data`|  The dataframe containing variables|
+|   `subset`  | Optional subset of data to test |
+
+
+
+```r
+trial_X
+```
+
+```
+##   id sex age arm y_primary y_secondary
+## 1  1   m  35   1        50           1
+## 2  2   f  42   2        78           1
+## 3  3   f  24   1        46           0
+## 4  4   m  56   2        97           1
+## 5  5   f  49   1        74           1
+```
+
+
+]
+
+.pull-right45[
+
+
+```r
+TEST(formula = Y ~ X1 + X2 + ...,
+     data = DATA,
+     subset = SUBSET,
+     ...)
+```
+
+
+### Examples
+
+
+```r
+# T-test
+# DV = y_primary, IV = arm
+t.test(formula = y_primary ~ arm,
+       data = trial_X)
+
+# Regression
+# DV = y_secondary, IV = arm, sex, age
+# Subset = only id &gt; 50
+glm(formula = y_secondary ~ arm + sex + age,
+    data = trial_X,
+    subset = id &gt; 50)
+```
+
+]
+
+
+
+---
+
+.pull-left35[
+
+
+&lt;br&gt;&lt;br&gt;
+
+## Exploring statistical objects
+
+Assign the results of a statistical function to a new object, then use *generic* functions such as `print()`, `summary()`, `predict()` and `plot()` to explore it.
+
+
+
+```r
+# Create statistical object
+my_obj &lt;- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+```
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+
+
+
+```r
+# Create a glm object
+chick_glm &lt;- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+names(chick_glm)
+```
+
+```
+##  [1] "coefficients"      "residuals"         "fitted.values"     "effects"           "R"                
+##  [6] "rank"              "qr"                "family"            "linear.predictors" "deviance"         
+## [11] "aic"               "null.deviance"     "iter"              "weights"           "prior.weights"    
+## [16] "df.residual"       "df.null"           "y"                 "converged"         "boundary"         
+## [21] "model"             "call"              "formula"           "terms"             "data"             
+## [26] "offset"            "control"           "method"            "contrasts"         "xlevels"
+```
+
+```r
+## Access elements
+chick_glm$coefficients
+```
+
+```
+## (Intercept)        Time 
+##      27.467       8.803
+```
+
+]
+
+
+---
+
+# What is machine learning?
+
+.pull-left6[
+
+
+### Algorithms autonomously learning from data.
+
+Given data, an algorithm tunes its *parameters* to match the data, understand how it works, and make predictions for what will occur in the future.
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mldiagram_A.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right4[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearningcartoon.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+# How do I do machine learning in R?
+
+.pull-left6[
+
+In principle, it's a lot like evaluating statistical functions.
+
+Install the necessary package, evaluate the model function, explore the results.
+
+
+```r
+# Create training and test data
+data_train &lt;- ...
+data_test &lt;- ...
+
+# Train models on training data
+model_A &lt;- A_fun(formula = y ~ ., 
+                 data = data_train)
+
+# Model A predictions
+pred_A &lt;- predict(model_A, 
+                  newdata = data_test)
+
+# Calculate Model A error
+pred_err_A &lt;- mean(abs(pred_A - data_test$y))
+
+# Compare to Models B, C, D...
+```
+
+]
+
+.pull-right35[
+
+
+If you're really into machine learning, the `caret` package can automate much of the the machine learning process.
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+# Today
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/schedule"&gt;Schedule&lt;/a&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
