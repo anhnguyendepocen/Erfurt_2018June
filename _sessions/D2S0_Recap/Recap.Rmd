@@ -182,6 +182,135 @@ data %>%    # Start with data, AND THEN...
 
 ]
 
+---
+
+
+```{r, echo = FALSE}
+patients_df <- tibble(id = c(1, 2, 3, 4, 5),
+                      b = c(37, 65, 57, 34, 45),
+                      c = c(1, 2, 2, 1, 2))
+
+results_df <- tibble(id = c(4, 92, 1, 2, 99),
+                    t1 = c(100, 134, 123, 143, 102),
+                    t2 = c(105, 150, 135, 140,68))
+```
+
+
+.pull-left4[
+# Transformation Functions
+
+| Function| Description|
+|:-------------|:----|
+| `rename()` | Change column names |
+| `mutate()`|   Create a new column from existing columns|
+| `case_when()`|  Recode values from a vector to another|
+| `left_join()` | Combine multiple dataframes| 
+
+]
+
+.pull-right55[
+<br><br><br><br>
+### patients_df
+```{r}
+patients_df   # Demographic data
+```
+
+
+]
+
+---
+
+.pull-left55[
+
+# Organisation Functions
+
+Organisation functions help you shuffle your data by sorting rows by columns, filter rows based on criteria, select columns (etc.)
+
+| Function| Purpose|Example|
+|:--------|:----|:------------|
+| `arrange()` |Sort rows by columns|`df %>%`<br>`arrange(arm, age)`|
+| `slice()`|   Select rows by location|`df %>%`<br>`slice(1:10)`|
+| `filter()` | Select specific rows by criteria|`df %>%`<br>`filter(age > 50)`|
+| `select()`|   Select specific columns|`df %>%`<br>`select(arm, t1)`|
+
+
+]
+
+
+.pull-right4[
+
+<br><br>
+
+Organise the `combined_df` dataframe
+
+```{r}
+combined_df %>%
+  
+  # Sort rows by arm then in 
+  #  descending order of age
+  arrange(arm, desc(age)) %>%
+  
+  # Only include age > 50
+  filter(age > 50) %>%
+  
+  # Select these columns
+  select(arm, age, t1, t2)
+```
+
+]
+
+---
+.pull-left4[
+
+# Aggregation functions
+
+| Function| action|
+|:-------------|:----|
+| `group_by()` |Group data by levels of one or more variables |
+| `summarise()` | Calculate summary statistics |
+
+### Statistical functions
+
+| Function| action|
+|:-------------|:----|
+| `min(), max()`| Minimum, maximum |
+| `mean(), median()` |Mean, Median |
+| `sd()` |Standard deviation|
+| `sum()` | Sum|
+| `n()`| Number of cases|
+]
+
+.pull-right55[
+<br>
+
+```{r, echo = FALSE}
+combined_df <- combined_df %>%
+  select(id, age, arm_char, t1, t2) %>%
+  rename(arm = arm_char)
+```
+
+```{r}
+# First 2 rows of raw data
+combined_df %>% slice(1:2)
+
+# Group and summarise!
+combined_df %>%
+  group_by(arm) %>%
+  summarise(
+    N = n(),
+    age_mean = mean(age),
+    t1_mean = mean(t1, na.rm = TRUE),
+    t2_mean = mean(t2, na.rm = TRUE)
+  )
+```
+
+
+```{r}
+
+```
+
+
+]
 
 
 
