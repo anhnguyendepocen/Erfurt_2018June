@@ -42,28 +42,6 @@ library(tidyverse)
 ```
 
 
-.pull-left4[
-
-<font size = 6>Two main topics today</font>
-
-1. Get your external data into R
-
-2. 
-
-
-]
-
-
-.pull-right55[
-
-
-
-]
-
-
-
-
----
 
 .pull-left45[
 ## Data input - Paths
@@ -1206,13 +1184,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ]
-
----
-
-# Live Demo & Practical
-
-<br><br><br>
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S1_Wrangling/Wrangling_practical.html">Link to Wrangling practical</a>
 
 
 ---
