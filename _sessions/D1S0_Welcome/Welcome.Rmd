@@ -1,7 +1,7 @@
 ---
 title: "Welcome!"
 subtitle: ""
-author: "The R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>"
 output:
   xaringan::moon_reader:
     css: ["default", "../_css/my-theme.css"]
@@ -15,7 +15,7 @@ output:
 
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D1S0_Intro/Intro.Rmd')
+xaringan::inf_mr('_sessions/D1S0_Welcome/Welcome.Rmd')
 ```
 
 
@@ -26,14 +26,6 @@ options(digits = 4)
 
 knitr::opts_chunk$set(fig.align = 'center')
 ```
-
-
-# Welcome!
-
-
-<p align="center"><img src="https://therbootcamp.github.io/assets/img/640px-Middle_Bridge,_Basel,_Switzerland.jpeg" width="500"  height="400"></p>
-
----
 
 
 .pull-left5[

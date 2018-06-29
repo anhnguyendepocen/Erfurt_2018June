@@ -29,7 +29,7 @@ layout: true
 
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D2S2_Statistics/Statistics.Rmd')
+xaringan::inf_mr('_sessions/D1S3_Statistics/Statistics.Rmd')
 ```
 
 ```{r setup, include=FALSE}
@@ -41,7 +41,7 @@ options(htmltools.dir.version = FALSE)
 # https://github.com/gnab/remark/wiki/Markdown
 
   
-  options(max.print = 20)
+options(max.print = 20)
 options(width=110)
 options(digits = 4)
 library(tidyverse)
