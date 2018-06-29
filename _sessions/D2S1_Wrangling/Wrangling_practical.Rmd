@@ -1,5 +1,5 @@
 ---
-title: "Data wrangling with dplyr"
+title: "Data wrangling"
 author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
@@ -115,6 +115,14 @@ baselers_agg <- baselers %>%
     N = n()
   )
 ```
+
+
+### Packages
+
+|Package| Installation|
+|:------|:------|
+|`tidyverse`|`install.packages("tidyverse")`|
+
 
 ### Datasets
 

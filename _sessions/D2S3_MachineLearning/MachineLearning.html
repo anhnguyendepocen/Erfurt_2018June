@@ -37,7 +37,6 @@ layout: true
 
 
 
-
 # What is machine learning?
 
 .pull-left6[
@@ -64,15 +63,7 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 
 .pull-left6[
 
-How does Google know what search results you want?
-
-How does Amazon know what products to recommend?
-
-How does Netflix decide what shows you'll want to watch next?
-
-How do Tesla cars recognize objects and predict accidents?
-
-&gt; Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
+&gt; ### Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
 
 ]
 
@@ -82,6 +73,76 @@ How do Tesla cars recognize objects and predict accidents?
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlexamples.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
+
+
+---
+
+# What is the basic machine learning process?
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="90%" /&gt;
+
+
+---
+
+# Why do we separate training from prediction?
+
+.pull-left4[
+
+Just because an algorithm can fit past (training) data well, does *not* necessarily mean that it will *predict* new data well.
+
+Anyone can come up with a model of *past* data (e.g.; stock performance, lottery winnings). Predicting future performance is much more difficult.
+
+&gt; "An economist is an expert who will know tomorrow why the things he predicted yesterday didn't happen today." ~ Evan Esar
+
+]
+ 
+.pull-right6[
+
+&lt;img src="../_image/prediction_collage.png" width="80%" /&gt;
+
+
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 6&gt;Can you come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
+
+
+
+
+.pull-left45[
+
+
+### Past "Training" Data
+&lt;br&gt;
+
+| id|sex | age|fam_history |smoking | disease|
+|--:|:---|---:|:-----------|:-------|-------:|
+|  1|m   |  45|No          |FALSE   |       0|
+|  2|m   |  43|Yes         |FALSE   |       1|
+|  3|f   |  40|Yes         |FALSE   |       1|
+|  4|m   |  51|Yes         |FALSE   |       1|
+|  5|m   |  44|No          |TRUE    |       0|
+
+]
+
+
+.pull-right45[
+
+### Future "Test" Data
+&lt;br&gt;
+
+
+| id|sex | age|fam_history |smoking |disease |
+|--:|:---|---:|:-----------|:-------|:-------|
+| 91|m   |  51|Yes         |TRUE    |?       |
+| 92|f   |  47|No          |TRUE    |?       |
+| 93|m   |  39|No          |TRUE    |?       |
+| 94|f   |  51|Yes         |TRUE    |?       |
+| 95|f   |  50|Yes         |FALSE   |?       |
+
+]
+
 
 
 ---
@@ -99,90 +160,6 @@ How do Tesla cars recognize objects and predict accidents?
 .pull-right45[
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# What is the basic machine learning process?
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="90%" /&gt;
-
-
----
-
-# Why do we separate training from prediction?
-
-.pull-left4[
-
-Just because an algorithm can fit past (training) data well, does *not* necessarily mean that it will *predict* new data well.
-
-&lt;br&gt; 
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stockpen.jpg" alt="Anyone can come up with a model of past stock performance. Predicting future performance is much more difficult." width="70%" /&gt;
-&lt;p class="caption"&gt;Anyone can come up with a model of past stock performance. Predicting future performance is much more difficult.&lt;/p&gt;
-&lt;/div&gt;
-
-]
-
-.pull-right6[
-
-&gt; "Prediction is difficult, especially when it is about the future" ~ Niels Bohr
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/bohr.jpg" alt="Niels Bohr, Nobel Laureate in Physics" width="20%" /&gt;
-&lt;p class="caption"&gt;Niels Bohr, Nobel Laureate in Physics&lt;/p&gt;
-&lt;/div&gt;
-
-&gt; "An economist is an expert who will know tomorrow why the things he predicted yesterday didn't happen today." ~ Evan Esar
-
-&lt;!-- &gt; "A prediction about the direction of the stock market tells you nothing about where stocks are headed, but a whole lot about the person doing the predicting" ~ Warren Buffett --&gt;
-
-]
-
----
-
-# What do you think?
-
-&lt;font size = 5&gt;Can anyone come up with a model that will perfectly match past data but is worthless in predicting future data?&lt;/font&gt;&lt;br&gt;&lt;br&gt;
-
-
-
-
-.pull-left45[
-
-
-### Past "Training" Data
-
-| id|sex | age|fam_history |smoking | disease|
-|--:|:---|---:|:-----------|:-------|-------:|
-|  1|m   |  46|Yes         |TRUE    |       0|
-|  2|m   |  47|Yes         |FALSE   |       1|
-|  3|f   |  42|No          |FALSE   |       1|
-|  4|m   |  49|No          |FALSE   |       1|
-|  5|m   |  41|No          |TRUE    |       1|
-|  6|m   |  43|Yes         |FALSE   |       0|
-|  7|f   |  45|Yes         |FALSE   |       1|
-|  8|m   |  45|No          |TRUE    |       1|
-
-]
-
-
-.pull-right45[
-
-### Future "Test" Data
-
-| id|sex | age|fam_history |smoking |disease |
-|--:|:---|---:|:-----------|:-------|:-------|
-| 91|m   |  39|No          |TRUE    |?       |
-| 92|m   |  46|No          |FALSE   |?       |
-| 93|m   |  45|No          |FALSE   |?       |
-| 94|m   |  54|No          |FALSE   |?       |
-| 95|m   |  44|No          |TRUE    |?       |
-| 96|m   |  44|No          |FALSE   |?       |
-| 97|f   |  42|No          |FALSE   |?       |
-| 98|m   |  44|Yes         |TRUE    |?       |
 
 ]
 
@@ -222,79 +199,46 @@ We will focus on 3 algorithms that apply to most ML tasks:
 
 ---
 
-.pull-left6[
-
-## How do you fit and evaluate models in R?
-
-&lt;br&gt;
-
-| Step|Description| Note / Example |
-|:------|:---|:------------|
-| 1| Install model packages| `FFTrees` for Decision Trees&lt;br&gt;`randomForest` for Random Forests|
-|     2| Get data |Use your own, or get free online datasets|
-|    3| Train model on data and generate insights|Always look at help menus and online tutorials!|
-|    4| Predict new data, possibly with cross-validation|Packages such as `mlr` and `caret` can really help|
-
-]
-
-.pull-right35[
-&lt;br&gt;
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png" width="90%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# How do you fit and evaluate models in R?
+## How do you fit and evaluate ML models in R?
 
 .pull-left45[
 
-### Fitting a model
-
+Answer: Pretty much the same way you fit standard statistical models. Install the package, load, and find the main fitting functions.
 
 
 ```r
-A_model &lt;- A_fun(formula = y ~.,
-                 data = data_train,
-                 ...)
+# Install the glmnet package
+install.packages("glmnet")
+
+# Load glmnet
+library(glmnet)
+
+# Look at help menu
+?glmnet
 ```
 
+&lt;b&gt;Important!&lt;/b&gt; Look at the help file for each function!
 
-| Argument| Description| Note |
-|------:|:----|:---|
-|     formula|  Formula indicating variables to use|  `y ~ .` is often used as a catch-all |
-|     data|    The dataset for model training| |
-|     ...|  Optional other arguments| See the function help page for details|
-
+Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
 
 ]
 
 .pull-right5[
 
 
-### Evaluating a model
-
-
 ```r
-# Common ways to explore / use a model
-
-A_model           # Print generic information
-
-names(A_model)    # Show attributes
-
-summary(A_model)  # Print summary information
-
-predict(A_model,  # Predict test data
-        newdata = data_test)  
-
-plot(A_model)     # Visualize the model
+# Help file for glmnet
+?glmnet
 ```
+
+
+&lt;img src="../_image/glmnet_help.jpg" width="80%" /&gt;
 
 ]
 
 ---
 
-## Regression with `glm()`
+## Regression
 
 .pull-left5[
 
@@ -310,40 +254,39 @@ Training a model means finding values of `\(\beta_{Age}\)` and `\(\beta_{Income}
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression.png" width="50%" style="display: block; margin: auto;" /&gt;
 
-
 ]
-
 
 .pull-right5[
 
-Create regressions using the `glm()` function (part of base-R)
+### Standard regression with `glm()`
+
+The `glm()` function in the base stats package performs standard regression.
 
 
 ```r
-# glm() function for regression
-glm(formula = y ~.,     # Formula
-    data = data_train,  # Training data
-    family, ...)        # Optional arguments
-
-# Train glm model
-loan_glm_model &lt;- glm(formula = risk ~ ., 
-                      data = data_train)
-
-# Predict new data with glm model
-loan_glm_pred &lt;- predict(loan_glm_model,
-                         newdata = data_test)
+glm_mod &lt;- glm(formula = happiness ~ .,
+               data = baselers)
 ```
 
-### Regularised regression with glmnet
+### Regularised regression with glmnet()
 
-We will also play with 'regularised' ridge regression with the `glmnet` package
+To perform regularised regression, which tries to reduce overfitting by penalising large coefficients, use the `glmnet()` package:
+
+
+```r
+install.packages("glmnet")
+library("glmnet")
+
+net_mod &lt;- glmnet(x, # Numeric features
+                  y, # Response
+                  alpha, # mixing parameter)
+```
 
 ]
 
-
 ---
 
-## Decision Trees with `rpart::rpart()`
+## Decision Trees
 
 .pull-left45[
 
@@ -358,125 +301,116 @@ In decision trees, the criterion is modeled as a sequence of logical Yes or No q
 
 .pull-right5[
 
-Create decision trees using the `rpart` package
+### Decision trees with rpart
+
+Create decision trees with `rpart`
 
 
 ```r
-# Load the rpart package
+install.packages("rpart")
 library(rpart)
 
 # Train rpart model
-loan_rpart_mod &lt;- rpart(formula = risk ~ ., 
-                        data = loan_data,
+loan_rpart_mod &lt;- rpart(formula, data,
+                        method = "class",
                         rpart.control)
-
-# Predict new data with rpart model
-loan_rpart_pred &lt;- predict(loan_rpart_mod,
-                           newdata = loan_test)
 ```
 
 ### Fast-and-frugal trees with FFTrees
 
-We will also play with 'fast-and-frugal trees' with the `FFTrees` package]
+Create very simple fast-and-frugal decision trees with `FFTrees`
+
+
+```r
+install.packages("FFTrees")
+library(FFTrees)
+
+loan_FFTrees_mod &lt;- FFTrees(formula, data,
+                            max.levels, goal)
+```
+ 
+
+]
+
 
 ---
 
-## Random Forests with `randomForest::randomForest()`
+## Ensemble decision trees
 
 .pull-left5[
 
-A Random Forest is a collection of many (hundreds, thousands) of decision trees
+A [Random Forest](https://en.wikipedia.org/wiki/Random_forest) is a collection of many (hundreds, thousands) of decision trees that use different features
 
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest_diagram.png" width="90%" /&gt;
-
-
+&lt;div class="figure"&gt;
+&lt;img src="../_image/randomforest_diagram.png" alt="&amp;lt;font size=3&amp;gt;&amp;lt;a href='https://medium.com/@williamkoehrsen'&amp;gt;Sourcemedium.com&amp;lt;/a&amp;gt;&amp;lt;/font&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;font size=3&gt;&lt;a href='https://medium.com/@williamkoehrsen'&gt;Sourcemedium.com&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;
+ 
 ]
 
 .pull-right5[
 
-Create decision trees using the `randomForest` package
+Create a random forest using the `randomForest` package
 
 
 ```r
-# Load the randomforest package
+install.packages("randomForest")
 library(randomForest)
 
-# Calculating a randomForest in R
+# Create a randomForest model
 randomForest(formula = y ~.,    # Formula 
              data = data_train, # Training data
-             ntree, mtry)       # Optional
-
-# Train randomForest model
-rf_model &lt;- randomForest(formula = risk ~ ., 
-                         data = loan_data)
-
-# Predict new data with model
-rf_pred &lt;- predict(rf_model,
-                   newdata = loan_test)
+             ntree, mtry)  # Tuning parameters
 ```
+
+Here are some of the tuning parameters
+
+|Parameter | Description|
+|:-------|:-------|
+|`ntree`|Number of trees in forest|
+|`mtry`|Number of variables randomly selected at splits|
+
+
+
 
 
 ]
-
 
 ---
 
-# 2 Ways to do machine learning in R
+## Optimizing model parameters with cross validation
 
 .pull-left45[
 
-### Raw method
+Most machine learning models have two types of parameters, *raw parameters* that dictate how an individual model makes predictions, and *tuning parameters* that determine how those raw parameters are calculated.
 
-Call individual packages and functions directly
+|Model| Raw parameters|Tuning parameters|
+|:------|:------|:------|
+|Decision Trees|Nodes, splits, decisions |Minimum number of cases in each node|
+|Regularised regression |Model coefficients | Coefficient penalty term|
 
-
-```r
-# LOAD LIBRARIES
-library(randomForest)
-library(ada)
-library(elasticnet)
-
-# Train models on training data
-rf_mod &lt;- randomForest(...)
-boost_mod &lt;- ada(...)
-rlr_mod &lt;- ridge(...)
-
-# Predictions
-rf_pred &lt;- predict(rf_mod, ...)
-boost_pred &lt;- predict(rf_mod, ...)
-
-#...
-```
+To determine 'optimal' tuning parameters, which maximize prediction performance, techniques such as cross validation are often used.
 
 ]
 
 .pull-right5[
 
-### Meta Method 
+### Cross Validation
 
-Use a "meta" package like `caret` (or `mlr`):
+&lt;img src="../_image/crossvalidation.jpg" width="80%" style="display: block; margin: auto;" /&gt;
 
-`caret` is a 'wrapper' packages that automates much of the the machine learning process.
+0) Select *tuning parameters*
 
-Use hundreds of different ML algorithms using a common language and set of functions. Change one "string' (not line!) to use a different model
+1) Split the training set into K "folds"
 
+2) Use K - 1 folds for training, and 1 fold for testing.
 
-```r
-library(caret)
+3) Repeat K times.
 
-train(..., method = "lm") # Regression!
-train(..., method = "rf") # Random forests!
-train(..., method = "ada") # Boosted regression trees
-```
-
-
-&lt;img src="../_image/caretlogo.jpeg" width="80%" style="display: block; margin: auto;" /&gt;
-
-Benefit: Makes it *extremely* easy to perform very complex machine learning procedures in a few lines of code
-
+4) Average the K testing performances
 
 ]
+
 
 ---
 
@@ -485,17 +419,29 @@ Benefit: Makes it *extremely* easy to perform very complex machine learning proc
 # Caret
 
 
-&lt;img src="https://vignette.wikia.nocookie.net/joke-battles/images/2/21/Bugs-Bunny-4.png/revision/latest?cb=20151231234917" width="35%" style="display: block; margin: auto;" /&gt;
 
-Caret stands for Classification And REgression Training.
+Caret stands for &lt;b&gt;C&lt;/b&gt;lassification &lt;b&gt;A&lt;/b&gt;nd &lt;b&gt;RE&lt;/b&gt;gression &lt;b&gt;T&lt;/b&gt;raining.
+
+`caret` is a 'wrapper' packages that automates much of the the machine learning process.
 
 Do very complex machine learning tasks with a few simple functions
 
-Knows each model's meta parameters and chooses the best ones with cross validation.
+Use any of hundreds of different ML algorithms by changing one "string' (not line!) to use a different model
+
+
+```r
+library(caret)
+
+train(..., method = "lm") # Regression!
+train(..., method = "rf") # Random forests!
+train(..., method = "ada") # Boosted trees
+```
+
+Knows each model's tuning parameters and chooses the best ones for your data using cross validation (or other method).
 
 ]
 
-.pull-right45[
+.pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;div class="figure" style="text-align: center"&gt;
 &lt;img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2014/09/Caret-package-in-R.png" alt="The almighty Caret!" width="90%" /&gt;
@@ -512,6 +458,8 @@ Knows each model's meta parameters and chooses the best ones with cross validati
 .pull-left5[
 
 # Caret
+
+
 
 
 As always, you can install `caret` from CRAN
@@ -533,104 +481,287 @@ Once you've installed `caret`, look at the vignette for a nice overview of the p
 vignette("caret")
 ```
 
-
 Today we will go over the main functions in the package
-
 
 ]
 
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 &lt;img src="caret_vignette.jpg" width="90%" /&gt;
 
-
 ]
-
 
 ---
 
 .pull-left5[
 # Caret
 
-
-Here are the main functions in the `caret` package
+Here are the main functions we will cover in the `caret` package
 
 | Function| Purpose|
 |--------|----------|
+| `createDataPartition()` | Split data into different partitions|
 | `trainControl()` | Determine how training (in general) will be done|
-| `train()` | Specify a model and find *best* parameters |
+| `train()` | Specify a model and find *best* parameters|
 | `varImp()` | Determine variable importance |
+| `predict()` | Predict values for new data|
+| `postResample()` | Evaluate prediction performance|
 
 ]
 
-
 .pull-right45[
 
-### Caret Vignette
+### Caret Vignettes
+
+The `caret` package has some of the *best* documentation (vignettes) you'll ever see.
 
 &lt;img src="caret_vignette.jpg" width="90%" /&gt;
 
 ]
 
----
-
-# Caret
-
-### trainControl()
-
-- Use `trainControl()` to define a general fitting process.
-
-
-
-```r
-# Get ready for 10 fold cross validation!
-
-mycontrol &lt;- trainControl(method = "repeatedcv", # Do repeated cross validation
-                          number = 10,           # 10 folds
-                          repeats = 50)         # Repeat 50 times (!)
-```
-
-
-- Can specify cross validation with `method = "repeatedcv"`
-    - Many other methods are available too!
-    
-- Can *repeat* cross validation many times with `repeats`
 
 ---
 
 .pull-left6[
+### createDataPartition()
 
-# Caret
+Use `createDataPartition()` to split a dataset into separate partitions.
 
-### train()
-
-- Use `train()` to fit **any** of over 200 models **and** get best parameters
+Useful to split a large dataset into separate training and test data
 
 
 ```r
-train(form = price ~ .,      # Criterion
-      data = data_train,     # Training data
-      method = "lm",         # Specify a model
-      trControl = mycontrol) # Use mycontrol parameters
+data &lt;- baselers %&gt;% 
+  drop_na     # Drop missing cases from baselers
+
+# Get training cases
+train_v &lt;- createDataPartition(y = data$income, #crit
+                               times = 1, 
+                               p = .5)$Resample1
+
+# Vector of training cases
+train_v[1:10]
 ```
 
-- Specify the criterion to be predicted as a formula with `form`
+```
+##  [1]  1  3  7 10 14 15 16 19 20 21
+```
 
-- Specify training data with `data`
+```r
+# Training Data
+baselers_train &lt;- data %&gt;% 
+  slice(train_v)
 
-- Choose a model with `method`
-    - `method = 'lm'` = Linear regression
-    - `method = 'rf` = Random forest
+# Testing Data
+baselers_test &lt;- data %&gt;% 
+  slice(-train_v)
+```
+
 
 ]
 
 .pull-right35[
 
-See all &gt;280 models at [http://topepo.github.io/caret/available-models.html](http://topepo.github.io/caret/available-models.html)
+### Training and Test
+
+
+```r
+### Training data
+
+dim(baselers_train)
+```
+
+```
+## [1] 3072   20
+```
+
+```r
+baselers_train %&gt;%
+  slice(1:5) %&gt;%
+  select(1:3)
+```
+
+```
+## # A tibble: 5 x 3
+##      id sex      age
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
+## 1     1 male      44
+## 2     4 male      27
+## 3     9 male      43
+## 4    12 male      31
+## 5    18 female    62
+```
+
+```r
+### Testing data
+
+dim(baselers_test)
+```
+
+```
+## [1] 3068   20
+```
+
+
+]
+
+
+---
+.pull-left55[
+### trainControl()
+
+Use `trainControl()` to define how `carat` should select the best parameters for any ML model (that you will specify later with `train()`)
+
+Many methods are available in the `method` argument, look at the help menu with `?trainControl` for additional details
+
+
+```r
+# Define how caraet should 
+#  select best model parameters
+
+ctrl &lt;- trainControl(method = "repeatedcv",
+                     number = 10,  # 10 folds
+                     repeats = 2) # Repeat 2 times
+```
+
+### trainControl methods
+
+|method|Description|
+|:----|:----|
+|`"repeatedcv"` | Repeated cross-validation|
+|`"LOOCV"`| Leave one out cross-validation|
+|`"none"` | Fit one model with default parameters |
+
+]
+
+.pull-right4[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### Cross Validation
+&lt;img src="../_image/crossvalidation.jpg" width="701" /&gt;
+
+]
+
+---
+
+.pull-left55[
+
+### train()
+
+Use `train()` to fit **any** of over 280 models **and** get best parameters
+
+
+```r
+rpart_train &lt;- train(form = income ~ .,  
+                     data = baselers_train,
+                     method = "rpart", # Model!
+                     trControl = ctrl)
+```
+
+
+|Parameter|Description|
+|:-----|:----|
+|`form`|Formula specifying criterion|
+|`data`|Training data|
+|`method`| Model|
+|`trControl`| Control parameters|
+
+
+]
+
+.pull-right4[
+
+See all &gt;280 models on the [Caret Documentation Page](http://topepo.github.io/caret/available-models.html)
 
 &lt;img src="caret_models.jpg" width="1699" /&gt;
+
+]
+
+---
+
+### train()
+
+Print the result of `train()` to obtain overall results
+
+
+```r
+rpart_train
+```
+
+```
+## CART 
+## 
+## 3072 samples
+##   19 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 2 times) 
+## Summary of sample sizes: 2764, 2764, 2765, 2765, 2765, 2766, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp      RMSE  Rsquared  MAE 
+##   0.0624  1481  0.7148    1193
+##   0.1142  1761  0.5958    1416
+##   0.5631  2327  0.5400    1873
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final value used for the model was cp = 0.0624.
+```
+
+
+
+---
+.pull-left4[
+
+### train()
+
+Explore your `train` Object
+
+
+```r
+# Best tuning parameters
+rpart_train$bestTune
+```
+
+```
+##       cp
+## 1 0.0624
+```
+
+```r
+# Show the final model
+rpart_train$finalModel
+```
+
+```
+## n= 3072 
+## 
+## node), split, n, deviance, yval
+##       * denotes terminal node
+## 
+## 1) root 3072 2.362e+10  7541  
+##   2) age&lt; 46.5 1814 4.717e+09  5808 *
+##   3) age&gt;=46.5 1258 5.604e+09 10040  
+##     6) age&lt; 64.5 852 1.773e+09  9029 *
+##     7) age&gt;=64.5 406 1.132e+09 12160 *
+```
+
+]
+
+
+.pull-right55[
+
+
+```r
+# Plot final model
+plot(rpart_train$finalModel)
+text(rpart_train$finalModel)
+```
+
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -639,51 +770,206 @@ See all &gt;280 models at [http://topepo.github.io/caret/available-models.html](
 
 .pull-left5[
 
-# Caret
-
 ### varImp()
 
-- Use `varImp()` to extract **variable importance** from a model
+Use `varImp()` to extract **variable importance** from a model
 
+Result will be be a model-specific method indicaating how important each variable was in predicting the criterion.
+    
 
 ```r
-# Look at variable importance with varImp
-varImp(diamonds_lm_train)
+varImp(rpart_train)
 ```
 
-- Result will be a vector showing how important each variable was in predicting the criterion.
-
-- Specific outputs depend on the model
-    - Regression: Regression weights
-    - Decision trees: Mean *gini* index.
+```
+## rpart variable importance
+## 
+##   only 20 most important variables shown (out of 24)
+## 
+##                                  Overall
+## age                              100.000
+## food                              59.720
+## happiness                          1.115
+## fitness                            0.644
+## datause                            0.602
+## id                                 0.231
+## tattoos                            0.211
+## educationSEK_II                    0.000
+## alcohol                            0.000
+## consultations                      0.000
+## `confessionevangelical-reformed`   0.000
+## height                             0.000
+## children                           0.000
+## confessionconfessionless           0.000
+## rhine                              0.000
+## confessionother                    0.000
+## hiking                             0.000
+## sexmale                            0.000
+## fasnachtyes                        0.000
+## weight                             0.000
+```
     
 ]
 
+.pull-right45[
+
+
+```r
+# Plot variable importance
+plot(varImp(rpart_train))
+```
+
+![](MachineLearning_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left5[
+## predict(), postResample()
+
+Test a models prediction performance with `predict()`
+
+
+```r
+# Get predictions based on best 
+bas_pred &lt;- predict(object = rpart_train, 
+                    newdata = baselers_test)
+
+# Result is a vector of predictions 
+#   for each row in newdata
+bas_pred[1:5]
+```
+
+```
+##     1     2     3     4     5 
+## 12162  9029 12162  5808  5808
+```
+
+```r
+# Assess performance with postResample()
+postResample(pred = bas_pred, 
+             obs = baselers_test$income)
+```
+
+```
+##      RMSE  Rsquared       MAE 
+## 1583.4110    0.6516 1270.2859
+```
+
+
+
+]
 
 .pull-right45[
 
-![](varimp_ss.jpg)&lt;!-- --&gt;
+### Plot predictions vs Truth
+
+
+```r
+# Plot predictions versus truth
+end &lt;- tibble(pred = bas_pred,
+              obs = baselers_test$income)
+
+ggplot(data = results,
+       aes(x = pred, y = obs)) + 
+  geom_point(alpha = .1) +
+  labs(title = "Rpart Performance",
+       x = "Predictions",
+       y = 'Truth') +
+  theme_bw() +
+  geom_smooth(method = "lm")
+```
+
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+---
+.pull-left5[
+
+## Recap - ML steps with caret
+
+Step 0: Create training and test data (if necessary)
+
+
+```r
+train_v &lt;- createDataPartition(y, times, p)
+
+data_train &lt;- data %&gt;% slice(train_v)
+data_test &lt;- data %&gt;% slice(-train_v)
+```
+
+Step 1: Define control parameters
+
+
+```r
+ctl &lt;- trainControl(method = "repeatedcv",
+                    number = 10, 
+                    repeats = 2) 
+```
+
+
+Step 2: Train model
+
+
+```r
+rpart_train &lt;- train(form = income ~ .,  
+                     data = data_train,
+                     method = "rpart",
+                     trControl = ctl)
+```
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Step 3: Explore
+
+
+```r
+rpart_train            # Print object
+varImp(rpart_train)    # Var importance
+rpart_train$finalModel # Final model
+```
+
+
+Step 4: Predict 
+
+
+```r
+my_pred &lt;- predict(object = rpart_train, 
+                   newdata = data_test)
+```
+
+
+Step 4: Evaluate 
+
+
+```r
+postResample(pred = bas_pred, 
+             obs = baselers_test$income)
+```
 
 
 ]
 
 
 ---
-
 
 &lt;br&gt;&lt;br&gt;
 .pull-left5[
 
 # Caret
 
+There are *many* other great features of caret we haven't touched
 
-- There are *many* other great features of caret we haven't touched
-   - Splitting data with `createDataPartition()`
-   - Imputing (replacing) missing values and transforming predictors with `preProcess()`
-   - Add your own custom model
-   
+- Use the `preProcess()` function to process your data (Imputing (replacing) missing values and transforming predictors)
 
-- Be sure to check out the **excellent** documentation site to learn all the details
+- Add your own custom model
+
+Be sure to check out the **excellent** documentation site to learn all the details
 
 
 ]
@@ -692,77 +978,15 @@ varImp(diamonds_lm_train)
 
 ### http://topepo.github.io/caret/index.html
 
-
 &lt;img src="caret_package_md.jpg" width="2251" /&gt;
 
 ]
 
 ---
 
-## Machine Learning II Live Demo &amp; Practical
-
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html"&gt;Link to Machine Learning II practical&lt;/a&gt;
-
-
-
-
-
-
----
-
 ## Machine Learning Live Demo &amp; Practical
 
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S3_MachineLearning/MachineLearning_practical.html"&gt;Link to Machine Learning practical&lt;/a&gt;
-
-
-&lt;!-- --- --&gt;
-&lt;!-- # What is the history of machine learning? --&gt;
-
-&lt;!-- - 1805 - 1809: Legendre and Gauss discover least squares. Soon after Galton defines **Regression** in a biological context, followed by Pearson for purely statistical analyses. --&gt;
-
-&lt;!-- - 1952: Arthur Samuel creates first computer learning program for learning checkers and coins the term **Machine Learning** in 1959.  --&gt;
-
-&lt;!-- - 1957: Frank Rosenblatt creates first **Neural Network** to simulate the thought process of the human brain. --&gt;
-
-&lt;!-- - 1963: First algorithm for **Support Vector Machines** is developed by Vapnik &amp; Chervonenkis. --&gt;
-
-&lt;!-- - 1967: **Nearest neighbor algorithm** is developed for classification --&gt;
-
-&lt;!-- - 1984: Breiman &amp; Olshen publish the CART algorithm for **Decision Trees**, followed by Quinlan who publishes the ID3 algorithm followed by C4.5 --&gt;
-
-&lt;!-- - 1986: Rina Dechter introduces **Deep Learning**, with many subsequent updates in the 2000s. --&gt;
-
-&lt;!-- - 1995: Tin Kam Ho develops first algorithm for **Random Forests** --&gt;
-
-&lt;!-- Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes. --&gt;
-
-
-
----
-### Old
-
-
-
-
----
-# Why do we separate training from prediction?
-
-- Data comes from two processes: *Signal* and *Noise* (aka Error).
-&lt;br&gt;
-
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-
-
----
-# Why do we separate training from prediction?
-
-- A good model is one that tries to capture the signal and ignore the noise
-- A bad model is one that captures too much unpredictable noise,
-    
-
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html"&gt;Link to Machine Learning II practical&lt;/a&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
