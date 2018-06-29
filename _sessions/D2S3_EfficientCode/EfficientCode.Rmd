@@ -29,7 +29,7 @@ layout: true
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D2S3_EfficientCode/EfficientCode.Rmd')
-baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
+baselers <- read_csv("data/")
 ```
 
 
