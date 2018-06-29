@@ -1,7 +1,7 @@
 ---
 title: "Welcome!"
 subtitle: ""
-author: "The R Bootcamp<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>"
 output:
   xaringan::moon_reader:
     css: ["default", "../_css/my-theme.css"]
@@ -15,7 +15,7 @@ output:
 
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D1S0_Intro/Intro.Rmd')
+xaringan::inf_mr('_sessions/D1S0_Welcome/Welcome.Rmd')
 ```
 
 
@@ -28,41 +28,28 @@ knitr::opts_chunk$set(fig.align = 'center')
 ```
 
 
-# Welcome!
-
-
-<p align="center"><img src="https://therbootcamp.github.io/assets/img/640px-Middle_Bridge,_Basel,_Switzerland.jpeg" width="500"  height="400"></p>
-
----
-
-
-.pull-left5[
+.pull-left6[
 
 #  Materials
 <br><br>
 
-<font size=6>Get all of the course materials through our homepage!</font><br><br>
+<font size=6>Get all of the course materials through our course page!</font><br><br>
 
-<font size="6" color="#F62D73"><a href="www.therbootcamp.com"><b>www.therbootcamp.com</b></a></font><br><br>
+<font size="5" color="#F62D73"><a href="https://therbootcamp.github.io/Erfurt_2018June/"><b>https://therbootcamp.github.io/Erfurt_2018June/</b></a></font><br><br>
 
 <font size=6>Bookmark it :)</font><br><br>
 
-
-
 <br>
-
-<!---
-### OR
-<br>
-<font size="6"> Direct <font size="6" color="#F62D73"><a href="bit.ly/BaselRBootcamp_April2018"><b>BaselRBootcamp_April2018</b></a></font>
---->
-
 
 ]
 
-.pull-right5[
+.pull-right4[
 
-<p align="center"><img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/homepage_April2018_ss.jpg?raw=true" width="400"></p>
+
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/erfurt_schedule_ss.jpg")
+```
+
 
 
 ]
@@ -85,78 +72,14 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-
-```{r, echo = FALSE, out.width = "80%"}
-knitr::include_graphics("../_image/principles.jpg")
-```
-
-
-[Source: www.hackerearth.com](https://www.hackerearth.com/blog/innovation-management/open-innovation-principles/)
-
-
----
-## Struggle, Ask questions (repeat!) -> Insight!
-
-```{r, echo = FALSE}
-knitr::include_graphics("../_image/struggle_question_insight.png")
-```
-
-
----
-### Theory + Applications = Empowered learning!
-
-<font size = "6"></font>
-
-```{r, echo = FALSE, out.width = "80%"}
-knitr::include_graphics("../_image/theory_applications_ven.png")
-```
-
-
-
-
----
-## Everyone learns differently
-
-```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("../_image/programming_pace.png")
-```
-
-
----
-
 .pull-left4[
 # Schedule 
 
 <font size = 5>We have a very intense and ambitious schedule!</font><br>
 
-<font size = 5>The amount of material we will be covering in two short weekends is...crazy</font><br>
-
-<font size = 5>The course is separated into different sessions</font><br>
-
-
-### Two Tracks
-
-<font size = 5>There is both a beginner and advanced track</font><br>
-
-<font size = 5>Red sessions are generally more advanced than Gray sessions<br><br>
-
-
-]
-
-.pull-right55[
-
-<img src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018Apr.png?raw=true" height="600" align="right">
-
-]
-
----
-
-.pull-left45[
-
-<br>
 # Sessions
 
-<font size = 5>Each focus session is 2 hours</font><br>
+<font size = 5>Each focus session is 1 hour 45 minutes</font><br>
 
 <font size = 5>Introduction lecture with slides</font><br>
 
@@ -164,17 +87,13 @@ knitr::include_graphics("../_image/programming_pace.png")
 
 ]
 
-
 .pull-right55[
-```{r, echo = FALSE, out.width = "90%"}
-knitr::include_graphics("../_image/session_breakdown.png")
+
+```{r, eval = TRUE, echo = FALSE}
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt.png?raw=true")
 ```
 
-
-
 ]
-
-
 
 ---
 
@@ -241,36 +160,6 @@ knitr::include_graphics("../_image/practical_emojis.png")
 ]
 
 
-
----
-
-.pull-left5[
-<br><br>
-# ~15 min, 1-1 Coaching
-
-<font size=5>Sometimes, you may find yourself in need of some intensive help. That's ok!</font><br><br>
-
-<font size=5>That's ok! We're here to help!</font><br><br>
-
-<font size=5>At <i><font color='blue'>any time</font></i>, you can request a 15 minute 1-1 intensive help / coaching session</font><br><br>
-
-<font size=5>We'll find some space and help you with whatever you're struggling with</font>
-
-
-]
- 
-
-.pull-right45[
-
-```{r, echo = FALSE}
-knitr::include_graphics("../_image/coaching_15.png")
-```
-
-
-
-]
-
-
 ---
 # Cheatsheets
 
@@ -307,58 +196,29 @@ knitr::include_graphics("../_image/coaching_15.png")
 </table>
 <br>
 
-
-
----
-
-.pull-left4[
-
-<br><br>
-# Breaks
-
-<font size = 5>Feel free to take breaks when you need them!</font><br2>
-
-<font size = 5>Help yourself to refreshments</font><br>
-
-<font size = 5>Coffee machine nearby (1 CHF)</font><br>
-
-<font size = 5>Lunch on your own or together at Tibits</font><br>
-
-]
-
-
-.pull-right6[
-
-<p align='center'><br><br><br><font size="6"><b><a href="https://www.tibits.ch/de/restaurants.html#tibits-basel">Tibits</a><br>
-<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tibits.jpg" height="400" vspace="10"></p>
-
-]
-
-
-
-
-
-
 ---
 
 .pull-left35[
-# Introductions
+## Introductions
 
 <font size = 5>1. What is your name?</font>
 <br><br>
 <font size = 5>2. Where are you from?</font>
 <br><br>
-<font size = 5>3. What is your programming experience?</font>
+<font size = 5>3. What is your current position?</font>
 <br><br>
-<font size = 5>4. Why do you want to learn R?</font>
+<font size = 5>4. What is your programming experience?</font>
 <br><br>
-<font size = 5>5. Coffee or tea?</font>
+<font size = 5>5. Why do you want to learn R?</font>
 <br><br>
-<font size = 5>6. Pizza or pasta?</font>
+<font size = 5>6. Coffee or tea?</font>
 <br><br>
-<font size = 5>7. Beer or wine?</font>
+<font size = 5>7. Pizza or pasta?</font>
 <br><br>
-<font size = 5>8. Berlin or Paris?</font>
+<font size = 5>8. Beer or wine?</font>
+<br><br>
+<font size = 5>9. Berlin or Paris?</font>
+
 ]
 
 .pull-right6[
@@ -377,16 +237,102 @@ knitr::include_graphics("../_image/coaching_15.png")
 <br>
 <p align="center"><img src="http://www.abetterinterview.com/wp-content/uploads/2012/11/interview-questions.jpg" height="510"></p>
 
----
-# Session 1: What is R?
-
-
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D1S1_WhatIsR/What_is_R.html#1">Link to Session 1: What is R?</a>
-
 
 ---
 # Backup slides
 
 
+
+---
+
+---
+
+
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("../_image/principles.jpg")
+```
+
+
+[Source: www.hackerearth.com](https://www.hackerearth.com/blog/innovation-management/open-innovation-principles/)
+
+
+---
+## Struggle, Ask questions (repeat!) -> Insight!
+
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/struggle_question_insight.png")
+```
+
+
+---
+### Theory + Applications = Empowered learning!
+
+<font size = "6"></font>
+
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("../_image/theory_applications_ven.png")
+```
+
+
+
+
+---
+## Everyone learns differently
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("../_image/programming_pace.png")
+```
+
+
+
+---
+
+.pull-left45[
+
+<br>
+
+
+]
+
+
+.pull-right55[
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("../_image/session_breakdown.png")
+```
+
+
+
+]
+
+
+
+
+---
+
+.pull-left5[
+<br><br>
+# ~15 min, 1-1 Coaching
+
+<font size=5>Sometimes, you may find yourself in need of some intensive help. That's ok!</font><br><br>
+
+<font size=5>That's ok! We're here to help!</font><br><br>
+
+<font size=5>At <i><font color='blue'>any time</font></i>, you can request a 15 minute 1-1 intensive help / coaching session</font><br><br>
+
+<font size=5>We'll find some space and help you with whatever you're struggling with</font>
+
+
+]
+ 
+
+.pull-right45[
+
+```{r, echo = FALSE}
+knitr::include_graphics("../_image/coaching_15.png")
+```
+
+
+
+]
 
 

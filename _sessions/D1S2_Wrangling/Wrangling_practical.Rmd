@@ -130,8 +130,8 @@ baselers_agg <- baselers %>%
 
 ```{r, eval = TRUE, message = FALSE}
 library(tidyverse)
-trial_act <- read_csv("../_data/trial_act.csv")
-trial_act_demo <- read_csv("../_data/trial_act_demo_fake.csv")
+trial_act <- read_csv("../_data/day1/trial_act.csv")
+trial_act_demo <- read_csv("../_data/day1/trial_act_demo_fake.csv")
 ```
 
 |File | Rows | Columns |

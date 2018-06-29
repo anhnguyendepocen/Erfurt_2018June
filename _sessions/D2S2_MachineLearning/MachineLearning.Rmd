@@ -29,7 +29,7 @@ layout: true
   
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D2S3_MachineLearning/MachineLearning.Rmd')
+xaringan::inf_mr('_sessions/D2S2_MachineLearning/MachineLearning.Rmd')
 ```
 
 
