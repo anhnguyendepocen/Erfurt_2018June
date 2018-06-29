@@ -206,10 +206,11 @@ library(microbenchmark, quietly = T)
 
 # define link to data
 link <- 'http://tinyurl.com/y99aj5ed'
+link <- 'https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv'
 
 # microbenchmark
 microbenchmark(
-  web   = read_csv(link),
+  #web   = read_csv(link),
   local = read_csv('data/titanic.csv'),
   fread = fread('data/titanic.csv'),
   times = 10)
