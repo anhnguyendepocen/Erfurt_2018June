@@ -102,7 +102,7 @@ data = dow %>% select('Date','Close') %>%
 
 ```
 
-6. Create new variables containing the change in index price and exchange rate for each variable using the `mutate()`-function(). Vectors that reflect value changes can conveniently computed using the `diff()`-function. Note that since `diff()` will return `n - 1` change values, HEREONFURTHER add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
+6. Create new variables containing the change in index price and exchange rate for each variable using the `mutate()`-function. Vectors that reflect value changes can conveniently computed using the `diff()`-function. Note that since `diff()` will return `n - 1` change values, you have to add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 # create variables representing day-to-day changes
@@ -116,7 +116,7 @@ data = data %>% mutate(
 
 ```
 
-7. Create a variable containing merely the year of the date variable using `mutate()` and `year()` from the `lubridate`-package (should have been installed with the `tidyverse`). First, load the `lubridate`-package.
+7. Create a variable containing merely the year of the date variable using `mutate()` and the `year()`-function from the `lubridate`-package (should have been installed with the `tidyverse`, if not install using `install.packages()`). Don't forget to load the package before using it.
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 # load lubridate
@@ -127,7 +127,7 @@ data = data %>% mutate(year = year(Date))
 
 ```
 
-8. Create a long version of data frame, in which variables occupy different rows rather than columns, using the `gather()`-function from the `tidyr`-package (also part of the `tidyverse`). To do this use the command below. You may have to (or want to) change the object/variable names. The first two arguments (given we used *pipes*) to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variable containing the dates and years with a leading hyphen. Check out the example in the `?gather`-help file. When done, inspect the object and compare it (visually) to the original, wide version.   
+8. Finally, create a long version of data frame that represents variables as different rows rather than columns. Do this using the `gather()`-function from the `tidyr`-package (also part of the `tidyverse`) via the command below. You may have to adjust the object/variable names. Check out the example in the `?gather`-help file. When done, inspect the object and compare it (visually) to the original, wide version.   
 
 ```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 # create long version of data frame
@@ -136,7 +136,7 @@ long_data = data %>% gather(variable, value, -Date, -year)
 
 ## Statistics (& Plotting)
 
-8. Plot the price development of the three stock indices using the following command (using the long data object). The code uses a modern and very powerful plotting package called `ggplot2`, which you will be introduced to on the second weekend of the course. For the code to work, you may have to adjust the object and variable names to match the ones in your data frame. Inspecting the plot, do you see a significant drop anywhere?   
+8. Now let us visually inspect some of the relationships. Plot the price development of the three stock indices using the code below (based on the long data object). The code uses a modern and very powerful plotting package called `ggplot2`, which you will be introduced to later in the course. For the code to work, you may have to adjust the object and variable names to match the ones in your data frame. Inspecting the plot, do you see a significant drop anywhere?   
 
 ```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 # create long version of data frame
@@ -147,7 +147,7 @@ ggplot(data = temp_data, mapping = aes(x = Date, y = value)) +
 
 ```
 
-9. Calculate the overall stock index price change per year. Use `group_by()`, `summarize()`, and `sum()` on the stock index change variables. Remember there were `NA`'s in two of the stock index price variables. When was the biggest drop in stock index prices?
+9. What do the numbers say? Calculate the overall stock index price change per year. Use `group_by()`, `summarize()`, and `sum()` on the stock index change variables. Remember the `NA`'s in two of the stock index price variables. You have to deal with them. When was the biggest drop in stock index prices?
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 # calculate aggregate change per year
@@ -162,7 +162,7 @@ aggregate_change
 
 ```
 
-10. Now that you know when the biggest drop occured, do you not wonder which stock index suffered the biggest loss? Compare the overall losses to the index price on the first trading day of that year. To do this, first identify the first date available for that year and then `filter()` the data based on the respective character string to retrieve that day's closing prices. Then divide the overall stock price change by that years first closing price. Which stock index suffered the greatest relative loss?  
+10. Now that you know the time at which the biggest drop occured, you may wonder which stock indices was most affected? Compare the overall losses in index prices on the first trading day of the respective year. To do this, identify the first date available for that year and then `filter()` to select the value for the first trading day. Then divide the overall change in in that year's stock price that the first day's closing price. Which stock index suffered the greatest relative loss?  
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 aggregate_change %>% 
@@ -173,7 +173,9 @@ aggregate_change %>%
 
 ```
 
-11. One driver behind the results observed for the last two tasks is that modern financial markets are closely intertwined, to the extend that a change in one market can bring about a change in the markets. Evaluate this aspect of financial markets by correlating the stock index change variables among each other using `cor()`. Note that `cor()` can take a data frame as an argument to produce the full correlation matrix among all variables. Also, don't forget about the `NA`s - there is an argument for `cor()` to deal with them. How closely are the stock indices related and which ones are most closely related?  
+11. The results, so far, seem tosuggest large co-dependencies between financial markets, in the sense that a change in one market can bring about changes in other markets. Evaluate this aspect of financial markets more directly by correlating the stock index change variables among each other using `cor()`. 
+
+Note that `cor()` produces the full correlation matrix when provided with a data frame. Also, don't forget about the `NA`s - there is an argument for `cor()` to deal with them. Take a look at `?cor`. How closely are the stock indices related and which ones are most closely related?  
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 
@@ -182,7 +184,9 @@ data %>%
   cor(., use = 'complete.obs')
 ```
 
-12. Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. Note that here have to specify each pairwise correlation separately in order to `summarize()` the correlation for each year (rather than computing the entire correlation matrix). 
+12. Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. To do this use the `group_by()` and `summarize()`-functions.
+
+Note that, in this case, you will have to specify each pairwise correlation separately. 
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 
@@ -195,7 +199,7 @@ data %>%
 )
 ```
 
-13. Another important index of the financial markets is the exchange rate to other currencies. Generally, it is assumed that a strong economcy translates in both a strong stock index and a strong currency relative to other currencies. First, evaluate whether changes in exchange rates correlate with each other the same way that stock indices do. 
+13. Another important index of the financial markets is the exchange rate of its currency to that of other markets. Commonly, it is assumed that a strong economcy translates in both a strong stock index and a strong currency relative to other currencies. Towards evaluating this claim, that stock index prices and exchange rates move the same way, begin by evaluating whether exchange rate changes correlate with each other the same way that stock indices do. 
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 data %>% 
@@ -203,7 +207,7 @@ data %>%
   cor(., use = 'complete.obs')
 ```
 
-14. Now evaluate whether exchange rates vary as a function of the difference between stock indices. I.e., does, for instance, a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theory has also produced an alternative hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exhange them for their own currency to mantain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.
+14. Now evaluate directly whether exchange rates co-vary with differences between stock indices prices. For instance, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theorizing has also lead to postulating the alternative hypothesis. Foreign investors who benefit from a rise in stock index price, so the logic, may be motivated to sell their holdings and exhange them for their own currency to mantain a balanced portfolio. This would, in effect, lead to a depreciation of the currency at the same time as the stock index is outperforming and thus to a negative relationship between the two variables. What do you think? Ask the data.
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 data %>% 
@@ -213,7 +217,7 @@ data %>%
   )
 ```
 
-15. Now, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.
+15. Finally, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.
 
 ```{r, eval = FALSE, echo = FALSE, message = FALSE, warning = FALSE}
 
