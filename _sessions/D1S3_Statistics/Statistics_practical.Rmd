@@ -14,10 +14,6 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 ```
 
 
-### Slides
-
-- [Here are the introduction slides for this practical on statistics!](https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S2_Statistics/Statistics.html#1)
-
 ### Overview
 
 In this practical you'll do basic statistics in R. By the end of this practical you will know how to:
@@ -42,7 +38,7 @@ In this practical you'll do basic statistics in R. By the end of this practical 
 
 ```{r, eval = TRUE, message = FALSE}
 library(tidyverse)
-house <- read_csv("../_data/kc_house_data.csv")
+house <- read_csv("../_data/day_1/kc_house_data.csv")
 ```
 
 |File | Rows | Columns | Description |Source
@@ -219,9 +215,7 @@ kc_house <- read_csv(file = "data/kc_house_data.csv")
 ```
 
 ```{r, eval = TRUE, message = FALSE}
-kc_house <- read_csv("../_data/kc_house_data.csv")
-
-trial_act <- read_csv("../_data/trial_act.csv")
+trial_act <- read_csv("../_data/day_1/trial_act.csv")
 trial_act <- as_tibble(trial_act)
 ```
 
