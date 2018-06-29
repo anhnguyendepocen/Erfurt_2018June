@@ -5,7 +5,7 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 date: "June 2018"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -175,7 +175,7 @@ Note: The short hand formula = y ~ . means include <i>all</i> variables in the d
 To create a statistical object, apply the statistical function `STAT_FUN` with the `formula` and `data` arguments:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("../_image/formula_description.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/formula_description.png")
 ```
 
 
@@ -202,7 +202,7 @@ To customise a test, look at the help menu and specifying arguments directly.
 ### ?glm()
 
 ```{r, echo = FALSE}
-knitr::include_graphics("../_image/glm_help.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/glm_help.jpg")
 ```
 
 ]
@@ -520,7 +520,7 @@ names(my_glm)
  
  
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("../_image/list_tab.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/list_tab.png")
 ```
 
 
@@ -639,7 +639,7 @@ predict(object = mod,
 The `tidy()` function from the `broom` package allows you to convert the key results of *many* (like hundreds) of statistical object like "glm" to a data frame
 
 ```{r, echo = FALSE, out.width = "70%", fig.align="center"}
-knitr::include_graphics("../_image/broom_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/broom_hex.png")
 ```
 
 ```{r, eval = FALSE}
@@ -743,7 +743,7 @@ mean(coin_flips == "H")
 ### Simulate the birthday problem
 
 ```{r, out.width = "20%", echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("../_image/balloons.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/balloons.png")
 ```
 
 
@@ -835,12 +835,12 @@ ggplot(data = tibble(x = mysamp),
 .pull-right5[
 
 ```{r, echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("../_image/lavaan_ss.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/lavaan_ss.jpg")
 ```
 
 
 ```{r, echo = FALSE, fig.align = 'center'}
-knitr::include_graphics("../_image/BayesFactor_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/BayesFactor_ss.png")
 ```
 
 

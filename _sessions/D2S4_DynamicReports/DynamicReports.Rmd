@@ -1,8 +1,8 @@
 ---
 title: "Dynamic Reports"
-subtitle: "With RMarkdown"
-author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "April 2018"
+subtitle: "With R Markdown"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "June 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -449,11 +449,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
----
-
-## Dynamic Reports Pratical
-
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D4S2_DynamicReports/DynamicReports_practical.html">Link to practical</a>
 
 
 
@@ -515,6 +510,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 
+
+
+---
+
+## Dynamic Reports Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D4S2_DynamicReports/DynamicReports_practical.html">Link to practical</a>
 
 
 

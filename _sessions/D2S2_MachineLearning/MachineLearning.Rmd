@@ -5,7 +5,7 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 date: "June 2018"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -118,7 +118,7 @@ Anyone can come up with a model of *past* data (e.g.; stock performance, lottery
 .pull-right6[
 
 ```{r, echo = FALSE, out.width = "80%"}
-knitr::include_graphics("../_image/prediction_collage.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/prediction_collage.png")
 ```
 
 
@@ -264,7 +264,7 @@ Some functions will use the standard `FUN(formula, data)` arguments, but others 
 
 
 ```{r, echo = FALSE, out.width = "80%"}
-knitr::include_graphics("../_image/glmnet_help.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/glmnet_help.jpg")
 ```
 
 ]
@@ -375,7 +375,7 @@ loan_FFTrees_mod <- FFTrees(formula, data,
 A [Random Forest](https://en.wikipedia.org/wiki/Random_forest) is a collection of many (hundreds, thousands) of decision trees that use different features
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.cap = "<font size=3><a href='https://medium.com/@williamkoehrsen'>Sourcemedium.com</a></font>"}
-knitr::include_graphics("../_image/randomforest_diagram.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/randomforest_diagram.png")
 ```
  
 ]
@@ -429,7 +429,7 @@ To determine 'optimal' tuning parameters, which maximize prediction performance,
 ### Cross Validation
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/crossvalidation.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/crossvalidation.jpg")
 ```
 
 0) Select *tuning parameters*
@@ -651,7 +651,7 @@ ctrl <- trainControl(method = "repeatedcv",
 ### Cross Validation
 ```{r, echo = FALSE, message = FALSE}
 library(baselers)
-knitr::include_graphics("../_image/crossvalidation.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/crossvalidation.jpg")
 ```
 
 ]
@@ -792,7 +792,7 @@ postResample(pred = bas_pred,
 end <- tibble(pred = bas_pred,
               obs = baselers_test$income)
 
-ggplot(data = results,
+ggplot(data = end,
        aes(x = pred, y = obs)) + 
   geom_point(alpha = .1) +
   labs(title = "Rpart Performance",
@@ -899,12 +899,6 @@ knitr::include_graphics("caret_package_md.jpg")
 
 ---
 
-## Machine Learning Live Demo & Practical
-
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html">Link to Machine Learning II practical</a>
-
-
-
-
+# Questions?
 
 

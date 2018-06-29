@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="The R Bootcamp @ Erfurt www.therbootcamp.com @therbootcamp" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../_css/my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -98,7 +98,7 @@ Anyone can come up with a model of *past* data (e.g.; stock performance, lottery
  
 .pull-right6[
 
-&lt;img src="../_image/prediction_collage.png" width="80%" /&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/prediction_collage.png" width="80%" /&gt;
 
 
 ]
@@ -232,7 +232,7 @@ Some functions will use the standard `FUN(formula, data)` arguments, but others 
 ```
 
 
-&lt;img src="../_image/glmnet_help.jpg" width="80%" /&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/glmnet_help.jpg" width="80%" /&gt;
 
 ]
 
@@ -342,7 +342,7 @@ loan_FFTrees_mod &lt;- FFTrees(formula, data,
 A [Random Forest](https://en.wikipedia.org/wiki/Random_forest) is a collection of many (hundreds, thousands) of decision trees that use different features
 
 &lt;div class="figure"&gt;
-&lt;img src="../_image/randomforest_diagram.png" alt="&amp;lt;font size=3&amp;gt;&amp;lt;a href='https://medium.com/@williamkoehrsen'&amp;gt;Sourcemedium.com&amp;lt;/a&amp;gt;&amp;lt;/font&amp;gt;" width="90%" /&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/randomforest_diagram.png" alt="&amp;lt;font size=3&amp;gt;&amp;lt;a href='https://medium.com/@williamkoehrsen'&amp;gt;Sourcemedium.com&amp;lt;/a&amp;gt;&amp;lt;/font&amp;gt;" width="90%" /&gt;
 &lt;p class="caption"&gt;&lt;font size=3&gt;&lt;a href='https://medium.com/@williamkoehrsen'&gt;Sourcemedium.com&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
 &lt;/div&gt;
  
@@ -397,7 +397,7 @@ To determine 'optimal' tuning parameters, which maximize prediction performance,
 
 ### Cross Validation
 
-&lt;img src="../_image/crossvalidation.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/crossvalidation.jpg" width="80%" style="display: block; margin: auto;" /&gt;
 
 0) Select *tuning parameters*
 
@@ -641,7 +641,7 @@ ctrl &lt;- trainControl(method = "repeatedcv",
 .pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 ### Cross Validation
-&lt;img src="../_image/crossvalidation.jpg" width="701" /&gt;
+![](https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/crossvalidation.jpg)&lt;!-- --&gt;
 
 ]
 
@@ -871,7 +871,7 @@ postResample(pred = bas_pred,
 end &lt;- tibble(pred = bas_pred,
               obs = baselers_test$income)
 
-ggplot(data = results,
+ggplot(data = end,
        aes(x = pred, y = obs)) + 
   geom_point(alpha = .1) +
   labs(title = "Rpart Performance",
@@ -984,9 +984,7 @@ Be sure to check out the **excellent** documentation site to learn all the detai
 
 ---
 
-## Machine Learning Live Demo &amp; Practical
-
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html"&gt;Link to Machine Learning II practical&lt;/a&gt;
+# Questions?
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
