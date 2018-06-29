@@ -78,6 +78,31 @@ options(digits = 4)
 
 ---
 
+# When is R slow?
+
+.pull-right45[
+- (R) programs are slow when a large number computations of computations are required.
+
+- Usually this involves, explicitly or implicitly (i.e., in the background), running a **loop**. 
+]
+
+
+```{r, message=F, warning=F, eval = T}
+variables   <- c(')
+
+# define collapse function
+combine <- function(x) {
+  my_vec = c()
+  for(i in 1:length(x)){
+    my_vec = c(my_vec, x[i])
+    }
+  }
+
+```
+
+
+---
+
 # Profiling
 
 The first step to making your code efficient is to **identify critical parts** of your code. Do this using one of the following: 
@@ -206,10 +231,11 @@ library(microbenchmark, quietly = T)
 
 # define link to data
 link <- 'http://tinyurl.com/y99aj5ed'
+link <- 'https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv'
 
 # microbenchmark
 microbenchmark(
-  web   = read_csv(link),
+  #web   = read_csv(link),
   local = read_csv('data/titanic.csv'),
   fread = fread('data/titanic.csv'),
   times = 10)
