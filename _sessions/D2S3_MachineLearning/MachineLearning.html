@@ -69,7 +69,7 @@ How does Amazon know what products to recommend?
 
 How does Netflix decide what shows you'll want to watch next?
 
-How do Tesla cars recognize objects and predict accidents?
+How does Tesla autopilot recognize objects and predict accidents?
 
 &gt; Machine learning drives our algorithms for demand forecasting, product search ranking, product and deals recommendations, merchandising placements, fraud detection, translations, and much more. ~ Jeff Bezos, Amazon founder
 
@@ -504,10 +504,12 @@ Here are the main functions we will cover in the `caret` package
 
 | Function| Purpose|
 |--------|----------|
-| `creacreateDataPartition()` | Split data into different partitions|
+| `createDataPartition()` | Split data into different partitions|
 | `trainControl()` | Determine how training (in general) will be done|
 | `train()` | Specify a model and find *best* parameters|
 | `varImp()` | Determine variable importance |
+| `predict()` | Predict values for new data|
+| `postResample()` | Evaluate prediction performance|
 
 ]
 
@@ -962,7 +964,9 @@ postResample(pred = bas_pred,
 # Caret
 
 There are *many* other great features of caret we haven't touched
-- Imputing (replacing) missing values and transforming predictors with `preProcess()`
+
+- Use the `preProcess()` function to process your data (Imputing (replacing) missing values and transforming predictors)
+
 - Add your own custom model
 
 Be sure to check out the **excellent** documentation site to learn all the details
