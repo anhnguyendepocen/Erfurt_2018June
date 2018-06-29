@@ -533,18 +533,16 @@ Useful to split a large dataset into separate training and test data
 
 
 ```r
-# Drop missing cases from baselers
 data &lt;- baselers %&gt;% 
-  drop_na %&gt;%
-  select_if(is.numeric)
+  drop_na     # Drop missing cases from baselers
 
 # Get training cases
 train_v &lt;- createDataPartition(y = data$income, #crit
                                times = 1, 
-                               p = .5)
+                               p = .5)$Resample1
 
 # Vector of training cases
-train_v$Resample1[1:10]
+train_v[1:10]
 ```
 
 ```
@@ -554,11 +552,11 @@ train_v$Resample1[1:10]
 ```r
 # Training Data
 baselers_train &lt;- data %&gt;% 
-  slice(train_v$Resample1)
+  slice(train_v)
 
 # Testing Data
 baselers_test &lt;- data %&gt;% 
-  slice(-train_v$Resample1)
+  slice(-train_v)
 ```
 
 
@@ -576,7 +574,7 @@ dim(baselers_train)
 ```
 
 ```
-## [1] 3072   15
+## [1] 3072   20
 ```
 
 ```r
@@ -587,13 +585,13 @@ baselers_train %&gt;%
 
 ```
 ## # A tibble: 5 x 3
-##      id   age height
-##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1     1    44   174.
-## 2     4    27   209 
-## 3     9    43   176.
-## 4    12    31   166.
-## 5    18    62   175.
+##      id sex      age
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
+## 1     1 male      44
+## 2     4 male      27
+## 3     9 male      43
+## 4    12 male      31
+## 5    18 female    62
 ```
 
 ```r
@@ -603,7 +601,7 @@ dim(baselers_test)
 ```
 
 ```
-## [1] 3068   15
+## [1] 3068   20
 ```
 
 
@@ -681,7 +679,6 @@ See all &gt;280 models on the [Caret Documentation Page](http://topepo.github.io
 ]
 
 ---
-.pull-left6[
 
 ### train()
 
@@ -696,7 +693,7 @@ rpart_train
 ## CART 
 ## 
 ## 3072 samples
-##   14 predictor
+##   19 predictor
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (10 fold, repeated 2 times) 
@@ -713,24 +710,57 @@ rpart_train
 ```
 
 
-]
 
-.pull-right35[
+---
+.pull-left4[
 
-### Dissect train
+### train()
+
+Explore your `train` Object
 
 
 ```r
-# See all named elements
-names(rpart_train)
-
 # Best tuning parameters
 rpart_train$bestTune
+```
 
+```
+##       cp
+## 1 0.0624
+```
+
+```r
 # Show the final model
-#  In this case a rf model
 rpart_train$finalModel
 ```
+
+```
+## n= 3072 
+## 
+## node), split, n, deviance, yval
+##       * denotes terminal node
+## 
+## 1) root 3072 2.362e+10  7541  
+##   2) age&lt; 46.5 1814 4.717e+09  5808 *
+##   3) age&gt;=46.5 1258 5.604e+09 10040  
+##     6) age&lt; 64.5 852 1.773e+09  9029 *
+##     7) age&gt;=64.5 406 1.132e+09 12160 *
+```
+
+]
+
+
+.pull-right55[
+
+
+```r
+# Plot final model
+plot(rpart_train$finalModel)
+text(rpart_train$finalModel)
+```
+
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ]
 
@@ -752,21 +782,29 @@ varImp(rpart_train)
 ```
 ## rpart variable importance
 ## 
-##               Overall
-## age           100.000
-## food           59.720
-## happiness       1.115
-## fitness         0.644
-## datause         0.602
-## id              0.231
-## tattoos         0.211
-## rhine           0.000
-## weight          0.000
-## hiking          0.000
-## height          0.000
-## children        0.000
-## alcohol         0.000
-## consultations   0.000
+##   only 20 most important variables shown (out of 24)
+## 
+##                                  Overall
+## age                              100.000
+## food                              59.720
+## happiness                          1.115
+## fitness                            0.644
+## datause                            0.602
+## id                                 0.231
+## tattoos                            0.211
+## educationSEK_II                    0.000
+## alcohol                            0.000
+## consultations                      0.000
+## `confessionevangelical-reformed`   0.000
+## height                             0.000
+## children                           0.000
+## confessionconfessionless           0.000
+## rhine                              0.000
+## confessionother                    0.000
+## hiking                             0.000
+## sexmale                            0.000
+## fasnachtyes                        0.000
+## weight                             0.000
 ```
     
 ]
@@ -779,7 +817,7 @@ varImp(rpart_train)
 plot(varImp(rpart_train))
 ```
 
-![](MachineLearning_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
+![](MachineLearning_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -841,14 +879,10 @@ ggplot(data = results,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
-
-
 
 ---
 .pull-left5[

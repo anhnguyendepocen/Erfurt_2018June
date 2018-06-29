@@ -572,26 +572,24 @@ Use `createDataPartition()` to split a dataset into separate partitions.
 Useful to split a large dataset into separate training and test data
 
 ```{r, warning = FALSE}
-# Drop missing cases from baselers
 data <- baselers %>% 
-  drop_na %>%
-  select_if(is.numeric)
+  drop_na     # Drop missing cases from baselers
 
 # Get training cases
 train_v <- createDataPartition(y = data$income, #crit
                                times = 1, 
-                               p = .5)
+                               p = .5)$Resample1
 
 # Vector of training cases
-train_v$Resample1[1:10]
+train_v[1:10]
 
 # Training Data
 baselers_train <- data %>% 
-  slice(train_v$Resample1)
+  slice(train_v)
 
 # Testing Data
 baselers_test <- data %>% 
-  slice(-train_v$Resample1)
+  slice(-train_v)
 ```
 
 
@@ -694,7 +692,6 @@ knitr::include_graphics("caret_models.jpg")
 ]
 
 ---
-.pull-left6[
 
 ### train()
 
@@ -705,23 +702,33 @@ rpart_train
 ```
 
 
-]
 
-.pull-right35[
+---
+.pull-left4[
 
-### Dissect train
+### train()
 
-```{r, echo = TRUE, out.width = "90%", eval = FALSE, warning = FALSE}
-# See all named elements
-names(rpart_train)
+Explore your `train` Object
 
+```{r, echo = TRUE, out.width = "90%", eval = TRUE, warning = FALSE}
 # Best tuning parameters
 rpart_train$bestTune
 
 # Show the final model
-#  In this case a rf model
 rpart_train$finalModel
 ```
+
+]
+
+
+.pull-right55[
+
+```{r, fig.align = 'center'}
+# Plot final model
+plot(rpart_train$finalModel)
+text(rpart_train$finalModel)
+```
+
 
 ]
 
@@ -795,11 +802,7 @@ ggplot(data = results,
 ```
 
 
-
-
 ]
-
-
 
 ---
 .pull-left5[
