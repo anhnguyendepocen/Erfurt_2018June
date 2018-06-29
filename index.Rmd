@@ -14,7 +14,7 @@ output: html_document
 |:--|:----------------------------|:-------------------------------|
 |0| Welcome<br>[slides](_sessions/D1S0_Welcome/Welcome.html) | Recap <br>[slides](_sessions/D2S0_Recap/Recap.html) |
 |1| Intro to R<br>[slides](_sessions/D1S1_IntroToR/Intro_to_R.html) | Plotting<br>[slides](_sessions/D2S1_PlottingI/PlottingI.html), [practical](_sessions/D2S1_PlottingI/PlottingI_practical.html)|
-|2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning<br>[slides](_sessions/D2S2_MachineLearning/MachineLearning.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html)|
+|2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning<br>[slides](_sessions/D2S2_MachineLearning/MachineLearning.html), [practical](_sessions/D2S2_MachineLearning/MachineLearning_practical.html)|
 |3| Statistics<br>[slides](_sessions/D1S3_Statistics/Statistics.html), [practical](_sessions/D1S3_Statistics/Statistics_practical.html)| Efficient Code<br>[slides](_sessions/D2S3_EfficientCode/EfficientCode.html), [practical](_sessions/D2S3_EfficientCode/EfficientCode_practical.html)|
 |4| Case Studies<br>[Intro](_sessions/D1S4_CaseStudies/CaseStudies.html)<br>[1: Clinical Trial](_sessions/D1S4_CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/D1S4_CaseStudies/Financial_Data_Case_Study.html)|Dynamic Reports<br>[slides](_sessions/D1S4_DynamicReports/DynamicReports.html), [practical](_sessions/D2S4_DynamicReports/DynamicReports_practical.html)|
 
