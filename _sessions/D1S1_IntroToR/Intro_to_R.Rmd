@@ -5,7 +5,7 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 date: "June 2018"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -31,8 +31,13 @@ layout: true
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D1S1_IntroToR/Intro_to_R.Rmd')
-baselers <- read_csv("https://raw.githubusercontent.com/therbootcamp/baselers/master/inst/extdata/baselers.txt")
 ```
+
+```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
+# Code to knit slides
+baselers <- readr::read_csv("../_data/day_1/baselers.csv")
+```
+
 
 
 ```{r setup, include=FALSE}
@@ -432,7 +437,6 @@ mean(c(1, 2, 3), na.rm = "test")
 
 .pull-right5[
 ```{r, echo=FALSE,eval=T,warning=F,message=F,error=T}
-baselers <- load("baselers.RData")
 require(tibble)
 options(tibble.width = 48, tibble.max_extra_cols = 0)
 ```
@@ -689,5 +693,4 @@ if (var_rt < 2){
 
 <p><font size=6>Open up **Rstudio**...</font>
 
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D1S1_WhatIsR/What_is_R_practical.html">Link to practical</a>
 

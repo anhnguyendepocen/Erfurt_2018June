@@ -4,7 +4,7 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 date: "June 2018"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -28,8 +28,12 @@ layout: true
 
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
-xaringan::inf_mr('_sessions/D2S3_EfficientCode/EfficientCode.Rmd')
-baselers <- read_csv("data/baselers.csv")
+xaringan::inf_mr('_sessions/D1S1_IntroToR/Intro_to_R.Rmd')
+```
+
+```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
+# Code to knit slides
+baselers <- readr::read_csv("../_data/day_1/baselers.csv")
 ```
 
 
