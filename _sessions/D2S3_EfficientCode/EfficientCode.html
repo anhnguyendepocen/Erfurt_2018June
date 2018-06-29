@@ -70,6 +70,43 @@ layout: true
 
 ---
 
+# When is R slow?
+
+.pull-left35[
+- (R) programs are slow when a large number computations of computations are required.
+
+- Usually this involves, explicitly or implicitly (i.e., in the background), running a **loop**. 
+]
+
+.pull-right55[
+
+```r
+vars &lt;- c('sex', 'age', 'height', 'income')
+
+# loop that copies
+my_vec = numeric()
+for(i in 1:length(vars)){
+  var &lt;- baselers[[vars[i]]]
+  for(j in 1:length(var)){
+    my_vec = c(my_vec, var[j])
+  }
+}
+
+# loop that doesn't copy
+my_vec = numeric(nrow(baselers) * length(vars))
+ind = 0
+for(i in 1:length(vars)){
+  var &lt;- baselers[[vars[i]]]
+  for(j in 1:length(var)){
+    ind = ind + 1
+    my_vec[ind] = var[j]
+  }
+}
+```
+]
+
+---
+
 # Profiling
 
 The first step to making your code efficient is to **identify critical parts** of your code. Do this using one of the following: 
@@ -93,17 +130,17 @@ Often some small part of your code takes orders of magnitudes longer than everyt
 ```r
   profvis({
   # load data
-  data &lt;- read_csv('data/happiness.csv')
+  data &lt;- read_csv('data/baselers.csv')
 
   # mutate
   data &lt;- data %&gt;% 
-    mutate(happy_num = case_when(
-      happy == 'not too happy' ~ 0,
-      happy == 'pretty happy' ~ 1,
-      happy == 'very happy' ~ 2))
+    mutate(happy_bin = case_when(
+      happiness &lt;= 7 ~ 0,
+      happiness &gt;  7 ~ 1)
+      )
 
   # multiple regression 
-  model &lt;- lm(happy_num ~ tvhours + owngun, 
+  model &lt;- lm(rich ~ tattoos + happy_bin,
               data = data)
   
   # evaluate model
@@ -191,13 +228,8 @@ Use **primitive** functions, e.g., `sum(x)/length(x)` rather than `mean(x)`.
 # load package
 library(microbenchmark, quietly = T)
 
-# define link to data
-link &lt;- 'http://tinyurl.com/y99aj5ed'
-link &lt;- 'https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv'
-
 # microbenchmark
 microbenchmark(
-  #web   = read_csv(link),
   local = read_csv('data/titanic.csv'),
   fread = fread('data/titanic.csv'),
   times = 10)
@@ -206,8 +238,8 @@ microbenchmark(
 ```
 ## Unit: milliseconds
 ##   expr  min   lq mean median   uq  max neval cld
-##  local 4.62 4.96 5.36   5.35 5.40 6.91    10   b
-##  fread 1.04 1.12 1.26   1.19 1.36 1.63    10  a
+##  local 4.96 5.25  5.6   5.47 5.87 7.05    10   b
+##  fread 1.07 1.11  1.2   1.18 1.32 1.35    10  a
 ```
 ]
 
@@ -241,8 +273,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median    uq   max neval cld
-##  colMeans   782   785  1348    858   901  5896    10  a 
-##     apply 12994 17105 20570  17914 18432 47414    10   b
+##  colMeans   764   777   817    803   840   910    10  a 
+##     apply 14279 17790 17847  18056 18979 19283    10   b
 ```
 ]
 
@@ -254,7 +286,7 @@ microbenchmark(
 
 **R always copies.** 
 
-whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
+whenever using `c()`, `cbind()`, `rbind()`, `paste()` R creates a copy large enough to contain its inputs.
 
 ]
 
@@ -285,10 +317,10 @@ microbenchmark(
 ```
 ## Unit: nanoseconds
 ##     expr   min    lq  mean median    uq     max neval cld
-##   loop10  2290  2706 32414   2938  3164 2948835   100   a
-##  loop100 31581 32805 47235  50782 53902  130802   100   a
-##    vec10   126   151   232    206   274     785   100   a
-##   vec100   308   362   645    408   482    5131   100   a
+##   loop10  2199  2816 34330   3046  3426 3122502   100   a
+##  loop100 37263 44855 50308  47306 49296  190816   100   a
+##    vec10   124   145   236    227   289     947   100   a
+##   vec100   320   388   697    452   564    3656   100   a
 ```
 
 ]
@@ -318,8 +350,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq    max neval cld
-##    my_fun(x, is.null) 8.70 9.82 22.1   10.3 10.6 1180.8   100   a
-##  my_fun_c(x, is.null) 8.69 9.82 10.8   10.3 10.7   53.2   100   a
+##    my_fun(x, is.null) 8.95 10.2 22.8   10.6 11.2 1177.3   100   a
+##  my_fun_c(x, is.null) 8.90 10.2 11.7   10.8 11.1   63.8   100   a
 ```
 
 ```r
@@ -330,8 +362,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 9.32 10.2 11.2   10.6 11.1 52.2   100   a
-##  my_fun_c(x, is.null) 9.27 10.2 10.8   10.6 11.1 21.3   100   a
+##    my_fun(x, is.null) 8.65 10.3 12.0   11.6 12.4 54.9   100   a
+##  my_fun_c(x, is.null) 8.73 10.2 11.4   11.3 12.3 18.6   100   a
 ```
 ]
 ---
@@ -372,9 +404,9 @@ microbenchmark(vectorz = colMeans(data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median  uq   max neval cld
-##  vectorz 7.66 7.91 8.14   8.06 8.2 13.17   100   b
-##  cluster 4.23 4.60 4.85   4.73 4.9  8.45   100  a
+##     expr  min   lq mean median   uq   max neval cld
+##  vectorz 7.56 7.87 8.16   8.04 8.31 10.62   100   b
+##  cluster 4.20 4.55 4.76   4.71 4.92  7.28   100  a
 ```
 
 
@@ -421,9 +453,9 @@ microbenchmark(vector_implementation = colMeans(my_data),
 
 ```
 ## Unit: milliseconds
-##                   expr  min   lq mean median   uq   max neval cld
-##  vector_implementation 7.54 7.61 7.78   7.71 7.84 13.17   100   a
-##    rcpp_implementation 7.54 7.63 7.72   7.68 7.78  8.82   100   a
+##                   expr  min   lq mean median   uq  max neval cld
+##  vector_implementation 7.56 7.68 7.87   7.74 7.86 12.9   100   a
+##    rcpp_implementation 7.54 7.68 7.88   7.74 7.88 11.4   100   a
 ```
 ]
 ---

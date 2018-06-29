@@ -1,6 +1,6 @@
 ---
 title: "Practical: Efficient Code"
-author: "BaselRBootcamp April 2018"
+author: "The R Bootcamp @ Erfurt June 2018"
 output: html_document
 ---
 
@@ -14,10 +14,10 @@ Here a link to the lecture slides for this session: <a href="https://therbootcam
 
 ### Overview
 
-In this practical you'll learn how to program efficiently in R. By the end of this practical you will know how to:
+In this practical you'll learn how to create efficient programs in R. By the end of this practical you will know how to:
 
 1. Profile your code to identify critical parts.
-2. Make code more efficient.
+2. Make your program more efficient.
 3. How to do parallel computing.
 
 ### Benchmarking and profiling functions
@@ -161,7 +161,7 @@ profvis({
 
 ### Microbenchmark
 
-1. Run the microbenchmark example from above. What do you observe? Is retrieving a variable from a `tibble` fast or slow? Pay attention to the unit. You'll find that there are dramatic differences, but also that in absolute terms in may not matter much? How often would you have to select a variable from either object in order to take up more than 1 second?
+1. Run the microbenchmark example from above. What do you observe? Is retrieving a variable from a `tibble` fast or slow? Pay attention to the unit. That is how different are the durations in absolute and relative terms? Do these differences matter? Consider, how often would you have to select a variable from either object in order to take up more than 1 second?
 
 ```{r, eval = F, echo = F}
 # load packages
@@ -177,7 +177,7 @@ tbl <- as.tibble(df)
 microbenchmark(df[['var_1']], df$var_1, tbl$var_1)
 ```
 
-2. Although the absolute duration of selecting a variable may not be long, it will still be illuminating to try another option. Rerun the previous exercise and now also include `.subset2()` as another way to select a variable. Specifically, include `.subset2(df, 'var1')` and `.subset2(tbl, 'var1')` as additional arguments in microbenchmark. What do you find now? Is the unit still the same? 
+2. Although the absolute duration of selecting a variable may not be long, let us look at another option. Rerun the previous exercise and now also include `.subset2()` in the comparison. That is include `.subset2(df, 'var1')` and `.subset2(tbl, 'var1')` as additional arguments in microbenchmark. What do you find?
 
 ```{r, eval = F, echo = F}
 # load packages

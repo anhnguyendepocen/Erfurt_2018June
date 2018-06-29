@@ -29,7 +29,7 @@ layout: true
 ```{r, eval = FALSE, echo = FALSE}
 # Code to knit slides
 xaringan::inf_mr('_sessions/D2S3_EfficientCode/EfficientCode.Rmd')
-baselers <- read_csv("data/")
+baselers <- read_csv("data/baselers.csv")
 ```
 
 
@@ -80,26 +80,38 @@ options(digits = 4)
 
 # When is R slow?
 
-.pull-right45[
+.pull-left35[
 - (R) programs are slow when a large number computations of computations are required.
 
 - Usually this involves, explicitly or implicitly (i.e., in the background), running a **loop**. 
 ]
 
-
+.pull-right55[
 ```{r, message=F, warning=F, eval = T}
-variables   <- c(')
+vars <- c('sex', 'age', 'height', 'income')
 
-# define collapse function
-combine <- function(x) {
-  my_vec = c()
-  for(i in 1:length(x)){
-    my_vec = c(my_vec, x[i])
-    }
+# loop that copies
+my_vec = numeric()
+for(i in 1:length(vars)){
+  var <- baselers[[vars[i]]]
+  for(j in 1:length(var)){
+    my_vec = c(my_vec, var[j])
   }
+}
+
+# loop that doesn't copy
+my_vec = numeric(nrow(baselers) * length(vars))
+ind = 0
+for(i in 1:length(vars)){
+  var <- baselers[[vars[i]]]
+  for(j in 1:length(var)){
+    ind = ind + 1
+    my_vec[ind] = var[j]
+  }
+}
 
 ```
-
+]
 
 ---
 
@@ -126,17 +138,17 @@ Often some small part of your code takes orders of magnitudes longer than everyt
 
   profvis({
   # load data
-  data <- read_csv('data/happiness.csv')
+  data <- read_csv('data/baselers.csv')
 
   # mutate
   data <- data %>% 
-    mutate(happy_num = case_when(
-      happy == 'not too happy' ~ 0,
-      happy == 'pretty happy' ~ 1,
-      happy == 'very happy' ~ 2))
+    mutate(happy_bin = case_when(
+      happiness <= 7 ~ 0,
+      happiness >  7 ~ 1)
+      )
 
   # multiple regression 
-  model <- lm(happy_num ~ tvhours + owngun, 
+  model <- lm(rich ~ tattoos + happy_bin,
               data = data)
   
   # evaluate model
@@ -229,13 +241,8 @@ options(digits=3)
 # load package
 library(microbenchmark, quietly = T)
 
-# define link to data
-link <- 'http://tinyurl.com/y99aj5ed'
-link <- 'https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv'
-
 # microbenchmark
 microbenchmark(
-  #web   = read_csv(link),
   local = read_csv('data/titanic.csv'),
   fread = fread('data/titanic.csv'),
   times = 10)
@@ -278,7 +285,7 @@ microbenchmark(
 
 **R always copies.** 
 
-whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
+whenever using `c()`, `cbind()`, `rbind()`, `paste()` R creates a copy large enough to contain its inputs.
 
 ]
 
