@@ -12,7 +12,7 @@ output: html_document
 
 |  | Day 1<br>Essentials<br>[Get Datasets](https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBoocamp_Day1.zip?raw=true) | Day 2<br>Statistics<br>[Get Datasets](https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBootcamp_Day2.zip?raw=true) |
 |:--|:----------------------------|:-------------------------------|
-|0| Welcome<br>[slides](_sessions/D1S0_Intro/Intro.html) | Recap <br>[slides](_sessions/D2S0_Recap/Recap_I.html) |
+|0| Welcome<br>[slides](_sessions/D1S0_Welcome/Welcome.html) | Recap <br>[slides](_sessions/D2S0_Recap/Recap.html) |
 |1| Intro to R<br>[slides](_sessions/D1S1_IntroToR/Intro_to_R.html) | Plotting<br>[slides](_sessions/D2S1_PlottingI/PlottingI.html), [practical](_sessions/D2S1_PlottingI/PlottingI_practical.html)|
 |2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning<br>[slides](_sessions/D2S2_MachineLearning/MachineLearning.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html)|
 |3| Statistics<br>[slides](_sessions/D2S2_Statistics/Statistics.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html)| Efficient Code<br>[slides](_sessions/D2S3_EffiientCode/EfficientCode.html), [practical](_sessions/D2S3_EffiientCode/EfficientCode_practical.html)|
