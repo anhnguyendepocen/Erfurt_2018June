@@ -75,7 +75,7 @@ library(tidyverse)
 
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("../_image/example_folder_structure_annotated.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/example_folder_structure_annotated.png")
 ```
 
 
@@ -102,7 +102,7 @@ survey <- read_spss(file = "data/study1.sav")
 Tip! Press the tab key to view a list of all files in the directory!
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/tab_completion.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/tab_completion.jpg")
 ```
 
 
@@ -248,7 +248,7 @@ library(tidyverse)
 <br>
 <br><br>
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("../_image/dplyr_tidyr_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/dplyr_tidyr_hex.png")
 ```
 ]
 
@@ -289,7 +289,7 @@ knitr::include_graphics("../_image/dplyr_tidyr_hex.png")
 .pull-left45[
 
 ```{r, echo = FALSE, out.width = "95%"}
-knitr::include_graphics("../_image/pipe_explanation_kn.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/pipe_explanation_kn.png")
 ```
 
 
@@ -327,7 +327,7 @@ score %>%  # Take the vector score AND THEN
 .pull-left45[
 
 ```{r, echo = FALSE, out.width = "95%"}
-knitr::include_graphics("../_image/pipe_explanation_kn.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/pipe_explanation_kn.png")
 ```
 
 
@@ -379,7 +379,7 @@ score %>%        # Take vector score AND THEN
 
 <br>
 ```{r, echo = FALSE, out.width="600", fig.align = 'center'}
-knitr::include_graphics("../_image/dplyr_functions.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/dplyr_functions.png")
 ```
 
 ]
@@ -648,7 +648,7 @@ patients_df <- patients_df %>%
  
 
 ```{r, echo = FALSE, out.width = "95%"}
-knitr::include_graphics("../_image/joining_data.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/joining_data.png")
 ```
 
 
@@ -671,7 +671,7 @@ df1 %>%
 ```
 
 ```{r, echo = FALSE, out.width = "90%", fig.align = 'center'}
-knitr::include_graphics("../_image/joining_data.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/joining_data.png")
 ```
 
 
@@ -913,7 +913,7 @@ combined_df %>%
 ## Grouped Aggregation
 
 ```{r, echo = FALSE, out.width = "85%", fig.align = 'center'}
-knitr::include_graphics("../_image/summarsed_data_diagram.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/summarsed_data_diagram.png")
 ```
 
 
@@ -1194,7 +1194,7 @@ data <- data %>%
 # Questions?
 
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("../_image/dplyr_tidyr_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/dplyr_tidyr_hex.png")
 ```
 
 ]
