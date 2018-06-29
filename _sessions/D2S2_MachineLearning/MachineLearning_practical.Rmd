@@ -1,284 +1,328 @@
 ---
 title: "Machine Learning"
-author: "BaselRBootcamp April 2018"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
-```{r, echo = FALSE, fig.align = 'center', out.width = "50%", fig.cap = "Source: https://www.toptal.com/machine-learning/machine-learning-theory-an-introductory-primer"}
-knitr::include_graphics("https://uploads.toptal.io/blog/image/443/toptal-blog-image-1407508081138.png")
+```{r, echo = FALSE, fig.align = 'center', out.width = "50%", fig.cap = "The almighty Caret!"}
+knitr::include_graphics("https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2014/09/Caret-package-in-R.png")
 ```
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, fig.align = 'center')
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval = FALSE, fig.align = 'center')
+library(tidyverse)
 ```
 
-### Slides
-
-- [Here are the introduction slides for this practical on machine learning!](https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S3_MachineLearning/MachineLearning.html#1)
 
 ### Overview
 
-In this practical you'll conduct machine learning analyses on a dataset on heart disease. You will see how well many different machine learning models can predict new data. By the end of this practical you will know how to:
+In this practical you'll use the `caret` (**C**lassification **A**nd **RE**gression **T**raining) package to automate many aspects of the machine learning process. By the end of this practical you will know:
 
-1. Create separate training and test data
-2. Fit a model to data
-3. Explore a model
-4. Make predictions from a model
-5. Compare models in how well they can predict new data.
+1. Select different 'learners' available in the `caret` package
+2. Fit parameters of a learner to a dataset
+3. Explore learners to understand how they work
+4. Use cross validation techniques to estimate the accuracy of a learner and find best fitting parameters
+5  Make predictions and evaluate the performance of learners!
 
-### Glossary and packages
+### Cheatsheet
 
-Here are the main functions and packages you'll be using. For more information about the specific models, click on the link in *Additional Details*.
+<a href="https://github.com/rstudio/cheatsheets/raw/master/caret.pdf">
+  <img src="https://github.com/therbootcamp/Erfurt_2018June/blob/master/_sessions/_image/caret_cheatsheet_ss.jpg?raw=true" width="600px">
+</a>
 
-| Algorithm| Function| Package | Additional Details |
-|:------|:--------|:----|:----|
-|     Regression|    `glm()`| Base R| https://bookdown.org/ndphillips/YaRrr/regression.html#the-linear-model|
-|     Fast-and-Frugal decision trees|    `FFTrees()`| FFTrees| https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html|
-| Random Forests | `randomForest()` | `randomForest` | http://www.blopig.com/blog/2017/04/a-very-basic-introduction-to-random-forests-using-r/|
+### Packages
+
+|Package| Installation|
+|:------|:------|
+|`tidyverse`|`install.packages("tidyverse")`|
+|`caret`|`install.packages("caret")`|
+|`GGally`|`install.packages("GGally")`|
 
 ### Datasets
 
-You'll use two datasets in this practical:  `heartdisease.csv` and `ACTG175.csv`. They available in the `data_BaselRBootcamp_Day2.zip` file available through the main course page. If you haven't already, download the `data_BaselRBootcamp_Day2.zip` folder and unzip it to get the two files.
+```{r, eval = TRUE, message = FALSE, eval = FALSE}
+library(tidyverse)
+
+house_train <- read_csv("../_data/house_train.csv")
+house_test <- read_csv("../_data/house_test.csv")
+
+heartdisease_train <- read_csv("../_data/heartdisease_train.csv")
+heartdisease_train <- read_csv("../_data/heartdisease_test.csv")
+
+attrition_train <- read_csv("../_data/attrition_train.csv")
+attrition_train <- read_csv("../_data/attrition_test.csv")
+```
+
+|File | Rows | Columns | Criterion | Source |
+|:----|:-----|:------|:----|:-----|
+|`house_train.csv` | 1000 | 21 |`price`|[Kaggle: House Sales Prediction](https://www.kaggle.com/harlfoxem/housesalesprediction/home) |
+|`house_test.csv` | 15000 | 21 | `price` |[Kaggle: House Sales Prediction](https://www.kaggle.com/harlfoxem/housesalesprediction/home) |
+|`heartdisease_train.csv` | 150 | 14 |`diagnosis` | [UCI ML Heartdisease](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) |
+|`heartdisease_test.csv` | 150 | 14 | `diagnosis` |[UCI ML Heartdisease](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) |
+|`attrition_train` | 500 | 35 |`Attrition` |[Kaggle Attrition](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset) |
+|`attrition_test` | 900 | 35 |`Attrition` |[Kaggle Attrition](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset) |
+
 
 ### Examples
 
-- The following examples will take you through all steps of the machine learning process, from creating training and test data, to fitting models, to making predictions. Follow along and try to see how piece of code works!
+The following set of example code will take you through the basic steps of machine learning using the amazing `caret` package.
 
-```{r, eval = FALSE, echo = TRUE}
-# -----------------------------------------------
-# A step-by-step tutorial for conducting machine learning
-# In this tutorial, we'll see how well 3 different models can
-#  predict medical data
-# ------------------------------------------------
+```{r, echo = TRUE, eval = FALSE, results = 'hide', message = FALSE}
+# Load packages
+library(tidyverse)
+library(GGally)
+library(skimr)
+library(caret)
 
-# -----------------------
-# Part A:
-# Load libraries
-# -----------------------
+# ------------------------------------
+# Step 0: Create training and test data
+#  Only necessary if you don't already have training
+#   and test data
+# ------------------------------------
 
-library(tidyverse)      # for dplyr and ggplot2
-library(randomForest)   # for randomForest()
-library(FFTrees)        # for FFTrees and the heartdisease data
+# Split diamonds data into separate training and test datasets
+diamonds <- diamonds %>%
+  sample_frac(1)              
 
-# -----------------------
-# Part B: Create datasets
-#  heart_train, heart_test
-# -----------------------
+train_v <- createDataPartition(y = diamonds$price, 
+                               times = 1,
+                               p = .1)
 
-heartdisease <- read_csv(file = "data/heartdisease.csv")   # Save a copy of the heartdisease data as heart
+# Create separate training and test data
 
-set.seed(100)           # To fix the training / test randomization
+diamonds_train <- diamonds %>%
+  slice(train_v$Resample1)
 
-heartdisease <- heartdisease %>%
-   mutate_if(is.character, factor) %>%   # Convert character to factor
-   sample_frac(1)                        # Randomly sort rows
+diamonds_test <- diamonds %>%
+  slice(-train_v$Resample1)
 
-# Savew first 100 rows as heart_train and remaining as heart_test
-heart_train <- heartdisease %>% 
-                slice(1:100)
+# ---------------
+# Explore
+# ---------------
 
-heart_test <- heartdisease %>% 
-                slice(101:nrow(heartdisease))
+# Explore columns with summarizeColumns
+skim(diamonds_train)
 
-# ------------------------------
-# Part I: Build Models
-# ------------------------------
+# Visualise relationships with ggpairs
+ggpairs(diamonds_train)
 
-# Build FFTrees_model
-FFTrees_model <- FFTrees(formula = sex ~ ., 
-                         data = heart_train)
+# ---------------
+# Step 1: Define control parameters
+# ---------------
 
-# Build glm_model
-glm_model <- glm(formula = factor(sex) ~ ., 
-                 data = heart_train, 
-                 family = "binomial")  # For predicting a binary variable
+# Set up control values
+ctr <- trainControl(method = "repeatedcv",
+                    number = 10,
+                    repeats = 2)
 
-# Build randomForest model
-randomForest_model <- randomForest(formula = factor(sex) ~ ., 
-                                   data = heart_train)
+# ---------------
+# Step 2: Train model
+# ---------------
 
-# ------------------------------
-# Part II: Explore Models
-# ------------------------------
+# Predict price with linear regression
+diamonds_lm_train <- train(form = price ~ ., 
+                           data = diamonds_train,
+                           method = "lm",
+                           trControl = ctr)
+# ---------------
+# Step 3: Explore
+# ---------------
 
-print(FFTrees_model)
-summary(FFTrees_model)
+class(diamonds_lm_train)
+diamonds_lm_train
+names(diamonds_lm_train)
+summary(diamonds_lm_train)
 
-print(glm_model)
-summary(glm_model)
+# Look at variable importance with varImp
+varImp(diamonds_lm_train)
 
-print(randomForest_model)
-summary(randomForest_model)
+# Look at final model object
+diamonds_lm_train$finalModel
 
-# ------------------------------
-# Part III: Training Accuracy
-# ------------------------------
+# ---------------
+# Step 4: Predict
+# ---------------
 
-# FFTrees training decisions
-FFTrees_fit <- predict(object = FFTrees_model, 
-                       newdata = heart_train)
+diamonds_lm_predictions <- predict(diamonds_lm_train, 
+                                   newdata = diamonds_test)
+# ---------------
+# Step 5: Evaluate
+# ---------------
 
-# Regression training decisions
-#  Positive values are predicted to be 1, negative values are 0
-glm_fit <- predict(object = glm_model, 
-                   newdata = heart_train) > 0
+# Look at final prediction performance!
+postResample(pred = diamonds_lm_predictions, 
+             obs = diamonds_test$price)
 
-# randomForest training decisions
-randomForest_fit <- predict(object = randomForest_model, 
-                            newdata = heart_train)
+# Plot relationship between predictions and truth
+performance_data <- tibble(predictions = diamonds_lm_predictions,
+                          criterion = diamonds_test$price)
 
-# Now calculate fitting accuracies and put in dataframe
-
-# Truth value for training data is heart_train$sex
-train_truth <- heart_train$sex
-
-# Put training results together
-training_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
-                          result = c(mean(FFTrees_fit == train_truth),
-                                     mean(glm_fit == train_truth),
-                                     mean(randomForest_fit == train_truth)))
-
-# Plot training results
-
-ggplot(data = training_results, 
-       aes(x = model, y = result, fill = model)) + 
-  geom_bar(stat = "identity") +
-  scale_y_continuous(limits = c(0, 1)) +
-  labs(title = "Training Accuracy",
-       y = "Correct Classifications")
-
-# ------------------------------
-# Part IV: Prediction Accuacy!
-# ------------------------------
-
-# Calculate predictions for each model for heart_test
-
-# FFTrees testing decisions
-FFTrees_pred <- predict(object = FFTrees_model, 
-                        newdata = heart_test)
-
-# Regression testing decisions
-#  Positive values are predicted to be 1, negative values are 0
-glm_pred <- predict(object = glm_model, 
-                    newdata = heart_test) >= 0
-
-# randomForest testing decisions
-randomForest_pred <- predict(object = randomForest_model, 
-                             newdata = heart_test)
-
-# Now calculate testing accuracies and put in dataframe
-
-# Truth value for test data is heart_test$sex
-test_truth <- heart_test$sex
-
-testing_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
-                          result = c(mean(FFTrees_pred == test_truth),
-                                     mean(glm_pred == test_truth),
-                                     mean(randomForest_pred == test_truth)))
-
-# Plot testing results
-
-ggplot(data = testing_results, 
-       aes(x = model, y = result, fill = model)) + 
-  geom_bar(stat = "identity") +
-  scale_y_continuous(limits = c(0, 1)) +
-  labs(title = "Testing Accuracy",
-       y = "Correct Classifications")
+ggplot(data = performance_data,
+       aes(x = predictions, y = criterion)) +
+  geom_point(alpha = .1) +   # Add points
+  geom_abline(slope = 1, intercept = 0, col = "blue", size = 2) +
+  labs(title = "Regression prediction accuracy",
+       subtitle = "Blue line is perfect prediction!")
 ```
 
-## Tasks
+A. Open your R project. It should already have the folders `0_Data` and `1_Code`. Make sure that the all of the datasets you need for this pradctical are in your `1_Data` folder
 
-- Note, most of this practical will be copying and pasting code from the Examples and only making small changes.
-- You should start by copying and pasting all of the code in the examples into a new .R file.
-- Try running pieces of the code line by line and understand what it's doing!
+```{r}
+# Done!
+```
 
-#### Part A: Getting setup
-
-A. Open your `BaselRBootcamp` project. This project should have the folders `R` and `data` in the working directory.
-
-B. Open a new R script and save it in the `R` folder you just created as a new file called `machinelearning_practical.R`. At the top of the script, using comments, write your name and the date. The, load the  `tidyverse`, `randomForest` and  `FFTrees` packages. Here's how the top of your script should look:
+B. Open a new R script and save it as a new file called `ml_practical.R` in the `2_Code` folder. At the top of the script, using comments, write your name and the date. Then, load the all of the packages you'll need for this practical. Here's how the top of your script should look:
 
 ```{r, eval = FALSE, echo = TRUE}
 ## NAME
 ## DATE
 ## Machine Learning Practical
 
-library(tidyverse)      # for dplyr and ggplot2
-library(randomForest)   # for randomForest()
-library(FFTrees)        # for FFTrees and the heartdisease data
+library(XX)     
+library(XX)   
+library(XX)   
 ```
 
-C. Make sure the `heartdisease.csv` file is in the `data` in your working directory. Then, using `read_csv()`, read the `heartdisease.csv` data and assign it to a new object in R called `heartdisease`. 
+### Modelling procedure
 
-D. Explore the `heartdisease` dataset using `summary()`, and `View()`
+In this practical you will conduct machine learning analyses on several data sets. For each of the tasks, go through the following steps.
 
-E. There is a help menu for the `heartdisease` dataset in the `FFTrees` package. Look at the help menu for `heartdisease` by running `?heartdisease`
+A. Load the training data `XXX_train.csv` as a new dataframe called `XXX_train` and the test data `XXX_test.csv` as a new dataframe called `XXX_test`
 
-#### Part B: Create training and test data
+B. Explore the `XXX_train` dataframe with a combination of `skim()`, `names()`, `summary()` and other similar functions
 
-F. Create separate training dataframes `heart_train` for model training and `heart_test` for model testing. Print each of these dataframes to make sure they look ok.
+C. Define control parameters with `trainControl()`. Use 10-fold cross validation with 2 repeitions.
 
-#### Part I: Train models on `diagnosis`
-
-1. In the example code, we predicted patient's sex. Now, in our analyses, we will try to predict each patient's diagnosis using the column `diagnosis`. To do this, create three new model objects `FFTrees_model`, `glm_model`, and `randomForest_model`, each predicting `diagnosis` using the training data `heart_train`
-
-#### Part II: Calculate fits for training data
-
-2. Calculate fits for each model with `predict()`, then create `training_results` containing the fitting accuracy of each model in a dataframe. The code will be almost identical to what is in the Example. All you need to do is change the value of `truth_train` to the correct column in `heart_train`. Afterwards, plot the results using `ggplot`. Which model had the best training accuracy?
-
-#### Part III: Explore models
-
-3. Explore each of the three models by applying `print()`, `summary()`, `plot()`, and `names()` to the objects. Which of these methods work for each object? Can you interpret any of the outputs?
-
-4. You can look at a variable's *importance* in each of these models in different ways. In the decision tree, you can look at which variables show up in the tree. In regression, you can look at the significance of the predictors. In random forests, you can look at look at a variable's importance in terms of what is called *mean decrease in gini*. Using the following template, explore how each model rates the importance of variables.
+D. If you are conducting a classification analysis, be sure to convert the criterion to a factor to tell the function you are doing classification instead of regression. Do this for both the training and test datasets. Here's how to do it for a dataframe called `df`
 
 ```{r, eval = FALSE, echo = TRUE}
-# ----------------------
-# Explore the importance of different variables in models
-# ----------------------
-
-# Print the elements of the FFTrees model
-FFTrees_model
-
-# Look at significance of regression 
-summary(glm_model)
-
-# Look at importance of variables in randomforests
-randomForest_model$importance
+# Convert a column called criterion to a factor
+df <- df %>%
+  mutate(criterion = factor(criterion))
 ```
 
-#### Part IV: Calculate predictions for test data
+E. Train one or more models on the training data. Start with one model, then gradually try more. For each model, assign the result to a new training object called `XX_train` (e.g.; `rf_train` for random forests, `glm_train` for standard regression.)
 
-5. Calculate predictions for each model based on `heart_test`, and then calculate the prediction accuracies. Don't forget to change the value of `truth_test` to reflect the true value for the current analysis! Then plot the results. Which model predicted each patient's diagnosis the best?
+<b>Regression Tasks</b>
 
-### Extra Challenges
+*For classification tasks, your criterion should be numeric*
 
-6. By default, random forests creates 500 trees. You can change this using the `ntree` argument in `randomForest()`. Try creating 2 new randomForest objects, one based on either a small number of trees (e.g. 10), and one based on 10,000 trees. How much better (or worse) do these models do compared to the default model with 500 trees?
+- Standard regression with `glm`
+- Decision Trees with `rpart`
+- Regularised regression with `glmnet`
+- Random forests with `rf`
 
-7. You can use the `my.tree` argument in `FFTrees()` to create your own custom tree 'in words'. To see how this works, look at the "Specifying FFTs directly" vignette in the `FFTrees` package by running `vignette("FFTrees_mytree", package = "FFTrees")`. Look through the vignette to see how the `my.tree` argument works. Then, try creating a new `FFTrees` object called `custom_FFTrees_model` trained on the `heart_train` data using the following rule: "If sex = 0, predict False. If chol > 250, predict True. Otherwise, predict True.". Plot the object to see how the tree did!
+<b>Classification Tasks</b>
 
-8. A colleague of yours thinks that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the `svm()` function from the `e1071` package in all of your analyses. You'll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?
+*For classification tasks, your criterion should be a factor*
 
-9. In all of our machine learning, we have allowed all models to use all data in the `heartdisease` dataset. However, some of the data is more expensive to collect than other data. What do you think would happen if we only let the models use a few cheap predictors like `age`, `sex` and `chol`? Test your prediction by replicating the machine learning process, but *only* allow the models to make predictions based on the three variables `age`, `sex` and `chol`. Does one model substantially outperform the others? (Hint: You can easily tell a model what specific variables to include using the `formula` argument. For example, `formula = y ~ a + b` will tell a model to model a variable y, but *only* using variables a and b.)
+- Decision Trees with `rpart`
+- Random forests with `rf`
+- K nearest neighbors with `knn`
 
-10. How do you think these algorithms would perform on a randomly generated dataset? Let's test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called `random` to `heart_train` and `heart_test`. Then, run your machine learning analysis, but now train and test the models to predict the new random data column. How well do the models do in training and testing?
+F. Explore your training objects by printing them, looking at (and printing) their named elements with `names()`, try accessing a few of the named elements with `XX_train$` and see what the outputs look like.
 
-```{r, eval = FALSE}
-# Add a new column random to heart_train and heart_test
+G. Look at the final model with `XX_train$finalModel`. Try applying generic functions like `summary()`, `plot()`, and `broom:tidy()` to the object. Do these help you to understand the final model?
 
-heart_train <- heart_train %>%
-  mutate(
-    random = sample(c(0, 1), size = nrow(.), replace = TRUE)
-  )
+H. Predict the criterion values of the test data `XXX_test` using `predict()` and store the results in a vector called `XXX_pred` (e.g.; `rf_pred` for predictions from random forests)
 
-heart_test <- heart_test %>%
-  mutate(
-    random = sample(c(0, 1), size = nrow(.), replace = TRUE)
-  )
+I. Evaluate the model's prediction accuracy. For regression tasks, use `postResample()`, and for classification tasks, use `confusionMatrix()`.  and by creating an appropriate plot. 
+
+## Tasks
+
+### Regression
+
+1. Create your best possible model for the `house_train` dataset predicting housing `price`. Which model does the best in predicting `house_test$price`?
+
+### Classification
+
+*Make sure your criterion values are factors!!*
+
+3. Create your best possible model for the `heartdisease_train` dataset predicting `diagnosis`. Which model does the best in predicting `heartdisease_test$diagnosis?`
+
+4. Create your best possible model for the `attrition_train` dataset predicting `attrition`. Which model does the best in predicting `attrition_test$attrition?`
+
+### Exploring the parameter fitting process
+
+5. Repeat one of your previous analyses (with just one model), but instead of doing cross validation with 2 repetitions, just fit the model to the entire training dataset with `trainControl(method = "none")`. Then predict the testing data again. How does the accuracy of your models compare to your original analysis when you did not do any cross validation?
+
+### Try different models
+
+6. Go to [http://topepo.github.io/caret/available-models.html](http://topepo.github.io/caret/available-models.html) and find the craziest looking model you can find. Then, try it on one of your datasets and see how well it works!
+
+### Reducing data
+
+7. Repeat one of your original analyses, but instead of allowing the models to use all of the training data, force them to only use only *three* predictors. For example, in the `heartdisease_train` data, you could have the model(s) only use `age`, `sex` and `cp` as predictors by using the formula `form = diagnosis ~ age + sex + cp` as a predictor. How do the models compare to each other when they each only get access to a few predictors? Are they all the same or is one much better than others?
+
+8. Select one dataset, and using `createDataPartition`, create your own new training and test datasets based on the `XX_train` datasets (that is, pretend the `XX_train` datasets are all possible data available, and split them into new `XX_train2` and `XX_test2` datsets). Now you have a new world of training and test data! Repeat your analyses and see if you get similar models and prediction performance as before.
+
+
+### Tips
+
+If you want to plot the results of multiple models, you can try using the following code template:
+
+```{r, echo = TRUE, eval = TRUE}
+# Some fake prediction data
+#  include your real model prediction data here
+
+XX_pred <- rnorm(100, mean = 100, sd = 10)
+YY_pred <- rnorm(100, mean = 100, sd = 10)
+ZZ_pred <- rnorm(100, mean = 100, sd = 10)
+
+# Some fake true test values
+#   Get these from your XX_test objects
+
+truth <- rnorm(100, mean = 100, sd = 10)
+
+# Put results together in a tibble
+
+N <- length(truth)
+
+model_results <- tibble(model = rep(c("XX", "YY", "ZZ"), each = N),
+                        pred = c(XX_pred, YY_pred, ZZ_pred),
+                        truth = rep(truth, times = 3))
+
+# Add error and absolute error
+
+model_results <- model_results %>%
+  mutate(error = pred - truth,
+         abserr = abs(error))
+
+# Plot Distribution of errors for each model
+
+ggplot(model_results, 
+       aes(x = model, y = error, col = model)) +
+  geom_jitter(width = .1, alpha = .5) +
+  stat_summary(fun.y = mean, 
+               fun.ymin = min, 
+               fun.ymax = max, 
+               colour = "black") + 
+  labs(title = "Model Prediction Errors",
+       subtitle = "Dots represent means",
+       caption = "Caret is awesome!") +
+  theme(legend.position = "none")
+
+
+# Plot relationship between truth and predictions
+
+ggplot(model_results, 
+       aes(x = truth, y = pred, col = model)) +
+  geom_point(alpha = .5) +
+  geom_abline(slope = 1, intercept = 0) +
+  labs(title = "XX model predictions",
+       subtitle = "Diagonal represents perfect performance",
+       caption = "Caret is awesome!",
+       x = "True Values",
+       y = "Model Predictions")
+  
 ```
 
-# Additional reading
 
-- For more advanced machine learning functionality in R, check out the `caret` package [caret documentation link](http://topepo.github.io/caret/index.html) and the `mlr` package [mlr documentation link](https://cran.r-project.org/web/packages/mlr/vignettes/mlr.html). Both of these packages contain functions that automate most aspects of the machine learning process.
 
-- To read more about the fundamentals of machine learning and statistical prediction, check out [An Introduction to Statistical Learning by James et al.](https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370)
+### Further Reading
+
+- Max Kuhn, the author of `caret` has a fantastic overview of the package at [http://topepo.github.io/caret/index.html](http://topepo.github.io/caret/index.html). If you like the `caret` package as much as we do, be sure to go through this page in detail.
+
+- Max Kuhn is also the co-author of a fantastic book on machine learning called [Applied predictive modelling - http://appliedpredictivemodeling.com/](http://appliedpredictivemodeling.com/).
+ 
