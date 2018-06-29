@@ -1,0 +1,58 @@
+---
+title: "The R Bootcamp @ Erfurt, June 2018"
+author: "http://www.therbootcamp.com"
+output: html_document
+---
+
+<br>
+
+## Materials
+
+<br>
+
+|  | Day 1<br>Essentials<br>[Get Datasets](https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBoocamp_Day1.zip?raw=true) | Day 2<br>Statistics<br>[Get Datasets](https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBootcamp_Day2.zip?raw=true) |
+|:--|:----------------------------|:-------------------------------|
+|0| Welcome<br>[slides](_sessions/D1S0_Intro/Intro.html) | Recap <br>[slides](_sessions/D2S0_Recap/Recap_I.html) |
+|1| Intro to R<br>[slides](_sessions/D1S1_IntroToR/Intro_to_R.html) | Plotting<br>[slides](_sessions/D2S1_PlottingI/PlottingI.html), [practical](_sessions/D2S1_PlottingI/PlottingI_practical.html)|
+|2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning<br>[slides](_sessions/D2S2_MachineLearning/MachineLearning.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html)|
+|3| Statistics<br>[slides](_sessions/D2S2_Statistics/Statistics.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html)| Efficient Code<br>[slides](_sessions/D2S3_EffiientCode/EfficientCode.html), [practical](_sessions/D2S3_EffiientCode/EfficientCode_practical.html)|
+|4| Case Studies<br>[1: Clinical Trial](_sessions/D2S3_CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/D2S3_CaseStudies/Financial_Data_Case_Study.html)|Dynamic Reports<br>[slides](_sessions/D2S4_DynamicReports/DynamicReports.html), [practical](_sessions/D2S4_DynamicReports/DynamicReports_practical.html)|
+
+
+
+<br>
+
+## Schedule
+
+
+<p align="center"><br>
+    <a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/schedule.html"><img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt.png?raw=true" width=660></a><br>
+
+
+<!---
+
+<br>
+
+## Recommended readings
+
+<br>
+
+<table width="60%" border="0">
+  <tr>    
+  <td> <a href="http://r4ds.had.co.nz/"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" width="100" height="100"></a></td>
+  <td><a href="https://bookdown.org/ndphillips/YaRrr/"><img border="0" alt="W3Schools" src="https://bookdown.org/ndphillips/YaRrr/images/YaRrr_Cover.jpg" width="100" height="100"></a></td>
+  <td><a href="http://adv-r.had.co.nz/"><img border="0" alt="W3Schools" src="https://images.tandf.co.uk/common/jackets/amazon/978146658/9781466586963.jpg" width="100" height="100"></a>
+</td>
+  </tr>
+</table>
+<br>
+
+R for Data Science by Grolemund and Wickham: [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/)
+<br>
+YaRrr! The Pirate's Guide to R! [https://bookdown.org/ndphillips/YaRrr/](https://bookdown.org/ndphillips/YaRrr/)
+<br>
+Advanced R by Wickham: [http://adv-r.had.co.nz/](http://adv-r.had.co.nz/) 
+
+--->
+
+
