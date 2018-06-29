@@ -33,7 +33,6 @@ xaringan::inf_mr('_sessions/D2S3_MachineLearning/MachineLearning.Rmd')
 ```
 
 
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 # see: https://github.com/yihui/xaringan
@@ -99,28 +98,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
-
----
-
-## Two types of prediction tasks
-
-.pull-left45[
-
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png")
-```
-
-
-]
-
-
-.pull-right45[
-
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png")
-```
-
-]
 
 ---
 
@@ -200,6 +177,30 @@ knitr::kable(present, format = "markdown")
 ]
 
 
+
+---
+
+## Two types of prediction tasks
+
+.pull-left45[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png")
+```
+
+
+]
+
+
+.pull-right45[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png")
+```
+
+]
+
+
 ---
 
 ## What machine learning algorithms are there?
@@ -237,115 +238,40 @@ We will focus on 3 algorithms that apply to most ML tasks:
 
 ---
 
-.pull-left6[
-
-## How do you fit and evaluate models in R?
-
-<br>
-
-| Step|Description| Note / Example |
-|:------|:---|:------------|
-| 1| Install model packages| `FFTrees` for Decision Trees<br>`randomForest` for Random Forests|
-|     2| Get data |Use your own, or get free online datasets|
-|    3| Train model on data and generate insights|Always look at help menus and online tutorials!|
-|    4| Predict new data, possibly with cross-validation|Packages such as `mlr` and `caret` can really help|
-
-]
-
-.pull-right35[
-<br>
-```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png")
-```
-
-]
-
----
-
-# How do you fit and evaluate models in R?
+# How do you fit and evaluate ML models in R?
 
 .pull-left45[
 
-### Fitting a model
-
+Answer: Pretty much the same way you fit standard statistical models. Install the package, load, and find the main fitting functions.
 
 ```{r, eval = FALSE}
-A_model <- A_fun(formula = y ~.,
-                 data = data_train,
-                 ...)
+# Install the glmnet package
+install.packages("glmnet")
+
+# Load glmnet
+library(glmnet)
+
+# Look at help menu
+?glmnet
 ```
 
+Some functions will use the standard `FUN(formula, data)` arguments, but others (like `glmnet()`) require other arguments, like `x, y` (numeric matrices).
 
-| Argument| Description| Note |
-|------:|:----|:---|
-|     formula|  Formula indicating variables to use|  `y ~ .` is often used as a catch-all |
-|     data|    The dataset for model training| |
-|     ...|  Optional other arguments| See the function help page for details|
-
+The trick is looking at the help file for additional arguments and data requirements
 
 ]
 
 .pull-right5[
 
-### Evaluating a model
-
-```{r, eval = FALSE}
-# Common ways to explore / use a model
-
-A_model           # Print generic information
-
-names(A_model)    # Show attributes
-
-summary(A_model)  # Print summary information
-
-predict(A_model,  # Predict test data
-        newdata = data_test)  
-
-plot(A_model)     # Visualize the model
-```
-
-]
-
----
-
-## How do we evaluate ML models?
-
-.pull-left4[
-
-ML models are always evaluated based on their ability to *predict new, unseen data*.
-
-U
-
-<b> 1) Validation set</b>
-
-Train on one or more historical dataset(s) (i.e.; previous year's stock changes)
-
-Test on new data (i.e.; what happens this year)
-
-<b> 2) K-Fold Cross Validation </b>
-
-Uses only 
-
-Split data into <i>X%</i> training and <i>1 - X%</i> test data.
-
-Fit model to training data and evaluate prediction accuracy on test data
-
-Repeat several times.
-
-]
-
-.pull-right5[
-
-### Cross Validation
 ```{r, echo = FALSE}
-knitr::include_graphics("../_image/crossvalidation.jpg")
+knitr::include_graphics("../_image/glmnet_help.jpg")
 ```
 
 ]
 
 ---
 
-## Ridge Regression with `elasticnet::glmnet()`
+## Regression
 
 .pull-left5[
 
@@ -367,35 +293,33 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right5[
 
-Regularised ridge regression using the `elasticnet::glmnet()` function
+### Standard regression with `glm()`
+
+The `glm()` function in the base stats package performs standard regression.
 
 ```{r, eval = FALSE}
-library(elasticnet)
-
-# glm() function for regression
-glmnet(formula = y ~.,     # Formula
-       data = data_train,  # Training data
-       family, ...)        # Optional arguments
-
-# Train glm model
-loan_glm_model <- glm(formula = risk ~ ., 
-                      data = data_train)
-
-# Predict new data with glm model
-loan_glm_pred <- predict(loan_glm_model,
-                         newdata = data_test)
+glm_mod <- glm(formula = happiness ~ .,
+               data = baselers)
 ```
 
 ### Regularised regression with glmnet
 
-We will also play with 'regularised' ridge regression with the `glmnet` package
+To perform regularised regression, which tries to reduce overfitting by penalising large coefficients, use the `glmnet()` package:
+
+```{r, eval = FALSE}
+install.packages("glmnet")
+library("glmnet")
+
+net_mod <- glmnet(x, # Numeric features
+                  y, # Response
+                  alpha, # mixing parameter)
+```
 
 ]
 
-
 ---
 
-## Decision Trees with `rpart::rpart()`
+## Decision Trees
 
 .pull-left45[
 
@@ -412,45 +336,57 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right5[
 
-Create decision trees using the `rpart` package
+### Decision trees with rpart
+
+Create decision trees with `rpart`
 
 ```{r, eval = FALSE}
-# Load the rpart package
+install.packages("rpart")
 library(rpart)
 
 # Train rpart model
-loan_rpart_mod <- rpart(formula = risk ~ ., 
-                        data = loan_data,
+loan_rpart_mod <- rpart(formula, data,
+                        method = "class",
                         rpart.control)
-
-# Predict new data with rpart model
-loan_rpart_pred <- predict(loan_rpart_mod,
-                           newdata = loan_test)
 ```
 
 ### Fast-and-frugal trees with FFTrees
 
-We will also play with 'fast-and-frugal trees' with the `FFTrees` package]
+Create very simple fast-and-frugal decision trees with `FFTrees`
+
+```{r,eval = FALSE}
+install.packages("FFTrees")
+library(FFTrees)
+
+loan_FFTrees_mod <- FFTrees(formula, data,
+                            max.levels, goal)
+```
+ 
+
+]
+
 
 ---
 
-## Random Forests with `randomForest::randomForest()`
+## Ensemble Decision trees
+
 
 .pull-left5[
 
+
+
 A Random Forest is a collection of many (hundreds, thousands) of decision trees
 
-
-```{r, echo = FALSE, eval = TRUE, out.width = "90%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest_diagram.png")
+```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.cap = "<font size=3><a href='https://medium.com/@williamkoehrsen'>Sourcemedium.com</a></font>"}
+knitr::include_graphics("../_image/randomforest_diagram.png")
 ```
 
-
+ 
 ]
 
 .pull-right5[
 
-Create decision trees using the `randomForest` package
+Create a random forest using the `randomForest` package
 
 ```{r, eval = FALSE}
 # Load the randomforest package
@@ -460,77 +396,48 @@ library(randomForest)
 randomForest(formula = y ~.,    # Formula 
              data = data_train, # Training data
              ntree, mtry)       # Optional
-
-# Train randomForest model
-rf_model <- randomForest(formula = risk ~ ., 
-                         data = loan_data)
-
-# Predict new data with model
-rf_pred <- predict(rf_model,
-                   newdata = loan_test)
 ```
 
 
 ]
 
-
 ---
 
-# 2 Ways to do machine learning in R
+## Optimizing model parameters with cross validation
 
 .pull-left45[
 
-### Raw method
+Most machine learning models have two types of parameters, *raw parameters* that dictate how an individual model makes predictions, and *meta parameters* that determine how those raw parameters are calculated.
 
-Call individual packages and functions directly
+|Model| Raw parameters|Meta parameters|
+|:------|:------|:------|
+|Decision Trees|Nodes, splits, decisions |Minimum number of cases in each node|
+|Regularised regression |Model coefficients | Coefficient penalty term|
 
-```{r, eval = FALSE}
-# LOAD LIBRARIES
-library(randomForest)
-library(ada)
-library(elasticnet)
-
-# Train models on training data
-rf_mod <- randomForest(...)
-boost_mod <- ada(...)
-rlr_mod <- ridge(...)
-
-# Predictions
-rf_pred <- predict(rf_mod, ...)
-boost_pred <- predict(rf_mod, ...)
-
-#...
-```
+To determine 'optimal' meta parameters, which maximize prediction performance, techniques such as cross validation are often used.
 
 ]
 
 .pull-right5[
 
-### Meta Method 
+### Cross Validation
 
-Use a "meta" package like `caret` (or `mlr`):
-
-`caret` is a 'wrapper' packages that automates much of the the machine learning process.
-
-Use hundreds of different ML algorithms using a common language and set of functions. Change one "string' (not line!) to use a different model
-
-```{r, eval = FALSE}
-library(caret)
-
-train(..., method = "lm") # Regression!
-train(..., method = "rf") # Random forests!
-train(..., method = "ada") # Boosted regression trees
+```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("../_image/crossvalidation.jpg")
 ```
 
+0) Select *meta parameters*
 
-```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/caretlogo.jpeg")
-```
+1) Split the training set into K "folds"
 
-Benefit: Makes it *extremely* easy to perform very complex machine learning procedures in a few lines of code
+2) Use K - 1 folds for training, and 1 fold for testing.
 
+3) Repeat K times.
+
+4) Average the K testing performances
 
 ]
+
 
 ---
 
@@ -538,29 +445,31 @@ Benefit: Makes it *extremely* easy to perform very complex machine learning proc
 
 # Caret
 
-```{r, echo = FALSE, fig.align = 'center', out.width = "35%"}
+```{r, echo = FALSE, fig.align = 'center', out.width = "30%", eval = FALSE}
 knitr::include_graphics("https://vignette.wikia.nocookie.net/joke-battles/images/2/21/Bugs-Bunny-4.png/revision/latest?cb=20151231234917")
 ```
 
 Caret stands for <b>C</b>lassification <b>A</b>nd <b>RE</b>gression <b>T</b>raining.
 
+`caret` is a 'wrapper' packages that automates much of the the machine learning process.
+
 Do very complex machine learning tasks with a few simple functions
 
-Use anye of hundreds of different ML algorithms by changing one "string' (not line!) to use a different model
+Use any of hundreds of different ML algorithms by changing one "string' (not line!) to use a different model
 
 ```{r, eval = FALSE}
 library(caret)
 
 train(..., method = "lm") # Regression!
 train(..., method = "rf") # Random forests!
-train(..., method = "ada") # Boosted regression trees
+train(..., method = "ada") # Boosted trees
 ```
 
 Knows each model's meta parameters and chooses the best ones for your data using cross validation (or other method).
 
 ]
 
-.pull-right45[
+.pull-right4[
 <br><br><br>
 ```{r, echo = FALSE, fig.align = 'center', out.width = "90%", fig.cap = "The almighty Caret!"}
 knitr::include_graphics("https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2014/09/Caret-package-in-R.png")
