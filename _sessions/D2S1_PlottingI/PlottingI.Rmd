@@ -14,6 +14,29 @@ output:
       ratio: '16:9'
 ---
 
+layout: true
+
+<div class="my-footer"><span>
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">Erfurt, June 2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;
+<a href="https://therbootcamp.github.io/"><font color="#7E7E7E">www.therbootcamp.com</font></a>
+</span></div> 
+
+---
+
+```{r, eval = FALSE, echo = FALSE}
+# Code to knit slides
+xaringan::inf_mr('_sessions/D1S1_IntroToR/Intro_to_R.Rmd')
+```
+
+```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
+# Code to knit slides
+baselers <- readr::read_csv("../_data/day_1/baselers.csv")
+```
+
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)

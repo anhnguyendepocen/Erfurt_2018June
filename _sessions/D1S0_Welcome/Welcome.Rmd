@@ -4,7 +4,7 @@ subtitle: ""
 author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a>"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -28,28 +28,24 @@ knitr::opts_chunk$set(fig.align = 'center')
 ```
 
 
-.pull-left6[
+.pull-left45[
 
 #  Materials
 <br><br>
 
-<font size=6>Get all of the course materials through our course page!</font><br><br>
+<font size=6>Get all of the course materials through our course page!</font><br><br><br>
 
-<font size="5" color="#F62D73"><a href="https://therbootcamp.github.io/Erfurt_2018June/"><b>https://therbootcamp.github.io/Erfurt_2018June/</b></a></font><br><br>
+<font size="6" color="#F62D73"><a href="https://therbootcamp.github.io/Erfurt_2018June/"><b>.../Erfurt_2018June/</b></a></font><br><br><br><br><br><br><br>
 
-<font size=6>Bookmark it :)</font><br><br>
+<font size=6>...bookmark it :)</font><br><br>
 
 <br>
 
 ]
 
-.pull-right4[
-
-
-```{r, echo = FALSE}
-knitr::include_graphics("../_image/erfurt_schedule_ss.jpg")
-```
-
+.pull-right5[
+<br>
+<iframe src="https://therbootcamp.github.io/Erfurt_2018June/" height = "560" width = "500"></iframe>
 
 
 ]
@@ -59,13 +55,13 @@ knitr::include_graphics("../_image/erfurt_schedule_ss.jpg")
 
 # Aim
 
-.pull-left6[
+.pull-left45[
 
 >###<i>The aim of this workshop is enable you to thoughtfully and actively use R. We will communicate both the basics of the R language, as well as cutting-edge packages for wrangling, analyzing, and communicating statistical data.  
 
 ]
 
-.pull-right4[
+.pull-right5[
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/target.png" height="350"></p>
 
 ]
@@ -73,27 +69,25 @@ knitr::include_graphics("../_image/erfurt_schedule_ss.jpg")
 ---
 
 .pull-left4[
-# Schedule 
-
-<font size = 5>We have a very intense and ambitious schedule!</font><br>
-
 # Sessions
 
-<font size = 5>Each focus session is 1 hour 45 minutes</font><br>
+<font size = 5>Sessions are <b>1 hour 45 minutes</b> long</font><br>
 
-<font size = 5>Introduction lecture with slides</font><br>
+<font size = 5>Sessons begin with an <b>introduction lecture with slides</b></font><br>
 
-<font size = 5>Hands-on programming practical</font><br>
+<font size = 5>Majority sessions consists of <b>hands-on programming</b> practical</font><br>
+<br><br><br><br><br><br>
+<font size = 5><i>Struggle, ask for help, struggle!</i></font><br>
+
+]
+
+.pull-right4[
+
+<p align="center"><br>
+    <img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt.png?raw=true" height=550><br>
 
 ]
 
-.pull-right55[
-
-```{r, eval = TRUE, echo = FALSE}
-knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt.png?raw=true")
-```
-
-]
 
 ---
 
