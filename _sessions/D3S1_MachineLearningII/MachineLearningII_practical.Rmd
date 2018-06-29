@@ -29,22 +29,44 @@ In this practical you'll use the `caret` (**C**lassification **A**nd **RE**gress
 4. Use cross validation techniques to estimate the accuracy of a learner and find best fitting parameters
 5  Make predictions and evaluate the performance of learners!
 
-### Datasets
+### Cheatsheet
 
-You'll use four datasets in this practical:  `boston_train_csv` and `boston_test.csv`, `heartdisease_train.csv` and `heartdisease_test.csv`. They available in the `data_BaselRBootcamp_Day3.zip` file available through the main course page. If you haven't already, download the `data_BaselRBootcamp_Day3.zip` folder and unzip it to get the files. We also recommend saving them in a folder called `data` in your working directory!
+<a href="https://github.com/rstudio/cheatsheets/raw/master/caret.pdf">
+  <img src="https://github.com/therbootcamp/Erfurt_2018June/blob/master/_sessions/_image/caret_cheatsheet_ss.jpg?raw=true" width="600px">
+</a>
 
 ### Packages
 
-For this practical, you will need the following packages. If you don't have any installed, you'll need to install them with `install.packages()`
+|Package| Installation|
+|:------|:------|
+|`tidyverse`|`install.packages("tidyverse")`|
+|`caret`|`install.packages("caret")`|
 
-```{r, echo = TRUE}
-# Packages you'll need for this practical
-library(caret)
-library(mlr)        
-library(GGally)
-library(mlbench)
+### Datasets
+
+```{r, eval = TRUE, message = FALSE}
 library(tidyverse)
+
+house_train <- read_csv("../_data/house_train.csv")
+house_test <- read_csv("../_data/house_test.csv")
+
+heartdisease_train <- read_csv("../_data/heartdisease_train.csv")
+heartdisease_train <- read_csv("../_data/heartdisease_test.csv")
+
+attrition_train <- read_csv("../_data/attrition_train.csv")
+attrition_train <- read_csv("../_data/attrition_test.csv")
+
 ```
+
+|File | Rows | Columns | Criterion | Source |
+|:----|:-----|:------|:----|:-----|
+|`house_train.csv` | 1000, 15000 | 21 |`price`|[Kaggle: House Sales Prediction](https://www.kaggle.com/harlfoxem/housesalesprediction/home) |
+|`house_test.csv` | 15000 | 21 | `price` |[Kaggle: House Sales Prediction](https://www.kaggle.com/harlfoxem/housesalesprediction/home) |
+|`heartdisease_train.csv` | 150 | 14 |`diagnosis` | [UCI ML Heartdisease](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) |
+|`heartdisease_test.csv` | 150 | 14 | `diagnosis` |[UCI ML Heartdisease](https://archive.ics.uci.edu/ml/datasets/Heart+Disease) |
+|`attrition_train` | 500 | 35 |`Attrition` |[Kaggle Attrition](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset) |
+|`attrition_test` | 900 | 35 |`Attrition` |[Kaggle Attrition](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset) |
+
 
 ### Examples
 
