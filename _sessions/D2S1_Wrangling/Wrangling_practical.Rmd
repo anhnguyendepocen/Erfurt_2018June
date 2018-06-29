@@ -31,6 +31,8 @@ By the end of this practical you will know how to:
 
 ### Cheatsheet
 
+Data wrangling with dplyr and tidyr
+
 - Data wrangling with dplyr and tidyr Cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
 ### Glossary
