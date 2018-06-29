@@ -362,9 +362,7 @@ loan_FFTrees_mod <- FFTrees(formula, data,
                             max.levels, goal)
 ```
  
-
 ]
-
 
 ---
 
@@ -400,10 +398,6 @@ Here are some of the tuning parameters
 |:-------|:-------|
 |`ntree`|Number of trees in forest|
 |`mtry`|Number of variables randomly selected at splits|
-
-
-
-
 
 ]
 
@@ -692,6 +686,54 @@ knitr::include_graphics("caret_models.jpg")
 
 ]
 
+
+---
+
+### train()
+
+.pull-left55[
+
+For classification tasks, make sure your criterion is a factor. For regression tasks, make sure it is numeric
+
+```{r, echo = FALSE, message = FALSE}
+library(FFTrees)
+```
+
+```{r, eval = FALSE}
+# Diagnosis is currently coded as 0, 1
+heartdisease$diagnosis[1:10]
+
+# Will be a regression model
+reg_mod <- train(form = diagnosis ~ .,
+             data = heartdisease,
+             method = "rpart")
+```
+
+<font color='red' size = 3>Warning messages:
+1: In train.default(x, y, weights = w, ...) :
+  You are trying to do regression and your outcome only has two possible values Are you trying to do classification? If so, use a 2 level factor as your outcome column.</font>
+
+```{r, eval = FALSE}
+# Will be a classification model
+class_mod <- train(form = factor(diagnosis) ~ .,
+                   data = heartdisease,
+                   method = "rpart")
+```
+
+
+]
+
+.pull-right4[
+
+[Caret Documentation Page](http://topepo.github.io/caret/available-models.html)
+
+```{r, echo = FALSE}
+knitr::include_graphics("caret_models.jpg")
+```
+
+]
+
+
 ---
 
 ### train()
@@ -774,11 +816,15 @@ bas_pred <- predict(object = rpart_train,
 #   for each row in newdata
 bas_pred[1:5]
 
+```
+
+Then summarise overall performance with `postResample()`
+
+```{r}
 # Assess performance with postResample()
 postResample(pred = bas_pred, 
              obs = baselers_test$income)
 ```
-
 
 
 ]
@@ -884,7 +930,6 @@ There are *many* other great features of caret we haven't touched
 
 Be sure to check out the **excellent** documentation site to learn all the details
 
-
 ]
 
 .pull-right45[
@@ -900,5 +945,11 @@ knitr::include_graphics("caret_package_md.jpg")
 ---
 
 # Questions?
+<br><br><br>
+
+# [Machine Learning Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D2S2_MachineLearning/MachineLearning_practical.html)
+
+
+---
 
 
