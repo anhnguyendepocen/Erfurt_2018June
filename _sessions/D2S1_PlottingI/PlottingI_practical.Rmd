@@ -498,7 +498,7 @@ ggplot(XX,
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 10, fig.height = 12}
 # Read in nba data
-nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
+nba_long <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
 
 ggplot(nba_long, 
        mapping = aes(x = Name, y = measure, fill = value)) + 
