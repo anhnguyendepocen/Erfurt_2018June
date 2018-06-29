@@ -42,6 +42,7 @@ options(htmltools.dir.version = FALSE)
 # https://github.com/gnab/remark/wiki/Markdown
 options(width=110)
 options(digits = 4)
+library(baselers)
 
 library(tidyverse)
 ```
@@ -368,19 +369,15 @@ loan_FFTrees_mod <- FFTrees(formula, data,
 
 ---
 
-## Ensemble Decision trees
-
+## Ensemble decision trees
 
 .pull-left5[
 
-
-
-A Random Forest is a collection of many (hundreds, thousands) of decision trees
+A [Random Forest](https://en.wikipedia.org/wiki/Random_forest) is a collection of many (hundreds, thousands) of decision trees that use different features
 
 ```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.cap = "<font size=3><a href='https://medium.com/@williamkoehrsen'>Sourcemedium.com</a></font>"}
 knitr::include_graphics("../_image/randomforest_diagram.png")
 ```
-
  
 ]
 
@@ -389,14 +386,24 @@ knitr::include_graphics("../_image/randomforest_diagram.png")
 Create a random forest using the `randomForest` package
 
 ```{r, eval = FALSE}
-# Load the randomforest package
+install.packages("randomForest")
 library(randomForest)
 
-# Calculating a randomForest in R
+# Create a randomForest model
 randomForest(formula = y ~.,    # Formula 
              data = data_train, # Training data
-             ntree, mtry)       # Optional
+             ntree, mtry)  # Tuning parameters
 ```
+
+Here are some of the tuning parameters
+
+|Parameter | Description|
+|:-------|:-------|
+|`ntree`|Number of trees in forest|
+|`mtry`|Number of variables randomly selected at splits|
+
+
+
 
 
 ]
@@ -407,14 +414,14 @@ randomForest(formula = y ~.,    # Formula
 
 .pull-left45[
 
-Most machine learning models have two types of parameters, *raw parameters* that dictate how an individual model makes predictions, and *meta parameters* that determine how those raw parameters are calculated.
+Most machine learning models have two types of parameters, *raw parameters* that dictate how an individual model makes predictions, and *tuning parameters* that determine how those raw parameters are calculated.
 
-|Model| Raw parameters|Meta parameters|
+|Model| Raw parameters|Tuning parameters|
 |:------|:------|:------|
 |Decision Trees|Nodes, splits, decisions |Minimum number of cases in each node|
 |Regularised regression |Model coefficients | Coefficient penalty term|
 
-To determine 'optimal' meta parameters, which maximize prediction performance, techniques such as cross validation are often used.
+To determine 'optimal' tuning parameters, which maximize prediction performance, techniques such as cross validation are often used.
 
 ]
 
@@ -426,7 +433,7 @@ To determine 'optimal' meta parameters, which maximize prediction performance, t
 knitr::include_graphics("../_image/crossvalidation.jpg")
 ```
 
-0) Select *meta parameters*
+0) Select *tuning parameters*
 
 1) Split the training set into K "folds"
 
@@ -465,7 +472,7 @@ train(..., method = "rf") # Random forests!
 train(..., method = "ada") # Boosted trees
 ```
 
-Knows each model's meta parameters and chooses the best ones for your data using cross validation (or other method).
+Knows each model's tuning parameters and chooses the best ones for your data using cross validation (or other method).
 
 ]
 
@@ -488,11 +495,14 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/1/1c/K-f
 
 # Caret
 
+```{r, echo = FALSE, message = FALSE}
+library(caret)
+```
+
 
 As always, you can install `caret` from CRAN
 
 ```{r, eval = FALSE, echo = TRUE}
-
 # Install caret
 install.packages("caret")
 
@@ -532,6 +542,7 @@ Here are the main functions we will cover in the `caret` package
 
 | Function| Purpose|
 |--------|----------|
+| `creacreateDataPartition()` | Split data into different partitions|
 | `trainControl()` | Determine how training (in general) will be done|
 | `train()` | Specify a model and find *best* parameters|
 | `varImp()` | Determine variable importance |
@@ -550,6 +561,65 @@ knitr::include_graphics("caret_vignette.jpg")
 
 ]
 
+
+---
+
+.pull-left6[
+### createDataPartition()
+
+Use `createDataPartition()` to split a dataset into separate partitions.
+
+Useful to split a large dataset into separate training and test data
+
+```{r, warning = FALSE}
+# Drop missing cases from baselers
+data <- baselers %>% 
+  drop_na %>%
+  select_if(is.numeric)
+
+# Get training cases
+train_v <- createDataPartition(y = data$income, #crit
+                               times = 1, 
+                               p = .5)
+
+# Vector of training cases
+train_v$Resample1[1:10]
+
+# Training Data
+baselers_train <- data %>% 
+  slice(train_v$Resample1)
+
+# Testing Data
+baselers_test <- data %>% 
+  slice(-train_v$Resample1)
+```
+
+
+]
+
+.pull-right35[
+
+### Training and Test
+
+```{r}
+### Training data
+
+dim(baselers_train)
+
+baselers_train %>%
+  slice(1:5) %>%
+  select(1:3)
+
+### Testing data
+
+dim(baselers_test)
+
+```
+
+
+]
+
+
 ---
 .pull-left55[
 ### trainControl()
@@ -558,13 +628,13 @@ Use `trainControl()` to define how `carat` should select the best parameters for
 
 Many methods are available in the `method` argument, look at the help menu with `?trainControl` for additional details
 
-```{r, echo = TRUE, out.width = "90%", eval = FALSE}
+```{r, echo = TRUE, out.width = "90%", eval = TRUE}
 # Define how caraet should 
 #  select best model parameters
 
 ctrl <- trainControl(method = "repeatedcv",
                      number = 10,  # 10 folds
-                     repeats = 50) # Repeat 50 times
+                     repeats = 2) # Repeat 2 times
 ```
 
 ### trainControl methods
@@ -575,53 +645,83 @@ ctrl <- trainControl(method = "repeatedcv",
 |`"LOOCV"`| Leave one out cross-validation|
 |`"none"` | Fit one model with default parameters |
 
-
 ]
 
 .pull-right4[
 <br><br><br><br>
 ### Cross Validation
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE}
+library(baselers)
 knitr::include_graphics("../_image/crossvalidation.jpg")
 ```
-
 
 ]
 
 ---
 
-.pull-left6[
+.pull-left55[
 
 ### train()
 
-- Use `train()` to fit **any** of over 200 models **and** get best parameters
+Use `train()` to fit **any** of over 280 models **and** get best parameters
 
-```{r, echo = TRUE, out.width = "90%", eval = FALSE}
-
-train(form = price ~ .,      # Criterion
-      data = data_train,     # Training data
-      method = "lm",         # Specify a model
-      trControl = mycontrol) # Use mycontrol parameters
+```{r, echo = TRUE, out.width = "90%", eval = TRUE, warning = FALSE}
+rpart_train <- train(form = income ~ .,  
+                     data = baselers_train,
+                     method = "rpart", # Model!
+                     trControl = ctrl)
 ```
 
-- Specify the criterion to be predicted as a formula with `form`
 
-- Specify training data with `data`
+|Parameter|Description|
+|:-----|:----|
+|`form`|Formula specifying criterion|
+|`data`|Training data|
+|`method`| Model|
+|`trControl`| Control parameters|
 
-- Choose a model with `method`
-    - `method = 'lm'` = Linear regression
-    - `method = 'rf` = Random forest
 
 ]
 
-.pull-right35[
+.pull-right4[
 
-See all >280 models at [http://topepo.github.io/caret/available-models.html](http://topepo.github.io/caret/available-models.html)
+See all >280 models on the [Caret Documentation Page](http://topepo.github.io/caret/available-models.html)
 
 ```{r, echo = FALSE}
 knitr::include_graphics("caret_models.jpg")
 ```
 
+]
+
+---
+.pull-left6[
+
+### train()
+
+Print the result of `train()` to obtain overall results
+
+```{r, echo = TRUE, out.width = "90%", eval = TRUE, warning = FALSE}
+rpart_train
+```
+
+
+]
+
+.pull-right35[
+
+### Dissect train
+
+```{r, echo = TRUE, out.width = "90%", eval = FALSE, warning = FALSE}
+# See all named elements
+names(rpart_train)
+
+# Best tuning parameters
+rpart_train$bestTune
+
+# Show the final model
+#  In this case a rf model
+rpart_train$finalModel
+```
 
 ]
 
@@ -629,31 +729,136 @@ knitr::include_graphics("caret_models.jpg")
 
 .pull-left5[
 
-# Caret
-
 ### varImp()
 
-- Use `varImp()` to extract **variable importance** from a model
+Use `varImp()` to extract **variable importance** from a model
 
-```{r, echo = TRUE, out.width = "90%", eval = FALSE}
-
-# Look at variable importance with varImp
-varImp(diamonds_lm_train)
-```
-
-- Result will be a vector showing how important each variable was in predicting the criterion.
-
-- Specific outputs depend on the model
-    - Regression: Regression weights
-    - Decision trees: Mean *gini* index.
+Result will be be a model-specific method indicaating how important each variable was in predicting the criterion.
+    
+```{r}
+varImp(rpart_train)
+```    
     
 ]
 
+.pull-right45[
+
+```{r, fig.width = 7, fig.height = 4}
+# Plot variable importance
+plot(varImp(rpart_train))
+```
+
+]
+
+---
+
+.pull-left5[
+## predict(), postResample()
+
+Test a models prediction performance with `predict()`
+
+```{r}
+# Get predictions based on best 
+bas_pred <- predict(object = rpart_train, 
+                    newdata = baselers_test)
+
+# Result is a vector of predictions 
+#   for each row in newdata
+bas_pred[1:5]
+
+# Assess performance with postResample()
+postResample(pred = bas_pred, 
+             obs = baselers_test$income)
+```
+
+
+
+]
 
 .pull-right45[
 
-```{r, echo = FALSE}
-knitr::include_graphics("varimp_ss.jpg")
+### Plot predictions vs Truth
+
+```{r, fig.width = 4, fig.height = 3, fig.align = 'center'}
+# Plot predictions versus truth
+end <- tibble(pred = bas_pred,
+              obs = baselers_test$income)
+
+ggplot(data = results,
+       aes(x = pred, y = obs)) + 
+  geom_point(alpha = .1) +
+  labs(title = "Rpart Performance",
+       x = "Predictions",
+       y = 'Truth') +
+  theme_bw() +
+  geom_smooth(method = "lm")
+```
+
+
+
+
+]
+
+
+
+---
+.pull-left5[
+
+## Recap - ML steps with caret
+
+Step 0: Create training and test data (if necessary)
+
+```{r, eval = FALSE}
+train_v <- createDataPartition(y, times, p)
+
+data_train <- data %>% slice(train_v)
+data_test <- data %>% slice(-train_v)
+```
+
+Step 1: Define control parameters
+
+```{r, eval = FALSE}
+ctl <- trainControl(method = "repeatedcv",
+                    number = 10, 
+                    repeats = 2) 
+```
+
+
+Step 2: Train model
+
+```{r, eval = FALSE}
+rpart_train <- train(form = income ~ .,  
+                     data = data_train,
+                     method = "rpart",
+                     trControl = ctl)
+```
+
+]
+
+.pull-right45[
+<br><br><br>
+Step 3: Explore
+
+```{r, eval = FALSE}
+rpart_train            # Print object
+varImp(rpart_train)    # Var importance
+rpart_train$finalModel # Final model
+```
+
+
+Step 4: Predict 
+
+```{r, eval = FALSE}
+my_pred <- predict(object = rpart_train, 
+                   newdata = data_test)
+```
+
+
+Step 4: Evaluate 
+
+```{r, eval = FALSE}
+postResample(pred = bas_pred, 
+             obs = baselers_test$income)
 ```
 
 
@@ -661,21 +866,17 @@ knitr::include_graphics("varimp_ss.jpg")
 
 
 ---
-
 
 <br><br>
 .pull-left5[
 
 # Caret
 
+There are *many* other great features of caret we haven't touched
+- Imputing (replacing) missing values and transforming predictors with `preProcess()`
+- Add your own custom model
 
-- There are *many* other great features of caret we haven't touched
-   - Splitting data with `createDataPartition()`
-   - Imputing (replacing) missing values and transforming predictors with `preProcess()`
-   - Add your own custom model
-   
-
-- Be sure to check out the **excellent** documentation site to learn all the details
+Be sure to check out the **excellent** documentation site to learn all the details
 
 
 ]
@@ -683,7 +884,6 @@ knitr::include_graphics("varimp_ss.jpg")
 .pull-right45[
 
 ### http://topepo.github.io/caret/index.html
-
 
 ```{r, echo = FALSE}
 knitr::include_graphics("caret_package_md.jpg")
@@ -693,211 +893,12 @@ knitr::include_graphics("caret_package_md.jpg")
 
 ---
 
-## Machine Learning II Live Demo & Practical
+## Machine Learning Live Demo & Practical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S1_MachineLearningII/MachineLearningII_practical.html">Link to Machine Learning II practical</a>
 
 
 
-
-
-
----
-
-## Machine Learning Live Demo & Practical
-
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S3_MachineLearning/MachineLearning_practical.html">Link to Machine Learning practical</a>
-
-
-<!-- --- -->
-<!-- # What is the history of machine learning? -->
-
-<!-- - 1805 - 1809: Legendre and Gauss discover least squares. Soon after Galton defines **Regression** in a biological context, followed by Pearson for purely statistical analyses. -->
-
-<!-- - 1952: Arthur Samuel creates first computer learning program for learning checkers and coins the term **Machine Learning** in 1959.  -->
-
-<!-- - 1957: Frank Rosenblatt creates first **Neural Network** to simulate the thought process of the human brain. -->
-
-<!-- - 1963: First algorithm for **Support Vector Machines** is developed by Vapnik & Chervonenkis. -->
-
-<!-- - 1967: **Nearest neighbor algorithm** is developed for classification -->
-
-<!-- - 1984: Breiman & Olshen publish the CART algorithm for **Decision Trees**, followed by Quinlan who publishes the ID3 algorithm followed by C4.5 -->
-
-<!-- - 1986: Rina Dechter introduces **Deep Learning**, with many subsequent updates in the 2000s. -->
-
-<!-- - 1995: Tin Kam Ho develops first algorithm for **Random Forests** -->
-
-<!-- Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes. -->
-
-
-
----
-### Old
-
-
-
-
----
-# Why do we separate training from prediction?
-
-- Data comes from two processes: *Signal* and *Noise* (aka Error).
-<br>
-
-```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
-
-set.seed(100)
-x <- seq(0, 5, length.out = 50)
-noise <- rnorm(50, mean = 0, sd = 2.5)
-
-model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
-
-y <- model_fun(x)
-y_obs <- model_fun(x) + noise
-
-par(mar = c(3, 4, 3, 1))
-
-par(mfrow = c(1, 3))
-
-plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 1
-
-plot(x, y_obs, main = "Signal", xlab = "", ylab = "", col = "lightgray")
-curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 2
-
-plot(x, y_obs, main = "Noise", xlab = "", ylab = "")
- curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-
- segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-# 
-# # Plot 3
-# 
-# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-# 
-# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
-# 
-# 
-# lines(x, y_obs)
-# 
-# # Plot 4
-# 
-# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
-# 
-# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
-
-
-# lines(x, y_obs)
-
-
-```
-
-
-
-
----
-# Why do we separate training from prediction?
-
-- A good model is one that tries to capture the signal and ignore the noise
-- A bad model is one that captures too much unpredictable noise,
-    
-
-```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
-
-set.seed(100)
-x <- seq(0, 5, length.out = 50)
-noise <- rnorm(50, mean = 0, sd = 2.5)
-
-model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
-
-y <- model_fun(x)
-y_obs <- model_fun(x) + noise
-
-par(mar = c(3, 4, 3, 1))
-
-par(mfrow = c(1, 3))
-
-plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 1
-
-plot(x, y_obs, main = "Good Model", xlab = "", ylab = "", col = "darkgray")
-
-lines(x, y, col = "blue")
-
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
-
-text(.5, 20, "Fitting error = Medium", adj = 0)
-text(.5, 15, "Prediction error = Low", adj = 0)
-
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 2
-
-plot(x, y_obs, main = "Bad Model", xlab = "", ylab = "")
-
-text(.5, 20, "Fitting error = None", adj = 0)
-text(.5, 15, "Prediction error = High", adj = 0)
-
-
-lines(x, y_obs, col = "red")
-# lines(y, y = y_obs)
-
-
-# 
-# # Plot 3
-# 
-# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-# 
-# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
-# 
-# 
-# lines(x, y_obs)
-# 
-# # Plot 4
-# 
-# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
-# 
-# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
-
-
-# lines(x, y_obs)
-
-
-```
 
 
 
