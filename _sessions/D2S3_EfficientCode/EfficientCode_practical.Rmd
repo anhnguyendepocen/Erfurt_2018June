@@ -194,7 +194,7 @@ microbenchmark(df[['var_1']], df$var_1, tbl$var_1,
                .subset2(df,'var_1'), .subset2(tbl,'var_1'))
 ```
 
-3. There is a particular reason for why some functions are faster than others. But before we go to that, let's look at another striking example. Compare the function `mean()` to a function that uses its basic ingredients `sum()` and `length()`, i.e., `my_mean_fun <- function(my_vec) sum(my_vec) / length(my_vec)`. To do this, first create a vector consisting of random numbers using `runif()` (see `?runif`). Make sure to use a long enough vector, e.g., `my_vec <- runif(1000000)`. Then test the original and your own mean function using `microbenchmark()`. What do you find? Which function is faster, yours or R's?
+3. There is a particular reason for why some functions are faster than others. But before we go into that, let's look at another striking example. Compare the function `mean()` to a function that uses its basic ingredients `sum()` and `length()`, i.e., `my_mean_fun <- function(my_vec) sum(my_vec) / length(my_vec)`. To do this, first create a vector consisting of random numbers using `runif()` (see `?runif`). Make sure to use a long enough vector, e.g., `my_vec <- runif(1000000)`. Then test the original and your own mean function using `microbenchmark()`. What do you find? Which function is faster, yours or R's?
 
 ```{r, eval = F, echo = F}
 # define vector
@@ -218,12 +218,12 @@ typeof(mean); typeof(sum); typeof(length)
 
 ```
 
-**Explanation**: Many functions in R are so-called `primitives`. This means that the function has not been implemented in R, but in a lower-level language such as C. Using such functions is almost always preferable, at least, if speed is of the essence. 
+**Explanation**: Many functions in R are so-called `primitives`. This means that the function has not been implemented in R, but in a lower-level language such as C. Using such functions is almost always preferable, if speed is of the essence. 
 
 
 ### Profiling
 
-Now, we turn to a more complex code example. In the following exercises, we want to profile a larger code chunk and then figure out ways to make it more efficient. To do this, you first need to install and load the `profvis` package. Note: As an alternative, you may also try the `linprof` package by Hadley Wickham (install via `devtools::install_github("hadley/lineprof")`).  
+Let us now turn to a more complex code example. In the following exercises, we want to profile a larger code chunk and then figure out ways to make it more efficient. To do this, you first need to install and load the `profvis` package. 
 
 5. Copy the profiling example into a new script file, save it into your project, and run the `profvis()` function on the code. What parts of the code are most computationally expensive?
 
@@ -277,9 +277,8 @@ profvis({
 
 ### Making code efficient
 
-When attempting to make code efficient, the first question should always be, is it really necessary. In this case, this is actually not the case. But, let's pretend we weren't dealing in seconds, but rather in minutes or even hours. Clearly, there is some part of the code that takes much more time then all of the rest together. Let's try to make it faster. First think about why it is slow? Is it R or is there some other reason?   
-
-6. To speed up the reading of data, save it onto the hard drive (inside your project) using `write_csv()`. Now, change the code so that the file is not read from the URL, but from your hard drive? Has the code become faster? By how much?
+In attempting to make code efficient, the first question should always be, is it really necessary. In this case, this is actually not the case. But, let's pretend it was. Clearly, there is some part of the code that take much more time than the rest. Let's try to fix these parts by making them faster. Why it is the code slow? Is it R or is there some other reason?   
+6. To speed up the reading of data, write it onto the hard drive (inside your project) using `write_csv()`. Now, change the code so that the file is not read from the URL, but from your hard drive? Has the code become faster? By how much?
 
 ```{r, eval=F, echo=F}
 # ---- loading the data and saving it to disk
@@ -338,7 +337,9 @@ profvis({
 
 ```
 
-7. Still that one part in the code takes most time. Let's then try to actually change the code. That is, let's try to use a different function that has been build for reading data fast. The `data.table` package happens to have such a function. It's called `fread()` and it works the same way as `read_csv()`. Try it and see what happens to the code execution time. Any changes to the profile? Note: You want to run this twice to let the compiler kick in. 
+7. Still reading in data takes most time, so let's try to actually make some changes to the code. That is, let's try to use a different function that has been build for reading data fast. The `data.table` package happens to have such a function. It's called `fread()` and it works the same way as `read_csv()`. Try it and see what happens to the code execution time. Any changes to the profile?
+
+Note: You want to run this twice to let the compiler kick in. 
 
 ```{r, eval=F, echo=F}
 
@@ -449,13 +450,13 @@ profvis({
 
 ### Speeding up code: Advanced section
 
-In most cases it is possible to produce efficient code using existing R functions. Sometimes, however, data sets are so big or computations so complex that additional measures must be taken. Generally, there are two fundamental ways to make code really fast: (a) implement code in a lower-level language that inherently runs faster and (b) running code in parallel. In this section you will be getting a taste of both of these approaches.    
+In most cases, it is possible to produce efficient code using existing R functions. Sometimes, however, data sets are so big or computations so complex that additional measures must be taken. Generally, there are two fundamental ways to make code really fast: (a) implement code in a lower-level language that inherently runs faster and (b) running code in parallel. In this section you will be getting a taste of both of these approaches.    
 
 #### Parallel R
 
-Running code in parallel requires using a slightly different programming style. But, it really isn't much different. To make use of parallel execution, we must split the data into parcels, often called jobs, and specify a function to handle these parcels, often called a worker. Once both of them are specified, we can use the functions in R's `parallel` package to assign jobs to workers and collect the results. But let's deal with the ingredients first. In this section, we will be looking at a very simple task, to compute the means of every column in a matrix. 
+Running code in parallel requires using a different programming style, but not by much. To make use of parallel execution, we must split the data into parcels, often called jobs, and specify a function build to process indvidiual parcels, often called a worker. Once both of them are specified, we can use the functions in R's `parallel` package to assign jobs to workers and collect the results. Let's begin by dealníng with the two ingredients, the jobs and the worker. In this section, we will be looking at a very simple task, to compute the means of every column in a matrix. 
 
-9. Let's define our jobs. Assume we have the following data.frame `my_df = as.data.frame(matrix(as.double(1:100000000), ncol = 100))`, which has 100 columns and 100,000 rows, and that we want to split the data frame into 100 equally large jobs of 1,000 rows each (`as.double` to avoid integer overflow). One easy way of doing this is to use the `split()` function. The `split()` function is build to slice data.frames row-wise as a function of the levels of another variable. Thus, if we had a vector that had one value for the first 1,000 entries, another for the next 1,000 entries and so on, we could use it to split our data frame. One easy way to create such a vector is to use `rep()`. `rep()` creates vectors by repeating its arguments values. For instance, `rep(10, 5)` will create `10 10 10 10 10`. To create a vector with the said properties, we need to make use of the fact that `rep()` is vectorized. That is, we can provide vectors for both arguments of the function. To cut things short, we can create our split vector using `split_vec <- rep(1:100, rep(1000, 100))`. Now apply `split()` to slice `my_df` using `split_vec` into 100 separate jobs. What type of object does `split()` return?
+9. Let's define our jobs. We have the following data frame `my_df = as.data.frame(matrix(as.double(1:100000000), ncol = 100))`, which has 100 columns and 100,000 rows, and seek to split it into 100 individual parcels of 1,000 rows each (Note: `as.double` is needed to avoid integer overflow). One easy way of doing this is to use the `split()` function. The `split()` function is build to slice data frames row-wise as a function of the levels of another variable. That is, if we had a vector that had one value for the first 1,000 entries, another for the next 1,000 entries and so on, then `split` would create separate data frames for each different value and, thus, 100 parcels of 1,000 rows each. One easy way to create such a vector is to use `rep()`. `rep()` creates vectors by repeating its arguments' values. For instance, `rep(10, 5)` will create `10 10 10 10 10`. To create a vector with the said properties, we can make use of the fact that `rep()` is vectorized. That is, we can provide vectors for both arguments of the function. To cut things short, we can create our split vector using `split_vec <- rep(1:100, rep(1000, 100))`. Now apply `split()` to slice `my_df` using `split_vec` into 100 separate jobs. What type of object does `split()` return?
 
 ```{r, eval=F, echo=F}
 # my_mat
@@ -469,14 +470,14 @@ jobs <- split(my_df, split_vec)
 
 ```
 
-10. Now, let's define our worker. We want to compute the mean of the columns of a data frame However, since we sliced the data frame in 100 pieces of 1,000 rows each, every worker will only have access to pieces of each variable. Thus, we need to find a way to also split the computation of the mean. One way to do this is to have the workers compute merely the sum of all the values they have access to and then later, when the results of all of the workers have been collected, to divide the sum of results by the total number of observations. In pseudo-code: `sum(c(sum(worker_1), sum(worker_2), ..., sum(worker_100)) / 100000`. Thus, what we need is a function that computes the sums of columns of each slice of the data frame. It so happens that R has a convenient (but not exactly fast) tool to do this, called `apply()`. `apply()` is a function that allows you to apply functions to data frames (or matrices) row or column wise. `apply(my_df, 2, sd)`, for instance, iterates through the columns (1 = rows, 2 = columns) and calculates the standard deviation using `sd()`. To calculate the sum instead, we need to merely replace `sd` by `sum`, i.e., `apply(my_df, 2, sum)`. Now, we have our worker. The last thing we want to do is to store the worker in its own function. That is, we want to run `worker <- function(df) apply(df, 2, sum)`. Let's do this.    
+10. Now, let's define our worker. We want to compute the mean of the columns of a data frame However, since we sliced the data frame in 100 pieces of 1,000 rows each, every worker will only have access to pieces of each variable. Thus, we need to find a way to also split the computation of the mean. One way to do this is to have the workers compute merely the sum of all the values they have access to and then later, when the results of all of the workers have been collected, to divide the sum of results by the total number of observations. In pseudo-code we will caculate: `sum(c(sum(worker_1), sum(worker_2), ..., sum(worker_100)) / 100000`. Thus, what we need is a function that computes the sums of columns of each slice of the data frame. It so happens that R has a convenient (but not exactly fast) tool to do this, called `apply()`. `apply()` is a function that allows you to apply functions to data frames (or matrices) row or column wise. `apply(my_df, 2, sd)`, for instance, iterates through the columns (1 = rows, 2 = columns) and calculates the standard deviation using `sd()`. To instead calculate the sum, we need to merely replace `sd` by `sum`, i.e., to use `apply(my_df, 2, sum)`. Now, we have our worker. The last thing we want to do is to store the worker in its own function. That is, we want to run `worker <- function(df) apply(df, 2, sum)`. Let's do this.    
 
 ```{r, eval=F, echo=F}
 # define worker
 worker <- function(df) apply(df, 2, sum)
 ```
 
-11. Alright, we have a jobs object and we have our worker function. Let's run this in parallel. To do this, we will be working with R's `parallel` package, which for a couple of years now is part of the standard R distribution The first step in running jobs in parallel is to set up a cluster of R instances. To do this, we use the function `makeCluster()`. Specify the number of R instances to be contained in the cluster and assign the cluster to an object, e.g., `cl <- makeCluster(8)`. I have chosen 8 because I have 8 (virtual) processors in my computer. You may have more or less. It makes sense to choose a number that is close to the number of processors in your computer. If you don't know how many processors you have, test it using `detectCores()`. OK, now that we have our cluster `cl` the next step is to actually run the jobs in parallel. To do this, we use `clusterApplyLB()`, which takes three arguments: (1) the cluster object, (2) the jobs, and (3) the worker, each of which we should now be ready to supply. Use `clusterApplyLB(cl, jobs, worker)` and don't forget to assign the output to a new object. The last part of running parallel is to stop the cluster using `stopCluster(cl)`. Try it out and store the result in `my_result`. 
+11. Alright, we have a jobs object and we have our worker function. Let's run those in parallel. To do this, we will be working with R's `parallel` package, which for a couple of years now is part of the standard R distribution The first step in running jobs in parallel is to set up a cluster of R instances. To do this, we use the function `makeCluster()`. Specify the number of R instances to be contained in the cluster and assign the cluster to an object, e.g., `cl <- makeCluster(8)`. I have chosen 8 because I have 8 (virtual) processors in my computer. You may have more or less. It makes sense to choose a number that is close to the number of processors in your computer. If you don't know how many processors you have, test it using `detectCores()`. OK, now that we have our cluster `cl` the next step is to actually run the jobs in parallel. To do this, we use `clusterApplyLB()`, which takes three arguments: (1) the cluster object, (2) the jobs, and (3) the worker, each of which we should now be ready to supply. Use `clusterApplyLB(cl, jobs, worker)` and don't forget to assign the output to a new object. The last part of running parallel is to stop the cluster using `stopCluster(cl)`. Try it out and store the result in `my_result`. 
 
 
 ```{r, eval=F, echo=F}
