@@ -141,11 +141,12 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 
 .pull-right5[
+<br><br><br>
 
-
-```{r, echo = FALSE}
-knitr::include_graphics("../_image/practical_emojis.png")
+```{r, echo = FALSE, fig.cap = "<a href = 'http://www.kaizenoutdoorfitness.com'>Source: kaizenoutdoorfitness.com</a>"}
+knitr::include_graphics("http://www.kaizenoutdoorfitness.com/wp-content/uploads/2012/07/creating-a-boot-camp-program-for-fat-loss1-1024x647.jpg")
 ```
+
 
 
 ]
@@ -214,7 +215,8 @@ knitr::include_graphics("../_image/practical_emojis.png")
 
 .pull-right6[
 <br><br>
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"><br>
+<a href = 'https://gailcarriger.com/2010/12/23/the-etiquette-of-proper-introductions-in-victorian-times/'>Source: gailcarriger.com</a></p>
 
 ]
 
