@@ -48,13 +48,13 @@ options(digits = 4)
 
 Work on one or all of 3 case studies designed to repeat the central elements of **Intro to R**, **Data Wrangling**, and **Statistics**<br><br>
 
-### 1 Clinical trial
+### [Clinical trial](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S4_CaseStudies/Clinical_Data_Case_Study.html)
 Analyse a clinical trial comparing the effectiveness of drugs on reducing histamine.<br><br>
 
-### 2 Finance
+### [Finance](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S4_CaseStudies/Financial_Data_Case_Study.html)
 Study the development of key financial markets across the last 20 years<br><br>
 
-### 3 Your own data
+### Your own data
 Work on your own data.
 
 

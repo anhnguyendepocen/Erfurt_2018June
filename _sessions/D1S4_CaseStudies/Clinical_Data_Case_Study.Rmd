@@ -1,6 +1,6 @@
 ---
 title: "Dimarta Clinical Trial- Case Study"
-author: "BaselRBootcamp April 2018"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
@@ -76,7 +76,7 @@ In addition to exploring the effects of the three medications, the researchers a
 
 ## Data Description
 
-The data for this case study are in three separate files: `dimarta_biomarker.csv`, `dimarta_demographics.csv`, and  `dimarta_trial.csv`. The files are located in the `data_BaselRBootcamp_Day1.zip` folder available through the schedule.  Here are descriptions of the columns in these files:
+The data for this case study are in three separate files: `dimarta_biomarker.csv`, `dimarta_demographics.csv`, and  `dimarta_trial.csv`. Here are descriptions of the columns in these files:
 
 **dimarta_trial.csv**
 
