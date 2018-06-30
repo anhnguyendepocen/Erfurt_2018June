@@ -1,6 +1,6 @@
 ---
 title: "Data I/O and Wrangling"
-subtitle: "With dplyr (and a bit of tidyr)"
+subtitle: ""
 author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "June 2018"
 output:
@@ -117,24 +117,27 @@ print(fires)
 
 
 ---
+
+# Where you're at...
+
 .pull-left4[
-<br><br>
-## Where you're at...
 
-0) Loaded packages (like tidyverse!) with <font color = 'blue'>library()</font><br>
+0) Loaded packages (like tidyverse!) with `library()`<br>
 
-1) Created a new dataframe (df) from external files using a data input function such as <br>df <font color='red'><-</font> <font color='blue'>read_csv</font>()<br>
+1) Created a new dataframe (df) from external files using a data input function such as `df <- read_csv()`<br>
 
-2) You can explore the dataframe with functions like <font color = 'blue'>View</font>(), <font color = 'blue'>dim</font>() and <font color = 'blue'>names()</font>
+2) You can explore the dataframe with functions like `View()`, `dim()` and `names()`
 
-3) You can explore the dataframe and calculate descriptive statistics on specific columns using <font color = 'blue'>FUN</font>(df<font color='red'>$</font><font color = 'green'>NAME</font>)<br>
+3) You can explore the dataframe and calculate descriptive statistics on specific columns using `FUN(df$NAME)`<br>
+
+<br><br><br>
+What's next?... **Wrangling!**
 
 ]
 
 
 .pull-right55[
 
-<br>
 ```{r, eval = FALSE}
 # Step 0) Load libraries
 
@@ -161,7 +164,6 @@ table(baslers$sex)  # How many of each sex?
 
 ```
 
-What's next?... <font size = 7>Wrangling!</font>
 
 ]
 

@@ -12,7 +12,6 @@
 class: center, middle, inverse, title-slide
 
 # Data I/O and Wrangling
-## With dplyr (and a bit of tidyr)
 ### The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
 ### June 2018
 
@@ -113,40 +112,43 @@ print(fires)
 ## # A tibble: 517 x 13
 ##        X     Y month day    FFMC   DMC    DC   ISI  temp    RH  wind  rain  area
 ##    &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1     7     5 mar   fri    86.2  26.2  94.3   5.1   8.2    51   6.7   0       0
-##  2     7     4 oct   tue    90.6  35.4 669.    6.7  18      33   0.9   0       0
-##  3     7     4 oct   sat    90.6  43.7 687.    6.7  14.6    33   1.3   0       0
-##  4     8     6 mar   fri    91.7  33.3  77.5   9     8.3    97   4     0.2     0
-##  5     8     6 mar   sun    89.3  51.3 102.    9.6  11.4    99   1.8   0       0
-##  6     8     6 aug   sun    92.3  85.3 488    14.7  22.2    29   5.4   0       0
-##  7     8     6 aug   mon    92.3  88.9 496.    8.5  24.1    27   3.1   0       0
-##  8     8     6 aug   mon    91.5 145.  608.   10.7   8      86   2.2   0       0
-##  9     8     6 sep   tue    91   130.  693.    7    13.1    63   5.4   0       0
-## 10     7     5 sep   sat    92.5  88   699.    7.1  22.8    40   4     0       0
+##  1     7     5 mar   fri    86.2  26.2  94.3  5.10  8.20    51 6.70  0.       0.
+##  2     7     4 oct   tue    90.6  35.4 669.   6.70 18.0     33 0.900 0.       0.
+##  3     7     4 oct   sat    90.6  43.7 687.   6.70 14.6     33 1.30  0.       0.
+##  4     8     6 mar   fri    91.7  33.3  77.5  9.00  8.30    97 4.00  0.200    0.
+##  5     8     6 mar   sun    89.3  51.3 102.   9.60 11.4     99 1.80  0.       0.
+##  6     8     6 aug   sun    92.3  85.3 488.  14.7  22.2     29 5.40  0.       0.
+##  7     8     6 aug   mon    92.3  88.9 496.   8.50 24.1     27 3.10  0.       0.
+##  8     8     6 aug   mon    91.5 145.  608.  10.7   8.00    86 2.20  0.       0.
+##  9     8     6 sep   tue    91.0 130.  693.   7.00 13.1     63 5.40  0.       0.
+## 10     7     5 sep   sat    92.5  88.0 699.   7.10 22.8     40 4.00  0.       0.
 ## # ... with 507 more rows
 ```
 
 
 
 ---
+
+# Where you're at...
+
 .pull-left4[
-&lt;br&gt;&lt;br&gt;
-## Where you're at...
 
-0) Loaded packages (like tidyverse!) with &lt;font color = 'blue'&gt;library()&lt;/font&gt;&lt;br&gt;
+0) Loaded packages (like tidyverse!) with `library()`&lt;br&gt;
 
-1) Created a new dataframe (df) from external files using a data input function such as &lt;br&gt;df &lt;font color='red'&gt;&lt;-&lt;/font&gt; &lt;font color='blue'&gt;read_csv&lt;/font&gt;()&lt;br&gt;
+1) Created a new dataframe (df) from external files using a data input function such as `df &lt;- read_csv()`&lt;br&gt;
 
-2) You can explore the dataframe with functions like &lt;font color = 'blue'&gt;View&lt;/font&gt;(), &lt;font color = 'blue'&gt;dim&lt;/font&gt;() and &lt;font color = 'blue'&gt;names()&lt;/font&gt;
+2) You can explore the dataframe with functions like `View()`, `dim()` and `names()`
 
-3) You can explore the dataframe and calculate descriptive statistics on specific columns using &lt;font color = 'blue'&gt;FUN&lt;/font&gt;(df&lt;font color='red'&gt;$&lt;/font&gt;&lt;font color = 'green'&gt;NAME&lt;/font&gt;)&lt;br&gt;
+3) You can explore the dataframe and calculate descriptive statistics on specific columns using `FUN(df$NAME)`&lt;br&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+What's next?... **Wrangling!**
 
 ]
 
 
 .pull-right55[
 
-&lt;br&gt;
 
 ```r
 # Step 0) Load libraries
@@ -173,7 +175,6 @@ table(baslers$sex)  # How many of each sex?
 # Step 4) ...
 ```
 
-What's next?... &lt;font size = 7&gt;Wrangling!&lt;/font&gt;
 
 ]
 
@@ -517,11 +518,11 @@ patients_df   # Demographic data
 ## # A tibble: 5 x 3
 ##      id     b     c
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1
-## 2     2    65     2
-## 3     3    57     2
-## 4     4    34     1
-## 5     5    45     2
+## 1    1.   37.    1.
+## 2    2.   65.    2.
+## 3    3.   57.    2.
+## 4    4.   34.    1.
+## 5    5.   45.    2.
 ```
 
 
@@ -547,11 +548,11 @@ patients_df  # Original
 ## # A tibble: 5 x 3
 ##      id     b     c
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1
-## 2     2    65     2
-## 3     3    57     2
-## 4     4    34     1
-## 5     5    45     2
+## 1    1.   37.    1.
+## 2    2.   65.    2.
+## 3    3.   57.    2.
+## 4    4.   34.    1.
+## 5    5.   45.    2.
 ```
 ]
 
@@ -606,10 +607,6 @@ patients_df &lt;- patients_df %&gt;%
 # Create new columns with mutate()
   mutate(age_months = age * 12,
          age_decades = age / 10)
-```
-
-```
-## Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ]
@@ -736,11 +733,11 @@ combined_df %&gt;%
 ## # A tibble: 5 x 5
 ##      id   arm   age    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1     1    37   123   135
-## 2     2     2    65   143   140
-## 3     3     2    57    NA    NA
-## 4     4     1    34   100   105
-## 5     5     2    45    NA    NA
+## 1    1.    1.   37.  123.  135.
+## 2    2.    2.   65.  143.  140.
+## 3    3.    2.   57.   NA    NA 
+## 4    4.    1.   34.  100.  105.
+## 5    5.    2.   45.   NA    NA
 ```
 
 ]
@@ -834,8 +831,8 @@ combined_df %&gt;%
 ## # A tibble: 2 x 4
 ##     arm   age    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     2    65   143   140
-## 2     2    57    NA    NA
+## 1    2.   65.  143.  140.
+## 2    2.   57.   NA    NA
 ```
 
 ]
@@ -872,11 +869,11 @@ combined_df %&gt;%
 ## # A tibble: 5 x 8
 ##      id   age   arm age_months age_decades arm_char    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1        444         3.7 drug       123   135
-## 2     2    65     2        780         6.5 other      143   140
-## 3     3    57     2        684         5.7 other       NA    NA
-## 4     4    34     1        408         3.4 drug       100   105
-## 5     5    45     2        540         4.5 other       NA    NA
+## 1    1.   37.    1.       444.        3.70 drug      123.  135.
+## 2    2.   65.    2.       780.        6.50 other     143.  140.
+## 3    3.   57.    2.       684.        5.70 other      NA    NA 
+## 4    4.   34.    1.       408.        3.40 drug      100.  105.
+## 5    5.   45.    2.       540.        4.50 other      NA    NA
 ```
 
 ]
@@ -921,8 +918,8 @@ combined_df %&gt;%
 ## # A tibble: 2 x 8
 ##      id   age   arm age_months age_decades arm_char    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1        444         3.7 drug       123   135
-## 2     4    34     1        408         3.4 drug       100   105
+## 1    1.   37.    1.       444.        3.70 drug      123.  135.
+## 2    4.   34.    1.       408.        3.40 drug      100.  105.
 ```
 
 ]
@@ -989,8 +986,8 @@ combined_df %&gt;%
 ## # A tibble: 2 x 6
 ##      id   age   arm arm_char    t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37     1 drug       123   135
-## 2     4    34     1 drug       100   105
+## 1    1.   37.    1. drug      123.  135.
+## 2    4.   34.    1. drug      100.  105.
 ```
 
 ]
@@ -1040,8 +1037,8 @@ combined_df %&gt;% slice(1:2)
 ## # A tibble: 2 x 5
 ##      id   age arm      t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37 drug    123   135
-## 2     2    65 other   143   140
+## 1    1.   37. drug   123.  135.
+## 2    2.   65. other  143.  140.
 ```
 
 ```r
@@ -1060,8 +1057,8 @@ combined_df %&gt;%
 ## # A tibble: 2 x 5
 ##   arm       N age_mean t1_mean t2_mean
 ##   &lt;chr&gt; &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 drug      2     35.5    112.     120
-## 2 other     3     55.7    143      140
+## 1 drug      2     35.5    112.    120.
+## 2 other     3     55.7    143.    140.
 ```
 
 
@@ -1105,11 +1102,11 @@ combined_df %&gt;%
 ## # Groups:   arm [2]
 ##      id   age arm      t1    t2
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    37 drug    123   135
-## 2     2    65 other   143   140
-## 3     3    57 other    NA    NA
-## 4     4    34 drug    100   105
-## 5     5    45 other    NA    NA
+## 1    1.   37. drug   123.  135.
+## 2    2.   65. other  143.  140.
+## 3    3.   57. other   NA    NA 
+## 4    4.   34. drug   100.  105.
+## 5    5.   45. other   NA    NA
 ```
 
 ]
@@ -1166,8 +1163,8 @@ combined_df %&gt;%
 ## # A tibble: 2 x 5
 ##   arm   t1_mean t2_mean  diff     N
 ##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
-## 1 drug     112.     120   8.5     2
-## 2 other    143      140  -3       3
+## 1 drug     112.    120.  8.50     2
+## 2 other    143.    140. -3.00     3
 ```
 
 ]
@@ -1378,7 +1375,7 @@ data &lt;- data %&gt;%
 
 
 ---
-
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
 # [Wrangling Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S2_Wrangling/Wrangling_practical.html)
     </textarea>
