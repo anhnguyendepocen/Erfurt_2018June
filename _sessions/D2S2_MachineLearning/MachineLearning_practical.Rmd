@@ -15,16 +15,6 @@ library(tidyverse)
 ```
 
 
-### Overview
-
-In this practical you'll use the `caret` (**C**lassification **A**nd **RE**gression **T**raining) package to automate many aspects of the machine learning process. By the end of this practical you will know:
-
-1. Select different 'learners' available in the `caret` package
-2. Fit parameters of a learner to a dataset
-3. Explore learners to understand how they work
-4. Use cross validation techniques to estimate the accuracy of a learner and find best fitting parameters
-5  Make predictions and evaluate the performance of learners!
-
 ### Cheatsheet
 
 <a href="https://github.com/rstudio/cheatsheets/raw/master/caret.pdf">
@@ -166,7 +156,7 @@ ggplot(data = performance_data,
        subtitle = "Blue line is perfect prediction!")
 ```
 
-A. Open your R project. It should already have the folders `0_Data` and `1_Code`. Make sure that the all of the datasets you need for this pradctical are in your `1_Data` folder
+A. Open your R project. It should already have the folders `1_Data` and `2_Code`. Make sure that the all of the datasets you need for this practical are in your `1_Data` folder
 
 ```{r}
 # Done!

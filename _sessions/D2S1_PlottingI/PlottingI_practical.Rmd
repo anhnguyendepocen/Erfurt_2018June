@@ -127,11 +127,11 @@ ggplot(data = mpg,
 
 ## Tasks
 
-### Getting the data and project setup
+### Setup
 
-1. Open a new R script and save it under the name `plotting_practical.R`
+1. Open your bootcamp R project. Open a new R script and save it under the name `plotting_practical.R` in your `2_Code` folder.
 
-2. Load the `tidyverse` package (which includes ggplot2).
+2. At the top of your script load the `tidyverse` package (which includes ggplot2).
 
 ```{r, eval = TRUE, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -203,7 +203,7 @@ ggplot(data = diamonds,
 
 10. Look at the theme help menu with `?theme_bw()` to see a list of all of the standard ggplot themes. Then, try adding one of these themes to your previous plots to see how they change.
 
-11. The `ggthemes` package contains many additional themes. If you don't have the package already, install it. Then, look at the `ggthemes()` vignette by running the following code:
+11. The `ggthemes` package contains many additional themes. If you don't have the package already, install it by running `install.packages("ggthemes")`. Then, look at the `ggthemes()` vignette by running the following code:
 
 ```{r, echo = TRUE}
 # Open the ggthemes vignette
@@ -221,7 +221,6 @@ ggplot(data = mpg, aes(x = cty, y = hwy)) +
   facet_wrap(~manufacturer) +
   theme_fivethirtyeight()
 ```
-
 
 ### Density geom with `geom_density()`
 
@@ -389,11 +388,11 @@ myplot
 myplot + geom_smooth()
 ```
 
-21. Using `ggsave()`, save the object as a pdf file called `myplot.pdf`. Set the width to 6 inches, and the height to 4 inches. Open the pdf outside of RStudio to make sure it worked!
+21. Using `ggsave()`, save the object as a pdf file called `myplot.pdf` in your `3_Figures` folder. Set the width to 6 inches, and the height to 4 inches. Open the pdf outside of RStudio to make sure it worked!
 
 ### Demographic information of midwest counties in the US
 
-22. Print the `midwest` dataset and look at the help menu to see what values it contains. It should look like this:
+22. Print the `midwest` dataset (it's contained in ggplot2) and look at the help menu to see what values it contains. It should look like this:
 
 ```{r, eval = TRUE}
 midwest
@@ -435,7 +434,6 @@ ggplot(data = midwest,
     guides(size = guide_legend(override.aes = list(col = "black")), 
            fill = guide_legend(override.aes = list(size = 5)))
 ```
-
 
 
 24. Create the following density plot showing the density of inhabitants with a college education in different states using the following template
@@ -535,7 +533,7 @@ ggplot(data = economics,
   theme_bw()
 ```
 
-28. Make the following plot from the `ACTG175` dataset (the dataset is contained in the `speff2trial` package). To do this, you'll need to use both `geom_boxplot()` and `geom_point()`. To jitter the points, use the `position` argument to `geom_point()`, as well as the `position_jitter()` function to control how much to jitter the points.
+28. Make the following plot from the `trial_act.csv` dataset. To do this, you'll need to use both `geom_boxplot()` and `geom_point()`. To jitter the points, use the `position` argument to `geom_point()`, as well as the `position_jitter()` function to control how much to jitter the points.
 
 ```{r, eval = TRUE, echo = FALSE, fig.width = 10, fig.height = 6}
 ggplot(data = ACTG175,
@@ -553,66 +551,6 @@ ggplot(data = ACTG175,
   geom_point(alpha = .2, 
              position = position_jitter(w = 0.1, h = 0))
 
-```
-
-
-30. Create the following lollipop chart from the Midwest data.
-
-```{r, eval = FALSE, echo = TRUE}
-midwest_IL <- midwest %>% 
-  filter(state == "XX") %>%
-  mutate(popdensity_z = (popdensity - mean(popdensity)) / sd(popdensity)) %>%
-  arrange(desc(popdensity_z)) %>%
-  mutate(county = factor(county, levels = county)) %>%
-  slice(1:25)
-
-ggplot(XX, aes(x = XX, y = XX)) + 
-  geom_segment(aes(y = 0, 
-                   x = county, 
-                   yend = popdensity_z, 
-                   xend = county, 
-                   col = popdensity_z), size = XX) +
-  geom_point(size = XX, fill = "white", shape = 21)  +
-  labs(title = "XX", 
-       subtitle = "XX",
-       Y = "XX",
-       X = "XX") + 
-  ylim(XX, XX) +
-  scale_colour_gradient(low = "XX", high = "XX", limits = c(-.1, 9)) +
-  coord_flip() +
-  geom_text(aes(label = 1:25)) +
-  guides(col = FALSE) +
-  theme_XX() +
-  theme(panel.grid = element_blank())
-```
-
-
-```{r, echo = FALSE, eval = TRUE}
-midwest_IL <- midwest %>% 
-  filter(state == "IL") %>%
-  mutate(popdensity_z = (popdensity - mean(popdensity)) / sd(popdensity)) %>%
-  arrange(desc(popdensity_z)) %>%
-  mutate(county = factor(county, levels = county)) %>%
-  slice(1:25)
-
-ggplot(midwest_IL, aes(x = county, y = popdensity_z)) + 
-  geom_segment(aes(y = 0, 
-                   x = county, 
-                   yend = popdensity_z, 
-                   xend = county, 
-                   col = popdensity_z), size = 1.5) +
-  geom_point(size = 8, fill = "white", shape = 21)  +
-  labs(title = "Standardized Population Density of top 25 counties in Illinois", 
-       subtitle = "Generated using ggplot2!") + 
-  ylim(-.5, 9) +
-  scale_colour_gradient(low = "red", high = "blue", limits = c(-.1, 9)) +
-  coord_flip() +
-  geom_text(aes(label = 1:25)) +
-  labs(y = "Standardized Population Density", 
-       x = "County") +
-  guides(col = FALSE) +
-  theme_bw() +
-  theme(panel.grid = element_blank())
 ```
 
 

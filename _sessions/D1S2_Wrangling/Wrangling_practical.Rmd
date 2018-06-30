@@ -89,7 +89,7 @@ baselers <- baselers %>%
          sex_bin = case_when(
                       sex == "male" ~ 0,
                       sex == "female" ~ 1,
-                      TRUE ~ NA_real_)),
+                      TRUE ~ NA_real_),
 
         # Show when height is greater than 150
         height_lt_150 = case_when(
@@ -100,7 +100,7 @@ baselers <- baselers %>%
   
   # Sort in ascending order of sex, then
   #  descending order of age
-  arrange(sex, desc(age_y))
+  arrange(sex, desc(age_y)))
 
 
 # Calculate grouped summary statistics

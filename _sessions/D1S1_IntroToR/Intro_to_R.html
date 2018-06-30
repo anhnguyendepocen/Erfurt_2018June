@@ -520,16 +520,16 @@ print(baselers)
 ## # A tibble: 10,000 x 20
 ##       id sex      age height weight income
 ##    &lt;int&gt; &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1     1 male      44   174.  113.   6300.
-##  2     2 male      65   180.   75.2 10900.
-##  3     3 female    31   168.   55.5  5100.
-##  4     4 male      27   209.   93.8  4200.
-##  5     5 male      24   177.   NA    4000.
-##  6     6 male      63   187.   67.4 11400.
-##  7     7 male      71   152.   83.3 12000.
-##  8     8 female    41   156.   67.8  7600.
-##  9     9 male      43   176.   69.3  8500.
-## 10    10 female    31   166.   66.3  6100.
+##  1     1 male      44   174.  113.    6300
+##  2     2 male      65   180.   75.2  10900
+##  3     3 female    31   168.   55.5   5100
+##  4     4 male      27   209    93.8   4200
+##  5     5 male      24   177.   NA     4000
+##  6     6 male      63   187.   67.4  11400
+##  7     7 male      71   152.   83.3  12000
+##  8     8 female    41   156.   67.8   7600
+##  9     9 male      43   176.   69.3   8500
+## 10    10 female    31   166.   66.3   6100
 ## # ... with 9,990 more rows, and 14 more
 ## #   variables
 ```
@@ -696,7 +696,7 @@ baselers &lt;- read_delim("baselers.txt",
 ## Bad
 
 ```r
-mean(subset((data.frame(c('a','b'),runif(1000,
+mean(subset((tibble(c('a','b'),runif(1000,
 0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
 ```
 
@@ -704,8 +704,8 @@ mean(subset((data.frame(c('a','b'),runif(1000,
 
 ```r
 # create my data.frame
-my_data &lt;- data.frame('group' = c('a','b'), 
-                      'value' = runif(1000,0,1))
+my_data &lt;- tibble('group' = c('a','b'), 
+                  'value' = runif(1000,0,1))
 
 # subset data to group a
 # and compute average value
@@ -759,7 +759,7 @@ if (var_rt &lt; 2){
 }
 
 # Crete sections using
-# Data wrangling section -------------------
+# Data wrangling section ---------
 ```
 See also &lt;a href="http://style.tidyverse.org/"&gt;style.tidyverse.org/&lt;/a&gt;
 ]
