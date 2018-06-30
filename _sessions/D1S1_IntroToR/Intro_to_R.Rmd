@@ -683,10 +683,12 @@ if (var_rt < 2){
 
 ---
 
-# Datasets Day 1
+# Downloads
 
-<font size="6" color="#F62D73"><a href="https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBoocamp_Day1.zip?raw=true">download link</a></font>
+<font size="6" color="#F62D73"><a href="https://github.com/therbootcamp/Erfurt_2018June/blob/master/_sessions/_data/day_1.zip?raw=true">Datasets day 1</a></font><br><br>
 
+<font size="6" color="#F62D73"><a href="http://www.tug.org/mactex/">Latex (Mac) link</a></font><br>
+<font size="6" color="#F62D73"><a href="https://miktex.org/">Latex (Windows) link</a></font>
 ---
 
 # Interactive session
