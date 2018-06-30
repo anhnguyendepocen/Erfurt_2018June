@@ -46,7 +46,7 @@ options(digits = 4)
 
 # Practical - Case studies
 
-Work on one or all of 3 case studies designed to repeat the central elements of **Intro to R**, **Data Wrangling**, and **Statistics**<br><br>
+Work on one or all of 2 case studies designed to repeat the central elements of **Intro to R**, **Data Wrangling**, and **Statistics**<br><br>
 
 ### [Clinical trial](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S4_CaseStudies/Clinical_Data_Case_Study.html)
 Analyse a clinical trial comparing the effectiveness of drugs on reducing histamine.<br><br>
