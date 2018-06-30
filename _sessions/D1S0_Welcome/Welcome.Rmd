@@ -140,12 +140,10 @@ knitr::opts_chunk$set(fig.align = 'center')
 ]
 
 
-.pull-right5[
+.pull-right45[
 
-
-```{r, echo = FALSE}
-knitr::include_graphics("../_image/practical_emojis.png")
-```
+<p align="center"><br>
+    <img border="0" alt="April2018Schedule" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/practical_emojis.png" width = 500><br>
 
 
 ]
@@ -158,17 +156,17 @@ knitr::include_graphics("../_image/practical_emojis.png")
 <table width="100%" style="cellspacing:0; cellpadding:0; border:none">
   <tr>    
   <td>
-  <p align = 'center'>RStudio IDE<br><br>
+  <p align = 'center'>RStudio IDE<br><br><br>
   <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/rstudio_cheat_ss.png?raw=true" height="180"></a></p>
   </td>
  
   <td>
-   <p align = 'center'>Base R<br><br>
+   <p align = 'center'>Base R<br><br><br>
   <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/baser_cheat_ss.png?raw=true" height="180"></a></p>
   </td>  
   
   <td> 
-   <p align = 'center'>Data Import<br><br>
+   <p align = 'center'>Data Import<br><br><br>
   <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/dataimport_cheat_ss.png?raw=true" height="180"></a></p>
   </td>
   
@@ -178,7 +176,7 @@ knitr::include_graphics("../_image/practical_emojis.png")
   </td>
 
   <td>
-  <p align = 'center'>Data Visualization<br><br>
+  <p align = 'center'>Data Visualization<br><br><br>
   <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/datavis_cheat_ss.png?raw=true" height="180" ></a></p>
   </td>
   
@@ -191,7 +189,7 @@ knitr::include_graphics("../_image/practical_emojis.png")
 
 .pull-left35[
 ## Introductions
-
+<br2>
 <font size = 5>1. What is your name?</font>
 <br><br>
 <font size = 5>2. Where are you from?</font>
@@ -213,15 +211,10 @@ knitr::include_graphics("../_image/practical_emojis.png")
 ]
 
 .pull-right6[
-<br><br>
+<br><br><br><br>
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
 
 ]
-
-
-
-
-
 
 
 ---
