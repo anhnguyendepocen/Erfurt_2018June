@@ -225,6 +225,9 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 
 ---
-<br>
-<p align="center"><img src="http://www.abetterinterview.com/wp-content/uploads/2012/11/interview-questions.jpg" height="510"></p>
+
+# Questions?
+<br><br><br>
+
+# [Introduction to R Session](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S1_IntroToR/Intro_to_R.html#1)
 
