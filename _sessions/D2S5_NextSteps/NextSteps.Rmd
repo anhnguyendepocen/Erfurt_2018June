@@ -195,10 +195,9 @@ ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 
 .pull-right45[
 
-<p align="center"><br><br><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYMfL36Dcs7IJ4DQh-XGUI0DYHsP0b8taF3jFahs2ZPilySQ/viewform?embedded=true" width="430" height="550">Wird geladen...</iframe></p>
+<p align="center"><br><br><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepT5_Ww20V2ABQkt6zQttnUkoz0-vqm9-pieaVOPlkw0H5AA/viewform?embedded=true" width="430" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></p>
 
 ]
-
 
 ---
 

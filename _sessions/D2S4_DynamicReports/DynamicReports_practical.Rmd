@@ -37,7 +37,7 @@ trial_act_demo <- read_csv("../_data/day_1/trial_act_demo_fake.csv")
 |:----|:-----|:------|
 |`trial_act.csv` | 2139 | 27 |
 
-### Tasks
+## Tasks
 
 1. Open your class project. In your `1_Data` folder, make sure you have copies of the datasets listed above.
 
@@ -189,7 +189,7 @@ cd4_cor_p <- cd4_cor$XX   # Get the p-value
 
 21. Add a new section called "Conclusions". Write the main conclusions of your analyses in one or two sentences. Feel free to add some formatting and/or in-line chunks to your content!
 
-### Managing folders with Markdeown
+## Managing working directories with Markdown
 
 22. Now it's time to move your Markdown file to your `4_Markdown` folder. Move your `speffanalysis.Rmd` file to your `4_Markdown` folder using your computer file browser (Finder on Mac, Windows explorer on PC). Now, try knitting your document. You should get an error! What happened?!
 
@@ -208,7 +208,7 @@ knitr::opts_knit$set(root.dir = "../")
 
 ## Other Markdown templates
 
-26. Don't like the standard markdown template? You can get many other templates from the `rmdformats` package. Install the package with `rmdformats`. Then create a new markdown file from one of the tempales with File -- New File -- R Markdown -- From Template. Try the `HTML readthedown` template. Knit the document and see how it looks different from your standard template.
+26. Don't like the standard markdown template? You can get many other templates from the `rmdformats` package. Install the package with `rmdformats`. Then create a new markdown file from one of the temples with File -- New File -- R Markdown -- From Template. Try the `HTML readthedown` template. Knit the document and see how it looks different from your standard template.
 
 ## Slideshow
 

@@ -163,8 +163,8 @@ Source: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/<
 </tbody>
 </table>
 </div>
-<div id="tasks" class="section level3">
-<h3>Tasks</h3>
+<div id="tasks" class="section level2">
+<h2>Tasks</h2>
 <ol style="list-style-type: decimal">
 <li><p>Open your class project. In your <code>1_Data</code> folder, make sure you have copies of the datasets listed above.</p></li>
 <li><p>Because R Markdown looks quite a bit different from standard R code, the best way to look at examples is to see a new R Markdown document in action. In RStudio, click File – New File – R Markdown</p></li>
@@ -276,8 +276,8 @@ cd4_cor_p &lt;- cd4_cor$XX   # Get the p-value</code></pre>
 <li><p>Add a new section called “Conclusions”. Write the main conclusions of your analyses in one or two sentences. Feel free to add some formatting and/or in-line chunks to your content!</p></li>
 </ol>
 </div>
-<div id="managing-folders-with-markdeown" class="section level3">
-<h3>Managing folders with Markdeown</h3>
+<div id="managing-working-directories-with-markdown" class="section level2">
+<h2>Managing working directories with Markdown</h2>
 <ol start="22" style="list-style-type: decimal">
 <li><p>Now it’s time to move your Markdown file to your <code>4_Markdown</code> folder. Move your <code>speffanalysis.Rmd</code> file to your <code>4_Markdown</code> folder using your computer file browser (Finder on Mac, Windows explorer on PC). Now, try knitting your document. You should get an error! What happened?!</p></li>
 <li><p>The problem is that when you knit your Markdown file, R changes your working directory to the folder where your markdown file is located. However, now that you moved your file to your <code>4_Markdown</code> folder, this isn’t true anymore. You need to tell Markdown that the root directory of your project is one directory up! Thankfully this is easy to do. Just add the following code to your initial <code>setup</code> R chunk:</p></li>
@@ -288,7 +288,7 @@ cd4_cor_p &lt;- cd4_cor$XX   # Get the p-value</code></pre>
 <div id="other-markdown-templates" class="section level2">
 <h2>Other Markdown templates</h2>
 <ol start="26" style="list-style-type: decimal">
-<li>Don’t like the standard markdown template? You can get many other templates from the <code>rmdformats</code> package. Install the package with <code>rmdformats</code>. Then create a new markdown file from one of the tempales with File – New File – R Markdown – From Template. Try the <code>HTML readthedown</code> template. Knit the document and see how it looks different from your standard template.</li>
+<li>Don’t like the standard markdown template? You can get many other templates from the <code>rmdformats</code> package. Install the package with <code>rmdformats</code>. Then create a new markdown file from one of the temples with File – New File – R Markdown – From Template. Try the <code>HTML readthedown</code> template. Knit the document and see how it looks different from your standard template.</li>
 </ol>
 </div>
 <div id="slideshow" class="section level2">
