@@ -200,7 +200,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 <br><br>
 <font size = 5>3. What is your current position?</font>
 <br><br>
-<font size = 5>4. What is your programming experience?</font>
+<font size = 5>4. What is your programming experience with R and other languages?</font>
 <br><br>
 <font size = 5>5. Why do you want to learn R?</font>
 <br><br>
