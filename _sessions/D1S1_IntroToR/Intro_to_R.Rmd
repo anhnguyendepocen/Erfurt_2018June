@@ -630,6 +630,7 @@ my_data %>%
 
 .pull-right5[
 ### Short style guide
+
 ```{r, eval=F}
 # Choose appropriate names
 analyze_baselers.R
@@ -646,10 +647,9 @@ if (var_rt < 2){
 }
 
 # Crete sections using
-# Data wrangling section --------------------------
-
+# Data wrangling section -------------------
 ```
-
+See also <a href="http://style.tidyverse.org/">style.tidyverse.org/</a>
 ]
 
 ---
