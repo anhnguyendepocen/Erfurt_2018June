@@ -1,16 +1,13 @@
 ---
-title: "Practical: Efficient Code"
-author: "The R Bootcamp @ Erfurt June 2018"
+title: "Efficient Code"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
-  ```{r, echo = FALSE}
+```{r, echo = FALSE}
 knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
 ```
 
-### Slides
-
-Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D4S1_EfficientCode/EfficientCode.html"><b>LINK</b></a><br>
 
 ### Overview
 
