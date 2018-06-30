@@ -12,12 +12,12 @@ output: html_document
 
 |  | Day 1<br>Essentials<br>[Get Datasets](https://github.com/therbootcamp/Erfurt_2018June/blob/master/_sessions/_data/day_1.zip?raw=true) | Day 2<br>Statistics<br>[Get Datasets](https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBootcamp_Day2.zip?raw=true) |
 |:--|:----------------------------|:-------------------------------|
-|0| Welcome<br>[slides](_sessions/D1S0_Welcome/Welcome.html) | Recap |
-|1| Intro to R<br>[slides](_sessions/D1S1_IntroToR/Intro_to_R.html) | Plotting|
-|2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning|
-|3| Statistics<br>[slides](_sessions/D1S3_Statistics/Statistics.html), [practical](_sessions/D1S3_Statistics/Statistics_practical.html)| Efficient Code|
-|4| Case Studies<br>[Intro](_sessions/D1S4_CaseStudies/CaseStudies.html)<br>[1: Clinical Trial](_sessions/D1S4_CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/D1S4_CaseStudies/Financial_Data_Case_Study.html)|Dynamic Reports|
-|5| |Next Steps |
+|0| Welcome<br>[slides](_sessions/D1S0_Welcome/Welcome.html) | Recap<br>slide|
+|1| Intro to R<br>[slides](_sessions/D1S1_IntroToR/Intro_to_R.html) | Plotting<br>slides, practical|
+|2| Data Wrangling<br>[slides](_sessions/D1S2_Wrangling/Wrangling.html), [practical](_sessions/D1S2_Wrangling/Wrangling_practical.html) |Machine Learning<br>slides, practical|
+|3| Statistics<br>[slides](_sessions/D1S3_Statistics/Statistics.html), [practical](_sessions/D1S3_Statistics/Statistics_practical.html)| Efficient Code<br>slides, practical|
+|4| Case Studies<br>[Intro](_sessions/D1S4_CaseStudies/CaseStudies.html)<br>[1: Clinical Trial](_sessions/D1S4_CaseStudies/Clinical_Data_Case_Study.html)<br>[2: Finance ](_sessions/D1S4_CaseStudies/Financial_Data_Case_Study.html)|Dynamic Reports<br>slides, practical|
+|5| |Next Steps<br>slides|
 
 
 

@@ -36,7 +36,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 <font size=6>Get all of the course materials through our course page!</font><br><br><br>
 
-<font size="6" color="#F62D73"><a href="https://therbootcamp.github.io/Erfurt_2018June/"><b>.../Erfurt_2018June/</b></a></font><br><br><br><br><br><br><br>
+<font size="6" color="#F62D73"><a href="https://therbootcamp.github.io/Erfurt_2018June/"><b>therbootcamp.github.io/<br>Erfurt_2018June</b></a></font><br><br><br><br><br><br><br>
 
 <font size=6>...bookmark it :)</font><br><br>
 
