@@ -851,7 +851,7 @@ coin_flips
 ```
 
 ```
-##  [1] "H" "H" "T" "T" "H" "H" "T" "H" "T" "H"
+##  [1] "T" "T" "H" "H" "T" "H" "T" "H" "H" "H"
 ```
 
 ```r
@@ -906,7 +906,7 @@ length(birthdays)
 ```
 
 ```
-## [1] 15
+## [1] 20
 ```
 
 
@@ -933,7 +933,7 @@ mysamp[1:5]  # First 5 values
 ```
 
 ```
-## [1]  9.220  9.373 14.722 13.789 13.504
+## [1] 10.501  9.980 11.936  2.309  6.631
 ```
 
 ```r
@@ -941,7 +941,7 @@ mean(mysamp) # Mean
 ```
 
 ```
-## [1] 9.839
+## [1] 10.56
 ```
 
 ```r
@@ -949,7 +949,7 @@ sd(mysamp)   # Standard deviation
 ```
 
 ```
-## [1] 4.964
+## [1] 4.513
 ```
 
 
@@ -1032,268 +1032,15 @@ Use random sampling functions to run simulations
 
 ]
 
----
-
-## Live Demo &amp; Pratical
-
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D2S2_Statistics/Statistics_practical.html"&gt;Link to Statistics practical&lt;/a&gt;
-
 
 ---
+&lt;br&gt;
 
+## Questions?
 
+&lt;br&gt;&lt;br&gt;
 
----
-
-.pull-left45[
-
-### Generalised linear model
-
-
-
-
-]
-
-
-
-.pull-right5[
-
-
-
-]
-
-
-
-
-
----
-# Examples with ChickWeight Data
-
-.pull-left4[
-
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-##  [ reached getOption("max.print") -- omitted 1 row ]
-```
-
-
-
-]
-
-
-.pull-right55[
-
-![Source: http://awallpapersimages.com/wp-content/uploads/2016/07/Chicken-cute-baby-image.jpg](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/cutechicken.jpg)
-
-]
-
-
-
----
-# Final notes
-
-.pull-left7[
-
-- When using a hypothesis test, always ask:
-
-&gt; What are the arguments?
-
-&gt; What format or class should the arguments be?
-
-- When in doubt, always look at the help files and examples at the end.
-
-- Save hypothesis tests as new objects, then apply `names()` to see what elements it contains, then extract what you want with `$`
-
-
-```r
-# Run test and save as test_A
-test_A &lt;- t.test(formula = weight ~ Diet,
-                 data = ChickWeight %&gt;%
-                        filter(Diet %in% c(1, 2)))
-
-names(test_A)  # What is in the object?
-
-test_A$statistic # Ah ok! Show me the test statistic
-```
-
-
-
-]
-
-.pull-right25[
-
-`?t.test`
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-#### Questions?
-
-]
-
-
-
-
-
----
-# Two types of statistics: Descriptive and Inferential
-
-.pull-left4[
-
-### Inferential
-
-- Used to make inferences about a larger population. Typically done in tandem with a *hypothesis test*
-
-#### Examples
-
-| Hypothesis Test| R Function|
-|------:|----:|
-|     T-test|    `t.test()`|
-|     Correlation Test|    `cor.test()`|
-|     Chi-Square Test|   `chisq.test()`|
-|     ANOVA, Post-hoc|    `aov(), TukeyHSD()`|
-
-- Hypothesis tests typically return lists of outputs (e.g.; p-value, test statistic)
-
-
-]
-
-.pull-right55[
-#### R implimentation
-
-
-```r
-t.test(x = c(4, 3, 6, 5, 3, 2),
-       mu = 0,
-       alternative = "two.sided")
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  c(4, 3, 6, 5, 3, 2)
-## t = 6.4, df = 5, p-value = 0.001
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  2.289 5.378
-## sample estimates:
-## mean of x 
-##     3.833
-```
-
-
-]
-
-
-
-
----
-# ANOVA with `aov()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-##  [ reached getOption("max.print") -- omitted 1 row ]
-```
-
-]
-
-.pull-right6[
-
-### ANOVA
-
-&gt; Is there difference in weights based on Diet?
-
-- Applying `summary()` to an `aov` object prints a nice table.
-
-
-```r
-E &lt;- aov(formula = weight ~ Diet, # Formula
-         data = ChickWeight)      # Data in Chickweight
-
-summary(E)  # Sow a summary of the results
-```
-
-```
-##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)    
-## Diet          3  155863   51954    10.8 6.4e-07 ***
-## Residuals   574 2758693    4806                    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-]
-
----
-# Post-hoc tests with `TukeyHSD()`
-
-.pull-left4[
-
-&gt; Which specific pairs of Diets differed?
-
-### Step 1: Create aov object
-
-- Apply `TukeyHSD()` to an `aov` object to get post-hoc tests.
-
-
-```r
-# Create an aov object called D
-
-D &lt;- aov(formula = weight ~ Diet,
-         data = ChickWeight)
-```
-
-]
-
-.pull-right55[
-
-### Step 2: Apply `TukeyHSD()` to object
-
-```r
-TukeyHSD(D)  # Conduct post-hoc tests
-```
-
-```
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = weight ~ Diet, data = ChickWeight)
-## 
-## $Diet
-##       diff      lwr   upr  p adj
-## 2-1 19.971  -0.2998 40.24 0.0552
-## 3-1 40.305  20.0335 60.58 0.0000
-## 4-1 32.617  12.2354 53.00 0.0003
-## 3-2 20.333  -2.7268 43.39 0.1058
-## 4-2 12.646 -10.5116 35.80 0.4954
-##  [ reached getOption("max.print") -- omitted 1 row ]
-```
-
-]
+# [Statistics Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S3_Statistics/Statistics_practical.html)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

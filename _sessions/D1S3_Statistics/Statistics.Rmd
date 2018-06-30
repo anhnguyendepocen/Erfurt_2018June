@@ -876,7 +876,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 ---
-<br><br><br>
+<br>
+
+## Questions?
+
+<br><br>
 
 # [Statistics Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D1S3_Statistics/Statistics_practical.html)
 
