@@ -1,7 +1,6 @@
 ---
-title: "Plotting: ggplot2"
-author: "TheRBootcamp, http://therbootcamp.github.io"
-date: "April 2018"
+title: "Plotting"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
@@ -12,10 +11,6 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "Source: https://www.rstudio.com/", out.width = "30%"}
 knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9296/small/1447173871/rstudio-hex-ggplot2-dot-psd.png")
 ```
-
-### Slides
-
-[Here are the introduction slides for this practical on Plotting 1.0: ggplot!](https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S2_PlottingI/PlottingI.html#1)
 
 ### Overview
 

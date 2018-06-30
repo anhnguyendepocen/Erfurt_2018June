@@ -1498,9 +1498,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ---
 
-## Plotting Pratical
+<br><br><br>
 
-<p><font size=6><b><a href="https://therbootcamp.github.io/BaselRBootcamp_2018April/_sessions/D3S2_PlottingI/PlottingI_practical.html">Link to Plotting practical</a>
+# [Plotting Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D2S1_PlottingI/PlottingI_practical.html)
 
 
 ---
