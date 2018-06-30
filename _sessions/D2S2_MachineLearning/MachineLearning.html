@@ -713,7 +713,7 @@ class_mod &lt;- train(form = factor(diagnosis) ~ .,
 
 .pull-right4[
 
-See all &gt; 280 models on the [Caret Documentation Page](http://topepo.github.io/caret/available-models.html)
+[Caret Documentation Page](http://topepo.github.io/caret/available-models.html)
 
 &lt;img src="caret_models.jpg" width="1699" /&gt;
 
@@ -886,6 +886,9 @@ bas_pred[1:5]
 ## 12162  9029 12162  5808  5808
 ```
 
+Then summarise overall performance with `postResample()`
+
+
 ```r
 # Assess performance with postResample()
 postResample(pred = bas_pred, 
@@ -896,7 +899,6 @@ postResample(pred = bas_pred,
 ##      RMSE  Rsquared       MAE 
 ## 1583.4110    0.6516 1270.2859
 ```
-
 
 
 ]
@@ -921,7 +923,7 @@ ggplot(data = end,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -1011,7 +1013,6 @@ There are *many* other great features of caret we haven't touched
 
 Be sure to check out the **excellent** documentation site to learn all the details
 
-
 ]
 
 .pull-right45[
@@ -1025,6 +1026,12 @@ Be sure to check out the **excellent** documentation site to learn all the detai
 ---
 
 # Questions?
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+# [Machine Learning Practical](https://therbootcamp.github.io/Erfurt_2018June/_sessions/D2S2_MachineLearning/MachineLearning_practical.html)
+
+
+---
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

@@ -140,10 +140,20 @@ knitr::opts_chunk$set(fig.align = 'center')
 ]
 
 
+<<<<<<< HEAD
 .pull-right45[
 
 <p align="center"><br>
     <img border="0" alt="April2018Schedule" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/practical_emojis.png" width = 500><br>
+=======
+.pull-right5[
+<br><br><br>
+
+```{r, echo = FALSE, fig.cap = "<a href = 'http://www.kaizenoutdoorfitness.com'>Source: kaizenoutdoorfitness.com</a>"}
+knitr::include_graphics("http://www.kaizenoutdoorfitness.com/wp-content/uploads/2012/07/creating-a-boot-camp-program-for-fat-loss1-1024x647.jpg")
+```
+>>>>>>> 40b837a61cb6abd4e9b7f46cc7cf731907b5ee99
+
 
 
 ]
@@ -211,8 +221,14 @@ knitr::opts_chunk$set(fig.align = 'center')
 ]
 
 .pull-right6[
+<<<<<<< HEAD
 <br><br><br><br>
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
+=======
+<br><br>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"><br>
+<a href = 'https://gailcarriger.com/2010/12/23/the-etiquette-of-proper-introductions-in-victorian-times/'>Source: gailcarriger.com</a></p>
+>>>>>>> 40b837a61cb6abd4e9b7f46cc7cf731907b5ee99
 
 ]
 
