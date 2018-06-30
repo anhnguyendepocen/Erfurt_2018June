@@ -1040,7 +1040,7 @@ combined_df %>%
 
 There are two key functions in the tidyr package (part of the tidyverse) that allow you to 'reshape' a dataframe between 'wide'and 'long' formats.<br>
 
-'Wide' dataframes have key data in <font color = 'blue'>separate columns</font>, <font color = 'blue'><br><br>'Long'</font> dataframes have key data in <font color = 'blue'>separate rows</font>.<br>
+'Wide' dataframes have key data in separate columns, <br><br>'Long'</font> dataframes have key data in separate rows.<br>
 
 Why reshape data between wide and long? Some functions require data to be in a certain shape<br>
 
@@ -1186,7 +1186,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ]
-
 
 ---
 <br><br><br>
