@@ -234,15 +234,15 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2
 
 ---
 
-# %>%    "The Pipe!"
+# %>%  aka  "The Pipe!"
 
 .pull-left35[
  
-<font size = 6>dplyr makes extensive use of a new operator called the "Pipe" <b><font color='purple'>%>%</font></b></font><br><br>
+<font size = 6>dplyr makes extensive use of a new operator called the "Pipe" <b><font  style="color:#52D998">%>%</font></b></font><br><br>
 
-<font size = 6>The "Pipe" <b><font color='purple'>%>%</font></b> is used to pass objects from one function to another</font><br><br>
+<font size = 6>The "Pipe" <b><font style="color:#52D998">%>%</font></b> is used to pass objects from one function to another</font><br><br>
 
-<font size = 6>You can read the "Pipe" <b><font color='purple'>%>%</font></b> as "And Then..."</font><br><br>
+<font size = 6>You can read the "Pipe" <b><font style="color:#52D998">%>%</font></b> as "And Then..."</font><br><br>
 
 
 <br>
@@ -276,16 +276,14 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2
 ]
 
 .pull-right5[
-
-## Example)
+<br><br><br>
+### Example
 
 ```{r}
 # Create a vector score
 score <- c(8, 4, 6, 3, 7, 3)
 ```
 
-
-<font size = 5>Q) Calculate the mean score</font>
 
 ```{r}
 # Base-R method
@@ -313,16 +311,16 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/Erfurt_2
 
 ]
 
-.pull-right5[
 
-## Example)
+
+.pull-right5[
+<br><br><br>
+### Example
 
 ```{r}
 # Create a vector score
 score <- c(8, 4, 6, 3, 7, 3)
 ```
-
-<font size = 5>Q) Calculate the standard deviation and round to 1 digit</font>
 
 ```{r}
 # Base-R method
@@ -500,13 +498,13 @@ patients_df   # Demographic data
 
 ---
 
+# `rename()` 
 
 .pull-left3[
-# rename() 
 
 
-<font size = 5> Change column names with rename()<br><br></font>
-<font size = 5>New = Old, <br>New = Old, ...<br><br></font>
+Change column names with `rename()`
+New = Old, New = Old, ...
 
 ```{r}
 patients_df  # Original
@@ -514,8 +512,8 @@ patients_df  # Original
 ]
 
 .pull-right65[
-<br><br>
-<font size = 5>Create better column names with rename()</font>
+
+Create better column names with `rename()`
 
 ```{r}
 # 0) Start with patients_df data
@@ -530,14 +528,14 @@ patients_df <- patients_df %>%
 
 ---
 
+# `mutate()` 
+
 .pull-left3[
-# mutate() 
 
-<font size = 4>Add new columns (or change existing ones) with mutate()<br><br></font>
-<font size = 4>Define new columns in terms of existing columns in the dataframe<br><br></font>
-<font size = 4>Can add multiple new columns within one mutate()<br><br></font>
-<font size = 4>Change an existing column by assigning it to itself<br><br></font>
-
+Add new columns (or change existing ones) with `mutate()`<br><br>
+Define new columns in terms of existing columns in the dataframe<br><br>
+Can add multiple new columns within one `mutate()`<br><br>
+Change an existing column by assigning it to itself
 
 ```{r, eval = FALSE}
 df %>%
@@ -551,9 +549,8 @@ df %>%
 ]
 
 .pull-right65[
-<br><br>
 
-<font size = 5>Add new columns with mutate()</font>
+Add new columns with `mutate()`
 
 ```{r}
 patients_df <- patients_df %>% 
@@ -568,10 +565,11 @@ patients_df <- patients_df %>%
 
 ---
 
-.pull-left35[
-## mutate(x = case_when())
-<br>
-<font size = 4>Use case_when() in combination with mutate() to define new columns based on logical conditions<br></font>
+.pull-left4[
+
+# `case_when()`
+
+Use `case_when()` in combination with `mutate()` to define new columns based on logical conditions
 
 ```{r, eval = FALSE}
 # Using mutate(case_when())
@@ -583,7 +581,7 @@ df %>%
     ))
 ```
 
-<font size = 4>Useful for recoding values. Ex) Create a new column arm_char based on the values of arm<br></font>
+Useful for recoding values. Example:
 
 |arm|arm_char|
 |:--|:--|
@@ -594,19 +592,20 @@ df %>%
 
 ]
 
-.pull-right6[
+.pull-right55[
 <br><br>
 
-<font size = 5>Recode values with mutate(case_when())</font>
+Recode values with `mutate(case_when())`
 
 ```{r}
 patients_df <- patients_df %>% 
 
   # Create column arm_char based on values of arm
   
-  mutate(arm_char = case_when(arm == 0 ~ "placebo",
+  mutate(
+    arm_char = case_when(arm == 0 ~ "placebo",
                               arm == 1 ~ "drug")
-         )
+  )
 ```
 
 Note: By default, all 'other' values are set to NA. To set 'other' values to something else, use the condition `TRUE` as a catch-all for all 'other' values. 
@@ -614,10 +613,11 @@ Note: By default, all 'other' values are set to NA. To set 'other' values to som
 ```{r}
 patients_df <- patients_df %>% 
 
-  mutate(arm_char = case_when(arm == 0 ~ "placebo",
-                              arm == 1 ~ "drug",
-                              TRUE ~ "other") # Catch-all
-         )
+  mutate(
+    arm_char = case_when(arm == 0 ~ "placebo",
+                         arm == 1 ~ "drug",
+                         TRUE ~ "other") # Catch-all
+  )
 ```
 
 ]
