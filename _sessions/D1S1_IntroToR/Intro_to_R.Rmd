@@ -685,7 +685,7 @@ if (var_rt < 2){
 
 # Datasets Day 1
 
-<font size="6" color="#F62D73"><a href="https://github.com/therbootcamp/BaselRBootcamp_2018April/blob/master/_sessions/_data/data_BaselRBoocamp_Day1.zip?raw=true">download link</a></font>
+<font size="6" color="#F62D73"><a href="https://github.com/therbootcamp/Erfurt_2018June/blob/master/_sessions/_data/data_BaselRBoocamp_Day1.zip?raw=true">download link</a></font>
 
 ---
 
