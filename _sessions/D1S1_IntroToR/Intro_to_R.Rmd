@@ -586,15 +586,15 @@ baselers <- read_delim("baselers.txt",
 .pull-right5[
 ## Bad
 ```{r, eval=F}
-mean(subset((data.frame(c('a','b'),runif(1000,
+mean(subset((tibble(c('a','b'),runif(1000,
 0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
 ```
 
 ## Good
 ```{r, eval=F}
 # create my data.frame
-my_data <- data.frame('group' = c('a','b'), 
-                      'value' = runif(1000,0,1))
+my_data <- tibble('group' = c('a','b'), 
+                  'value' = runif(1000,0,1))
 
 # subset data to group a
 # and compute average value
@@ -647,7 +647,7 @@ if (var_rt < 2){
 }
 
 # Crete sections using
-# Data wrangling section -------------------
+# Data wrangling section ---------
 ```
 See also <a href="http://style.tidyverse.org/">style.tidyverse.org/</a>
 ]
