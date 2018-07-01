@@ -283,7 +283,7 @@ combined_df %&gt;%
 ## If you want to do statistics in R, there is a package for that!
 
 .pull-left5[
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
 | Package| Models|
 |------:|:----|
@@ -331,7 +331,7 @@ my_glm &lt;- glm(formula = income ~ .,
               data = baselers)
 ```
 
-To include *interaction terms* use `x1 * x2` instead of `x1 + x2`
+To specify *interaction terms* use `x1:x2` or  `x1 * x2` instead of `x1 + x2`
 
 
 ```r
@@ -340,38 +340,9 @@ my_glm &lt;- glm(formula = income ~ food * alcohol,
               data = baselers)
 ```
 
----
-
-
-.pull-left45[
-&lt;br&gt;&lt;br&gt;
-## Other great statistics packages
-&lt;br&gt;
-
-|package|Description|
-|:----|:-----|
-|`afex`|Factorial experiments|
-|`lmer`|Linear mixed effects models|
-|`BayesFactor`|Bayesian Models|
-|`forecast`|Time series| 
-|`lavaan`|Latent variable and structural equation modelling| 
-
-
-]
-
-
-.pull-right5[
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/lavaan_ss.jpg" style="display: block; margin: auto;" /&gt;
-
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/Erfurt_2018June/master/_sessions/_image/BayesFactor_ss.png" style="display: block; margin: auto;" /&gt;
-
-
-]
-
 
 ---
+
 # Today
 
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/Erfurt_2018June"&gt;Schedule&lt;/a&gt;

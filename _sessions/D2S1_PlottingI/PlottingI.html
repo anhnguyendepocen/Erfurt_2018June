@@ -540,7 +540,8 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth(col = "blue")
 ```
@@ -571,7 +572,8 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth(col = "blue",
               method = "lm")
@@ -600,7 +602,8 @@ This is what happens, when you don't override...
 
 ```r
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth() # no overriding
 ```
@@ -696,10 +699,10 @@ A plotting **theme** controls many aspects of its overall look, from the backgro
 
 Common themes are...
 
-`theme_bw()`
-`theme_minimal()`
-'theme_classic()`
-`theme_light()`
+`theme_bw()`&lt;br&gt;
+`theme_minimal()`&lt;br&gt;
+`theme_classic()`&lt;br&gt;
+`theme_light()`&lt;br&gt;
 `theme_dark()`
 
 ]
@@ -727,9 +730,9 @@ Common themes are...
 
 `theme_bw()`&lt;br&gt;
 `theme_minimal()`&lt;br&gt;
-'theme_classic()`&lt;br&gt;
+`theme_classic()`&lt;br&gt;
 `theme_light()`&lt;br&gt;
-`theme_dark()`&lt;br&gt;
+`theme_dark()`
 
 ]
 
@@ -756,9 +759,9 @@ Common themes are...
 
 `theme_bw()`&lt;br&gt;
 `theme_minimal()`&lt;br&gt;
-'theme_classic()`&lt;br&gt;
+`theme_classic()`&lt;br&gt;
 `theme_light()`&lt;br&gt;
-`theme_dark()`&lt;br&gt;
+`theme_dark()`
 
 ]
 
@@ -842,7 +845,7 @@ ggplot(data = mpg,
        mapping = aes(x = displ, 
                      y = hwy)) + 
   geom_point()  +
-  facet_wrap(~ class)  # Tilde first!
+  facet_wrap(~ class)  # Tilde first
 ```
 
 
@@ -870,7 +873,7 @@ ggplot(data = mpg,
 ```r
 # Create myplot
 myplot &lt;- ggplot(data = mpg,
-                 aes(x = cty,
+                 aes(x = displ,
                      y = hwy)) + 
               geom_point() + 
               theme_bw()
@@ -942,8 +945,6 @@ myplot +
 # `ggsave()`
 
 .pull-left5[
-
-&lt;br&gt;&lt;br&gt;
 
 To save plots to a file (e.g.; .jpg, .pdf, .png), use the `ggsave()` function.
 
