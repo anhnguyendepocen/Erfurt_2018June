@@ -4,13 +4,12 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 output: html_document
 ---
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval = FALSE, message = FALSE, warning = FALSE, fig.align = 'center', out.width = "100%")
-```
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "Source: https://www.rstudio.com/", out.width = "30%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_hex.png")
-```
+
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_hex.png" alt="Source: https://www.rstudio.com/" width="30%" />
+<p class="caption">Source: https://www.rstudio.com/</p>
+</div>
 
 ### Overview
 
@@ -18,20 +17,17 @@ In this practical you'll practice creating interactive reports using RMarkdown.
 
 ### Cheatsheet
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf", out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_cheat.png")
-```
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_cheat.png" alt="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf" width="60%" />
+<p class="caption">https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf</p>
+</div>
 
 If you don't have it already, you can access the `Markdown` cheatsheet here [https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
 
 
 ### Datasets
 
-```{r, eval = TRUE, message = FALSE}
-library(tidyverse)
-trial_act <- read_csv("../_data/day_1/trial_act.csv")
-trial_act_demo <- read_csv("../_data/day_1/trial_act_demo_fake.csv")
-```
+
 
 |File | Rows | Columns |
 |:----|:-----|:------|
@@ -43,39 +39,30 @@ trial_act_demo <- read_csv("../_data/day_1/trial_act_demo_fake.csv")
 
 2. Because R Markdown looks quite a bit different from standard R code, the best way to look at examples is to see a new R Markdown document in action. In RStudio, click File -- New File -- R Markdown
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_A.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_A.png" width="60%" style="display: block; margin: auto;" />
 
 3.  Give the document a title and an author. For the output format, select HTML (the default). Click Ok!
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_B.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_B.png" width="60%" style="display: block; margin: auto;" />
 
 4. A new file that looks like this should open up. This is your first R Markdown document!
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_C.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_C.png" width="60%" style="display: block; margin: auto;" />
 
 5. Save your markdown file *in your main project directory* (not in the `4_Markdown` folder! -- you'll put it there later!) under the name `speffanalysis.Rmd`
 
 6. Now *knit* your document to an HTML file. To do this, click the *knit* button (or use the Command + Shift + K shortcut)
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_D.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_D.png" width="60%" style="display: block; margin: auto;" />
 
 7. Now you should see your final, HTML document! Scroll up and down the document and see how she looks!
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_E.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rmarkdown_ss_E.png" width="60%" style="display: block; margin: auto;" />
 
 8. In the first code chunk (with the label `setup`), include the following code: the arguments in`knitr::opts_chunk$set()` will set your global chunk options, while finally, `options(digits = 2)` makes sure that all of your numeric output is rounded to two decimal places.
 
-```{r, eval = FALSE, echo = TRUE}
+
+```r
 # INCLUDE ALL OF THIS CODE IN YOUR FIRST CHUNK!
 
 knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
@@ -101,20 +88,20 @@ options(digits = 2)  # Round all output to 2 digits
 
 14. Add the necessary text and markdown to your document to create the following two paragraphs. Pay attention to the header sizes, *italics* and `code` formats.
 
-```{r, fig.cap = "Write the necessary markdown to create this output!", eval = TRUE, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_output_ss.png")
-```
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_output_ss.png" alt="Write the necessary markdown to create this output!" width="75%" />
+<p class="caption">Write the necessary markdown to create this output!</p>
+</div>
 
 15. Knit the document! Diagnose and correct any errors!
 
 16. Add the appropriate combination of text, markdown, code chunks, and R code to add the following output to your document. To report the number of patients, use an in-line chunk to access the number directly from the data using the `nrow()` function, -- that is, don't type 2139 directly! To create the table, create a new chunk, and inside that chunk, use the `kable()` function, with the appropriate arguments, to create the table. The following code might help you create the table:
 
-```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_analysis_ss.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_analysis_ss.png" width="75%" style="display: block; margin: auto;" />
 
 
-```{r, eval = FALSE, echo = TRUE}
+
+```r
 # Code for Table 1:
 
 trial_act %>%
@@ -128,13 +115,12 @@ trial_act %>%
 
 15. Write the necessary code to add the following output to your document. To do this, create a new chunk. In the chunk use `dplyr` code to create the summary table of data. Assign the result to the object `trial_summary`. Then, use `kable()` to render this dataframe as a table in the final document.
 
-```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_analysis_ss_B.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_analysis_ss_B.png" width="75%" style="display: block; margin: auto;" />
 
 Here is some code you might find helpful in creating this table!
 
-```{r, echo = TRUE, eval = FALSE}
+
+```r
 # Helpful code to create the summary table!
 
 trial_act %>% 
@@ -151,13 +137,12 @@ trial_act %>%
 
 17. Add the appropriate combination of text, markdown, code chunks, and R code to add the following output to your document. Be sure to include the figure caption (you can do this with the `fig.cap` argument to the chunk)
 
-```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_ggplot_ss.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_ggplot_ss.png" width="75%" style="display: block; margin: auto;" />
 
 This code might help you to create the plot:
 
-```{r, eval = FALSE, echo = TRUE}
+
+```r
 # Boxplot code template
 
 ggplot(data = XX, 
@@ -175,7 +160,8 @@ ggplot(data = XX,
 
 19. A researcher wants to know if there is a correlation between patients' CD4 T cell count at baseline (`cd40`) and the number of days until a major negative event.  Include this information as a new subsection (with a second level header) in your analyses. To do this, run the following chunk. Then, write a sentence with the main outputs from the test, using inline chunks to directly access the correlation and the p-value. For example, a sentence could be: "The correlation between CD4 T cell count at baseline and number of days until a major negative event was r = XX, p = YY".
 
-```{r, eval = FALSE, echo = TRUE}
+
+```r
 # Correlation test between cd40 and days
 
 cd4_cor <- cor.test(formula = ~ XX + XX,
@@ -195,7 +181,8 @@ cd4_cor_p <- cd4_cor$XX   # Get the p-value
 
 23. The problem is that when you knit your Markdown file, R changes your working directory to the folder where your markdown file is located. However, now that you moved your file to your `4_Markdown` folder, this isn't true anymore. You need to tell Markdown that the root directory of your project is one directory up! Thankfully this is easy to do. Just add the following code to your initial `setup` R chunk:
 
-```{r, echo = TRUE}
+
+```r
 # Tell R Markdown that the root directory is now one folder
 #   up from the folder the markdown file is in
 
@@ -212,9 +199,7 @@ knitr::opts_knit$set(root.dir = "../")
 
 ## Slideshow
 
-```{r, eval = TRUE, echo = FALSE, out.width = "50%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/xaringan_ss.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/xaringan_ss.png" width="50%" style="display: block; margin: auto;" />
 
 27. Now it's time to create a slideshow! To do this, we'll use the Ninja template ([click here for a demo](https://slides.yihui.name/xaringan/#1)) from the `xaringan` package (that's what we use for all of our BaselRBootcamp slides). Install the `xaringan` package by running `install.packages('xaringan')`
 
