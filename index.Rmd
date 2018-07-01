@@ -25,7 +25,7 @@ output: html_document
 
 ## Pizza
 
-[Pizza]("https://www.lieferando.de/valentino-italienisches-ristorante-bar")
+[Pizza](https://www.lieferando.de/valentino-italienisches-ristorante-bar)
 
 
 ## Schedule
