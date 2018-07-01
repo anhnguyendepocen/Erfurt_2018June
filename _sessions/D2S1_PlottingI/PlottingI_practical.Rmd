@@ -245,7 +245,6 @@ ggplot(data = XX,
   theme_XX()
 ```
 
-
 ```{r, echo = FALSE, eval = TRUE, fig.width = 4, fig.height = 4}
 ggplot(data = diamonds, 
        mapping = aes(x = carat)) + 
