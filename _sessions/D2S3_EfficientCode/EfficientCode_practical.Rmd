@@ -61,7 +61,7 @@ library(dplyr)
 # ---- code to profile
 
 # load data
-data <- read_csv('https://tinyurl.com/yat6z2nv')
+data <- read_csv('https://tinyurl.com/happy-csv')
 
 # remove rownames
 data <- data[-1]
@@ -109,7 +109,7 @@ summary(pacific_model)
 profvis({
   
   # load data
-  data <- read_csv('https://tinyurl.com/yat6z2nv')
+  data <- read_csv('https://tinyurl.com/happy-csv')
   
   # remove rownames
   data <- data[-1]
@@ -228,7 +228,7 @@ Let us now turn to a more complex code example. In the following exercises, we w
 profvis({
   
   # load data
-  data <- read_csv('https://tinyurl.com/yat6z2nv')
+  data <- read_csv('https://tinyurl.com/happy-csv')
   
   # remove rownames
   data <- data[-1]
@@ -279,7 +279,7 @@ In attempting to make code efficient, the first question should always be, is it
 
 ```{r, eval=F, echo=F}
 # ---- loading the data and saving it to disk
-data <- read_csv('https://tinyurl.com/yat6z2nv')
+data <- read_csv('https://tinyurl.com/happy-csv')
 write_csv(data, 'data/happiness.csv')
 
 # ---- profile code
