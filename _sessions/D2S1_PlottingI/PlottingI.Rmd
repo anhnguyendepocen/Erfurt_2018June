@@ -620,7 +620,8 @@ ggplot(data = mpg,
 <br>
 ```{r, fig.width = 7, fig.height = 4, eval = F}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth(col = "blue")
 ```
@@ -632,7 +633,8 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, echo = F}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth(col = "blue")
 ```
@@ -655,7 +657,8 @@ ggplot(data = mpg,
 <br>
 ```{r, fig.width = 7, fig.height = 4, eval = F}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth(col = "blue",
               method = "lm")
@@ -689,7 +692,8 @@ This is what happens, when you don't override...
 <br>
 ```{r, fig.width = 7, fig.height = 4, eval = F}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy,
+                     col = class)) +
   geom_point() + 
   geom_smooth() # no overriding
 ```
@@ -844,10 +848,10 @@ A plotting **theme** controls many aspects of its overall look, from the backgro
 
 Common themes are...
 
-`theme_bw()`
-`theme_minimal()`
-'theme_classic()`
-`theme_light()`
+`theme_bw()`<br>
+`theme_minimal()`<br>
+`theme_classic()`<br>
+`theme_light()`<br>
 `theme_dark()`
 
 ]
@@ -885,9 +889,9 @@ Common themes are...
 
 `theme_bw()`<br>
 `theme_minimal()`<br>
-'theme_classic()`<br>
+`theme_classic()`<br>
 `theme_light()`<br>
-`theme_dark()`<br>
+`theme_dark()`
 
 ]
 
@@ -924,9 +928,9 @@ Common themes are...
 
 `theme_bw()`<br>
 `theme_minimal()`<br>
-'theme_classic()`<br>
+`theme_classic()`<br>
 `theme_light()`<br>
-`theme_dark()`<br>
+`theme_dark()`
 
 ]
 
@@ -1022,7 +1026,7 @@ ggplot(data = mpg,
        mapping = aes(x = displ, 
                      y = hwy)) + 
   geom_point()  +
-  facet_wrap(~ class)  # Tilde first!
+  facet_wrap(~ class)  # Tilde first
 ```
 
 
@@ -1056,7 +1060,7 @@ ggplot(data = mpg,
 ```{r, fig.width = 8}
 # Create myplot
 myplot <- ggplot(data = mpg,
-                 aes(x = cty,
+                 aes(x = displ,
                      y = hwy)) + 
               geom_point() + 
               theme_bw()
