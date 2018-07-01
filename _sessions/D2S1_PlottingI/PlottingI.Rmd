@@ -50,7 +50,8 @@ options(digits = 4)
 ```
 
 ```{r, echo = FALSE ,message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE, fig.align = 'center')
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
+                      message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
 library(tidyverse)
 ```
 
