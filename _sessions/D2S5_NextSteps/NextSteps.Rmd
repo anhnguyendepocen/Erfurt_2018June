@@ -160,7 +160,7 @@ model %>%
 
 # Rcpp
 
-By now one of the most referenced R packages is Rcpp - **R's interface to C++**. With often relatively little effort due to **Rcpp sugar**, Rcpp can provide vast speed improvements, which many packages today rely on Rcpp in the background for **swift code execution**. Rcpp becomes particularly powerful, when supplemented with `BH`, which makes avaialble a collection **free, peer-reviewed C++ libraries**, and [RcppArmdillo](http://arma.sourceforge.net/), which available the high-performance *Armadillo* library for linear algebra methods. 
+By now one of the most referenced R packages is Rcpp - **R's interface to C++**. With often relatively little effort due to **Rcpp sugar**, Rcpp can provide vast speed improvements, which many packages today rely on Rcpp in the background for **swift code execution**. Rcpp becomes particularly powerful, when supplemented with `BH`, which makes available a collection **free, peer-reviewed C++ libraries**, and [RcppArmdillo](http://arma.sourceforge.net/), which available the high-performance *Armadillo* library for linear algebra methods. 
 
 
 .pull-left4[
@@ -325,7 +325,7 @@ The web is a great place to learn about R.
 
 [**R-bloggers**](www.r-bloggers.com) is a website on which R users inform each other on the newest developments. See, e.g., Nathaniel's [entry](https://www.r-bloggers.com/the-new-and-improved-pirateplot-now-with-themes/).
 
-[**Stackoverflow**](www.r-bloggers.com) is a website on which R users exchange problems and solutions to problems. Try post something yourself. You will be amazed by the turnaround. 
+[**Stackoverflow**](www.r-bloggers.com) is a website on which R users exchange problems and solutions to problems. Try posting something yourself. You will be amazed by the turnaround. 
 
 
 ]
