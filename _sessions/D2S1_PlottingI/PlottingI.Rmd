@@ -164,7 +164,7 @@ E.g. `barplot()` for a bar plot, `boxplot()` for a box plot, and `plot()` for a 
 # Scatterplot in base R
 plot(x = mpg$displ,
      y = mpg$cty,
-     xlab = "Cylinder displacement (l)",
+     xlab = "Engine Displacement in Liters",
      ylab = "City miles per gallon",
      main = "Scatterplot")
 ```
@@ -177,7 +177,7 @@ plot(x = mpg$displ,
 # Scatterplot in base R
 plot(x = mpg$displ,
      y = mpg$cty,
-     xlab = "Cylinder displacement (l)",
+     xlab = "Engine Displacement in Liters",
      ylab = "City miles per gallon",
      main = "Scatterplot")
 ```
@@ -196,7 +196,7 @@ plot(x = mpg$displ,
 3) No way to set plotting <b>themes</b>.<br>
 4) Can't store plots as <b>objects</b> to reference and update later</font><br><br><br>
 
-The plot to the right would take <b>a lot of code in Base R</b> but **just 8 lines of code**, 5 of which controlling the labels, in `ggplot2`.
+The plot to the right would take <b>a lot of code in Base R</b> but **just 10 lines of code**, 5 of which controlling the labels, in `ggplot2`.
 
 ]
 
@@ -355,7 +355,7 @@ Including only a `data` argument returns a blank plotting space, because we have
 
 .pull-right45[
 
-```{r, fig.width=5, fig.height=5}
+```{r, fig.width=4, fig.height=4}
 ggplot(data = mpg)
 ```
 
@@ -478,8 +478,8 @@ ggplot(data = mpg,
 
 ```{r, out.width= "100%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, 
-                fill = class)) + 
+  mapping = aes(x = class,
+                y = hwy)) + 
   geom_boxplot()
 ```
 
@@ -493,8 +493,8 @@ ggplot(data = mpg,
 
 ```{r, out.width= "100%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, 
-                fill = class)) + 
+  mapping = aes(x = class,
+                y = hwy)) + 
   geom_violin()
 ```
 
@@ -510,10 +510,9 @@ ggplot(data = mpg,
 ## geom_bar()
 <br>
 
-```{r, out.width= "80%", echo = TRUE, fig.width = 6, fig.height = 4}
+```{r, out.width= "100%", echo = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = class, 
-                fill = class)) + 
+  mapping = aes(x = class)) + 
   geom_bar()
 ```
 
@@ -528,7 +527,8 @@ ggplot(data = mpg,
 
 ```{r, out.width= "100%", echo = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = displ, y = hwy)) + 
+  mapping = aes(x = displ,
+                y = hwy)) + 
   geom_count()
 ```
 
@@ -538,7 +538,7 @@ ggplot(data = mpg,
 
 ---
 
-# Aesthetics
+# Aesthetics: `color`
 
 .pull-left4[
 
@@ -567,6 +567,17 @@ ggplot(data = mpg,
 
 
 ---
+<!---
+
+# Colors in R & `ggplot2`
+
+SLIDE TO BE ADDED
+
+EXPLAINS COLORS IN GGPLOT
+EXPLAINS COLORS IN R
+
+--->
+
 
 # What's next?
 
@@ -787,11 +798,11 @@ ggplot(data = mpg,
                      col = class)) +
   geom_point() + 
   geom_smooth(col = "blue", method = "lm") +
-  labs(x = "Engine Displ...",
-       y = "Highway miles...",
+  labs(x = "Engine Displacement in Liters",
+       y = "Highway miles per gallon",
        title = "MPG data",
-       subtitle = "Cars with ...",
-       caption = "Source...")
+       subtitle = "Cars with higher engine displacement tend to have lower highway mpg",
+       caption = "Source: mpg data in ggplot2")
 ```
 
 ]
@@ -809,11 +820,11 @@ ggplot(data = mpg,
                      col = class)) +
   geom_point() + 
   geom_smooth(col = "blue", method = "lm") +
-  labs(x = "Engine Displ...",
-       y = "Highway miles...",
+  labs(x = "Engine Displacement in Liters",
+       y = "Highway miles per gallon",
        title = "MPG data",
-       subtitle = "Cars with ...",
-       caption = "Source...")
+       subtitle = "Cars with higher engine displacement tend to have lower highway mpg",
+       caption = "Source: mpg data in ggplot2")
 ```
 
 ]
@@ -860,7 +871,7 @@ Common themes are...
 .pull-right45[
 
 ```{r, eval = F}
-ggplot(...) + theme_bw()
+ggplot(...) + theme_light()
 ```
 
 ```{r, fig.width = 8, echo = FALSE}
@@ -873,7 +884,7 @@ ggplot(data = mpg,
        y = "Highway miles...",
        title = "MPG data",
        subtitle = "Cars with ...",
-       caption = "Source...") + theme_bw()
+       caption = "Source...") + theme_light()
 ```
 
 ]
@@ -938,7 +949,7 @@ Common themes are...
 .pull-right45[
 
 ```{r, eval = F}
-ggplot(...) + theme_light()
+ggplot(...) + theme_bw()
 ```
 
 ```{r, fig.width = 8, echo = FALSE}
@@ -951,7 +962,7 @@ ggplot(data = mpg,
        y = "Highway miles...",
        title = "MPG data",
        subtitle = "Cars with ...",
-       caption = "Source...") + theme_light()
+       caption = "Source...") + theme_bw()
 ```
 
 ]
@@ -1093,7 +1104,7 @@ myplot # Evaluate myplot
 ```{r, fig.width = 6, fig.height = 4}
 # Create myplot
 myplot <- ggplot(data = mpg,
-                 aes(x = cty,
+                 aes(x = displ,
                      y = hwy)) + 
               geom_point() + 
               theme_bw()
