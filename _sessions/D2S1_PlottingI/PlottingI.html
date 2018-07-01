@@ -137,7 +137,7 @@ E.g. `barplot()` for a bar plot, `boxplot()` for a box plot, and `plot()` for a 
 # Scatterplot in base R
 plot(x = mpg$displ,
      y = mpg$cty,
-     xlab = "Cylinder displacement (l)",
+     xlab = "Engine Displacement in Liters",
      ylab = "City miles per gallon",
      main = "Scatterplot")
 ```
@@ -162,7 +162,7 @@ plot(x = mpg$displ,
 3) No way to set plotting &lt;b&gt;themes&lt;/b&gt;.&lt;br&gt;
 4) Can't store plots as &lt;b&gt;objects&lt;/b&gt; to reference and update later&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-The plot to the right would take &lt;b&gt;a lot of code in Base R&lt;/b&gt; but **just 8 lines of code**, 5 of which controlling the labels, in `ggplot2`.
+The plot to the right would take &lt;b&gt;a lot of code in Base R&lt;/b&gt; but **just 10 lines of code**, 5 of which controlling the labels, in `ggplot2`.
 
 ]
 
@@ -407,8 +407,8 @@ Common geoms are...
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, 
-                fill = class)) + 
+  mapping = aes(x = class,
+                y = hwy)) + 
   geom_boxplot()
 ```
 
@@ -425,8 +425,8 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, 
-                fill = class)) + 
+  mapping = aes(x = class,
+                y = hwy)) + 
   geom_violin()
 ```
 
@@ -447,12 +447,11 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = class, 
-                fill = class)) + 
+  mapping = aes(x = class)) + 
   geom_bar()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -466,7 +465,8 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = displ, y = hwy)) + 
+  mapping = aes(x = displ,
+                y = hwy)) + 
   geom_count()
 ```
 
@@ -478,7 +478,7 @@ ggplot(data = mpg,
 
 ---
 
-# Aesthetics
+# Aesthetics: `color`
 
 .pull-left4[
 
@@ -711,7 +711,7 @@ Common themes are...
 
 
 ```r
-ggplot(...) + theme_bw()
+ggplot(...) + theme_light()
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
@@ -769,7 +769,7 @@ Common themes are...
 
 
 ```r
-ggplot(...) + theme_light()
+ggplot(...) + theme_bw()
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
@@ -913,7 +913,7 @@ myplot # Evaluate myplot
 ```r
 # Create myplot
 myplot &lt;- ggplot(data = mpg,
-                 aes(x = cty,
+                 aes(x = displ,
                      y = hwy)) + 
               geom_point() + 
               theme_bw()
