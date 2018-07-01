@@ -27,33 +27,7 @@ output: html_document
 
 
 <p align="center"><br>
-    <img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt.png?raw=true" width=660><br>
+    <img border="0" alt="April2018Schedule" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/schedule_2018June_Erfurt_new.png?raw=true" width=660><br>
 
-
-<!---
-
-<br>
-
-## Recommended readings
-
-<br>
-
-<table width="60%" border="0">
-  <tr>    
-  <td> <a href="http://r4ds.had.co.nz/"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" width="100" height="100"></a></td>
-  <td><a href="https://bookdown.org/ndphillips/YaRrr/"><img border="0" alt="W3Schools" src="https://bookdown.org/ndphillips/YaRrr/images/YaRrr_Cover.jpg" width="100" height="100"></a></td>
-  <td><a href="http://adv-r.had.co.nz/"><img border="0" alt="W3Schools" src="https://images.tandf.co.uk/common/jackets/amazon/978146658/9781466586963.jpg" width="100" height="100"></a>
-</td>
-  </tr>
-</table>
-<br>
-
-R for Data Science by Grolemund and Wickham: [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/)
-<br>
-YaRrr! The Pirate's Guide to R! [https://bookdown.org/ndphillips/YaRrr/](https://bookdown.org/ndphillips/YaRrr/)
-<br>
-Advanced R by Wickham: [http://adv-r.had.co.nz/](http://adv-r.had.co.nz/) 
-
---->
 
 

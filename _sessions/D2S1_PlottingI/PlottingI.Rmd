@@ -567,6 +567,17 @@ ggplot(data = mpg,
 
 
 ---
+<!---
+
+# Colors in R & `ggplot2`
+
+SLIDE TO BE ADDED
+
+EXPLAINS COLORS IN GGPLOT
+EXPLAINS COLORS IN R
+
+--->
+
 
 # What's next?
 
