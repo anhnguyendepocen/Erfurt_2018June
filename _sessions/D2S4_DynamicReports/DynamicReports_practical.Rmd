@@ -195,7 +195,7 @@ cd4_cor_p <- cd4_cor$XX   # Get the p-value
 
 23. The problem is that when you knit your Markdown file, R changes your working directory to the folder where your markdown file is located. However, now that you moved your file to your `4_Markdown` folder, this isn't true anymore. You need to tell Markdown that the root directory of your project is one directory up! Thankfully this is easy to do. Just add the following code to your initial `setup` R chunk:
 
-```{r}
+```{r, echo = TRUE}
 # Tell R Markdown that the root directory is now one folder
 #   up from the folder the markdown file is in
 
