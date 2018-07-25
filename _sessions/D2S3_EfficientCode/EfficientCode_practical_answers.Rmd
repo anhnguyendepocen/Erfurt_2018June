@@ -12,6 +12,9 @@ knitr::opts_chunk$set(echo = TRUE,
                       error = FALSE,
                       fig.width = 6,
                       fig.height = 6)
+
+require(profvis)
+require(readr)
 ```
 
 
@@ -447,7 +450,7 @@ profvis({
   # print results
   results
   
-  }, interval = .005)
+  }, interval = .001)
 
 ```
 
@@ -475,7 +478,7 @@ jobs <- split(my_df, split_vec)
 
 10. Now, let's define our worker. We want to compute the mean of the columns of a data frame However, since we sliced the data frame in 100 pieces of 1,000 rows each, every worker will only have access to pieces of each variable. Thus, we need to find a way to also split the computation of the mean. One way to do this is to have the workers compute merely the sum of all the values they have access to and then later, when the results of all of the workers have been collected, to divide the sum of results by the total number of observations. In pseudo-code we will calculate: `sum(c(sum(worker_1), sum(worker_2), ..., sum(worker_100)) / 100000`. Thus, what we need is a function that computes the sums of columns of each slice of the data frame. It so happens that R has a convenient (but not exactly fast) tool to do this, called `apply()`. `apply()` is a function that allows you to apply functions to data frames (or matrices) row or column wise. `apply(my_df, 2, sd)`, for instance, iterates through the columns (1 = rows, 2 = columns) and calculates the standard deviation using `sd()`. To instead calculate the sum, we need to merely replace `sd` by `sum`, i.e., to use `apply(my_df, 2, sum)`. Now, we have our worker. The last thing we want to do is to store the worker in its own function. That is, we want to run `worker <- function(df) apply(df, 2, sum)`. Let's do this.    
 
-```{r, eval=F, echo=F}
+```{r}
 # define worker
 worker <- function(df) apply(df, 2, sum)
 ```
