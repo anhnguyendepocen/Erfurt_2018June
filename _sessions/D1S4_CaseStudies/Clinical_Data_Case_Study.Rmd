@@ -4,8 +4,14 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 output: html_document
 ---
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval = FALSE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      eval = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      error = FALSE,
+                      fig.width = 6,
+                      fig.height = 6)
 ```
 
 
@@ -165,9 +171,9 @@ trial_df <- trial_df %>%
 ```{r}
 trial_df <- trial_df %>%
   mutate(StudyArm = case_when(
-    StudyArm == 1 ~ "placebo",
-    StudyArm == 2 ~ "adiclax",
-    StudyArm == 3 ~ "dimarta"
+    StudyArm == "I" ~ "placebo",
+    StudyArm == "II" ~ "adiclax",
+    StudyArm == "III" ~ "dimarta"
   ))
 ```
 

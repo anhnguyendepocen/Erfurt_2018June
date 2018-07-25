@@ -4,8 +4,14 @@ author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>ww
 output: html_document
 ---
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      eval = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      error = FALSE,
+                      fig.width = 6,
+                      fig.height = 6)
 ```
 
 
@@ -32,7 +38,7 @@ Functions to profile your code are:
 
 Minimal chunks of code can conveniently be tested using `microbenchmark()`. 
 
-```{r, eval = F}
+```{r, eval = FALSE, echo = TRUE}
 # load packages
 library(microbenchmark)
 library(tibble)
@@ -51,7 +57,7 @@ microbenchmark(df[['var_1']], df$var_1, tbl$var_1)
 
 Larger code chunks or even scripts can be conveniently tested using `system.time()` and `profvis()` from the `profvis` package. The example below is based on the `happiness` data set from the `wooldridge` package.   
 
-```{r, eval = F}
+```{r, eval = FALSE, echo = TRUE}
 # ---- install and load packages
 install.packages('profvis')
 library(profvis)
@@ -160,7 +166,7 @@ profvis({
 
 1. Run the microbenchmark example from above. What do you observe? Is retrieving a variable from a `tibble` fast or slow? Pay attention to the unit. That is how different are the durations in absolute and relative terms? Do these differences matter? Consider, how often would you have to select a variable from either object in order to take up more than 1 second?
 
-```{r, eval = F, echo = F}
+```{r}
 # load packages
 library(microbenchmark)
 library(tibble)
@@ -176,7 +182,7 @@ microbenchmark(df[['var_1']], df$var_1, tbl$var_1)
 
 2. Although the absolute duration of selecting a variable may not be long, let us look at another option. Rerun the previous exercise and now also include `.subset2()` in the comparison. That is include `.subset2(df, 'var1')` and `.subset2(tbl, 'var1')` as additional arguments in microbenchmark. What do you find?
 
-```{r, eval = F, echo = F}
+```{r}
 # load packages
 library(microbenchmark)
 library(tibble)
@@ -193,7 +199,7 @@ microbenchmark(df[['var_1']], df$var_1, tbl$var_1,
 
 3. There is a particular reason for why some functions are faster than others. But before we go into that, let's look at another striking example. Compare the function `mean()` to a function that uses its basic ingredients `sum()` and `length()`, i.e., `my_mean_fun <- function(my_vec) sum(my_vec) / length(my_vec)`. To do this, first create a vector consisting of random numbers using `runif()` (see `?runif`). Make sure to use a long enough vector, e.g., `my_vec <- runif(1000000)`. Then test the original and your own mean function using `microbenchmark()`. What do you find? Which function is faster, yours or R's?
 
-```{r, eval = F, echo = F}
+```{r}
 # define vector
 my_vec <- runif(1000000)
 
@@ -209,7 +215,7 @@ microbenchmark(mean(my_vec), my_mean_fun(my_vec), .Internal(mean(my_vec)))
 
 4. So, why are some functions faster than others? Test the type of each of `mean()`, `sum()`, `length()` using `typeof()`. Noticed a difference between `mean()` and the rest? Now, test each of these functions again using `is.primitive()`. What do you find?
 
-```{r, eval = F, echo = F}
+```{r}
 # test type
 typeof(mean); typeof(sum); typeof(length)
 
@@ -224,7 +230,7 @@ Let us now turn to a more complex code example. In the following exercises, we w
 
 5. Copy the profiling example into a new script file, save it into your project, and run the `profvis()` function on the code. What parts of the code are most computationally expensive?
 
-```{r, eval = F, echo=F}
+```{r}
 profvis({
   
   # load data
@@ -277,7 +283,7 @@ profvis({
 In attempting to make code efficient, the first question should always be, is it really necessary. In this case, this is actually not the case. But, let's pretend it was. Clearly, there is some part of the code that take much more time than the rest. Let's try to fix these parts by making them faster. Why it is the code slow? Is it R or is there some other reason?   
 6. To speed up the reading of data, write it onto the hard drive (inside your project) using `write_csv()`. Now, change the code so that the file is not read from the URL, but from your hard drive? Has the code become faster? By how much?
 
-```{r, eval=F, echo=F}
+```{r}
 # ---- loading the data and saving it to disk
 data <- read_csv('https://tinyurl.com/happy-csv')
 write_csv(data, 'data/happiness.csv')
@@ -338,7 +344,7 @@ profvis({
 
 Note: You want to run this twice to let the compiler kick in. 
 
-```{r, eval=F, echo=F}
+```{r}
 
 # load data.table
 require(data.table)
@@ -396,7 +402,7 @@ profvis({
 
 8. Finally, consider that efficient programs are not only fast but also readable and maintainable. Try to apply what you have learned about data wrangling to improve this piece of code. Make it as readable and maintainable as you can. And, who knows, maybe the code also gets a little faster.
 
-```{r, eval=F, echo=F}
+```{r}
 # ---- profile code
 
 profvis({
@@ -455,7 +461,7 @@ Running code in parallel requires using a different programming style, but not b
 
 9. Let's define our jobs. We have the following data frame `my_df = as.data.frame(matrix(as.double(1:100000000), ncol = 100))`, which has 100 columns and 100,000 rows, and seek to split it into 100 individual parcels of 1,000 rows each (Note: `as.double` is needed to avoid integer overflow). One easy way of doing this is to use the `split()` function. The `split()` function is build to slice data frames row-wise as a function of the levels of another variable. That is, if we had a vector that had one value for the first 1,000 entries, another for the next 1,000 entries and so on, then `split` would create separate data frames for each different value and, thus, 100 parcels of 1,000 rows each. One easy way to create such a vector is to use `rep()`. `rep()` creates vectors by repeating its arguments' values. For instance, `rep(10, 5)` will create `10 10 10 10 10`. To create a vector with the said properties, we can make use of the fact that `rep()` is vectorized. That is, we can provide vectors for both arguments of the function. To cut things short, we can create our split vector using `split_vec <- rep(1:100, rep(1000, 100))`. Now apply `split()` to slice `my_df` using `split_vec` into 100 separate jobs. What type of object does `split()` return?
 
-```{r, eval=F, echo=F}
+```{r}
 # my_mat
 my_df = as.data.frame(matrix(as.double(1:100000000), ncol = 100))
 
@@ -477,7 +483,7 @@ worker <- function(df) apply(df, 2, sum)
 11. Alright, we have a jobs object and we have our worker function. Let's run those in parallel. To do this, we will be working with R's `parallel` package, which for a couple of years now is part of the standard R distribution The first step in running jobs in parallel is to set up a cluster of R instances. To do this, we use the function `makeCluster()`. Specify the number of R instances to be contained in the cluster and assign the cluster to an object, e.g., `cl <- makeCluster(8)`. I have chosen 8 because I have 8 (virtual) processors in my computer. You may have more or less. It makes sense to choose a number that is close to the number of processors in your computer. If you don't know how many processors you have, test it using `detectCores()`. OK, now that we have our cluster `cl` the next step is to actually run the jobs in parallel. To do this, we use `clusterApplyLB()`, which takes three arguments: (1) the cluster object, (2) the jobs, and (3) the worker, each of which we should now be ready to supply. Use `clusterApplyLB(cl, jobs, worker)` and don't forget to assign the output to a new object. The last part of running parallel is to stop the cluster using `stopCluster(cl)`. Try it out and store the result in `my_result`. 
 
 
-```{r, eval=F, echo=F}
+```{r}
 # load parallel
 library(parallel)
 
@@ -495,7 +501,7 @@ stopCluster(cl)
 12. The last step of parallel computing is to collect the results and extract the information of interest. In this case, this means that we need to sum up the values provided by the workers for each variable and divide them by the total number of rows. One convenient way of doing this is to bind the results into a matrix, where the columns represent the original columns and the rows represent the number of jobs. One function that makes this super easy is `do.call()`. Try `my_result_mat <- do.call(rbind, my_result)`. The only thing left to do now, is to compute again the sums of each column - here we can again make use of our worker - and then to divide the results by the total number of rows. Let's do this.           
 
 
-```{r, eval=F, echo=F}
+```{r}
 # bind results to matrix
 my_result_mat <- do.call(rbind, my_result)
 
@@ -506,7 +512,7 @@ worker(my_result_mat) / nrow(my_df)
 
 13. Finally, compare the speed of applying the worker to the entire object versus running it in parallel using `system.time()`. One convenient way to compare the two is store all of the parallel code, beginning with splitting the matrix and ending with calculating the sums of sums and dividing by N, inside a function. What do you observe?   
 
-```{r, eval=F, echo=F}
+```{r}
 # my_df
 my_df = as.data.frame(matrix(as.double(1:100000000), ncol = 100))
 
@@ -555,7 +561,7 @@ Essentially, using C++, C++-libraries, and multi-threading allows you to tap int
 
 14. Below you see a piece of C++ code. Your first task is to copy this code into a new C++ file. To do this, first select File/New File/C++ File from the RStudio menu, which will create a new script for C++ code. Next delete everything in that script and replace it by the code below. Finally, save the File on the hard drive inside your project. 
 
-```{r, eval=F, echo=T}
+```{r, eval = FALSE, echo = TRUE}
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -580,7 +586,7 @@ NumericVector col_means_cpp(DataFrame& df) {
 
 Why does the result of this comparison differ from that in the slides?
 
-```{r, eval=F, echo=F}
+```{r, echo = TRUE}
 
 # ----- Load C++ code
 
@@ -624,7 +630,7 @@ List fast_lm(const arma::mat& X, const arma::colvec& y) {
   }
 ```
 
-```{r, eval=F, echo=T}
+```{r, echo=T}
 
 # Create data
 d = data.frame(

@@ -1,11 +1,17 @@
 ---
 title: "Dimarta Clinical Trial- Case Study"
-author: "BaselRBootcamp April 2018"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 output: html_document
 ---
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      error = FALSE,
+                      fig.width = 6,
+                      fig.height = 6)
 ```
 
 
@@ -76,7 +82,7 @@ In addition to exploring the effects of the three medications, the researchers a
 
 ## Data Description
 
-The data for this case study are in three separate files: `dimarta_biomarker.csv`, `dimarta_demographics.csv`, and  `dimarta_trial.csv`. The files are located in the `data_BaselRBootcamp_Day2.zip` folder available through the schedule.  Here are descriptions of the columns in these files:
+The data for this case study are in three separate files: `dimarta_biomarker.csv`, `dimarta_demographics.csv`, and  `dimarta_trial.csv`. Here are descriptions of the columns in these files:
 
 **dimarta_trial.csv**
 
@@ -127,7 +133,7 @@ Table: Table3. "dimarta_biomarker.csv" variable description:
 
 2. Open a new R script and save it as a new file in your `R` folder called `dimarta_casestudy.R`. At the top of the script, using comments, write your name and the date. Then, load the `tidyverse` package. Here's how the top of your script should look:
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r, echo = TRUE}
 ## My Name
 ## The Date
 ## Dimarta - Case Study
@@ -137,7 +143,7 @@ library(tidyverse)
 
 3. Using `read_csv()`, load the `dimarta_trial.csv`, `dimarta_demographics.csv`, and `dimarta_biomarker.csv` datasets as *three* new objects called `trial_df`, `demographics_df`, and `biomarker_df`.
 
-```{r, eval = FALSE, echo = TRUE}
+```{r, echo = TRUE}
 trial_df <- read_csv(file = "data/dimarta_trial.csv")
 demographics_df <- read_csv(file = "data/dimarta_demographics.csv")
 biomarker_df <- read_csv(file = "data/dimarta_biomarker.csv")
@@ -165,9 +171,9 @@ trial_df <- trial_df %>%
 ```{r}
 trial_df <- trial_df %>%
   mutate(StudyArm = case_when(
-    StudyArm == 1 ~ "placebo",
-    StudyArm == 2 ~ "adiclax",
-    StudyArm == 3 ~ "dimarta"
+    StudyArm == "I" ~ "placebo",
+    StudyArm == "II" ~ "adiclax",
+    StudyArm == "III" ~ "dimarta"
   ))
 ```
 
@@ -184,7 +190,7 @@ demographics_df <- demographics_df %>%
 
 8. Now let's create a new object called `dimarta_df` that combines data from `trial_df` and `demographics_df`. To do this, use `left_join()` to combine the `trial_df` data with the `demographics_df` data. This will merge the two datasets so you can have the study results and demographic data in the same dataframe. Make sure to assign the result to a new object called `dimarta_df`
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, echo = TRUE}
 # Create a new dataframe called dimarta_df that contains both trial_df and demographics_df
 dimarta_df <- trial_df %>%
   left_join(demographics_df)

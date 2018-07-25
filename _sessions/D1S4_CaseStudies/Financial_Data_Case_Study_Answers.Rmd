@@ -1,17 +1,26 @@
 ---
-title: 'Case study: Stock Market'
-output:
-  pdf_document: default
-  html_document: default
+title: "Stock Market - Case Study"
+author: "The R Bootcamp @ Erfurt<br/><a href='https://therbootcamp.github.io'>www.therbootcamp.com</a><br/><a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      error = FALSE)
 ```
 
 ## Overview
 
-In this case study, you will jointly analyse historic data of three major stock indices, the **Dow Jones**, the **DAX**, and the **Nikkei**, and the exchange rates between the **US dollar**, the **Euro**, and the **Yen**. Using this data, you will address several questions. How large was the impact of the recent financial crisis on the respective stock markets? How correlated is the development between the stock markets? What is the relationship between stock market returns and exchange rates? To address these questions, you will import several data files, while tuning import parameters to match the idiosyncracies of the data. You will merge the data files into a single data frame, and mutate the data to reflect changes in index price and exchange rate. You will analyze correlations of stock indices among themselves and to exchange rates. You create illustrative plots for each of the analyses. Below you will find several tasks that will guide you through these steps. For the most part these tasks require you to make use of what you have learned in the sessions **Data I/O**, **Data Wrangling**, and **Statistics**. However, they will also go beyond what you have learned, in particular when it comes to plotting. In those cases, the tasks will provide the necessary code and guidance.  
+In this case study, you will evaluate the development of three major stock indices, the **Dow Jones**, the **DAX**, and the **Nikkei**, over the last few decades and their relationships to the exchange rates between the respective currencies, the **US dollar**, the **Euro**, and the **Yen**. You will address several questions: How large was the impact of the recent financial crisis on the stock indices? How correlated is the development between the three stock indices? What is the relationship between stock indices and exchange rates? 
+
+To address these questions, you perform the following steps. First, you will import several raw data files. Importing these data files will require that you adjust some of the import parameters to account for minor idiosyncracies of the individual data files. Next, you will merge data files into a single data frame and create new variables that reflect changes in index prices and exchange rates. Using the combined data, you then analyze correlations of index prices and exchange rates. Finally, you will create plots illustrating the results of these analyses. 
+
+Below you will find a series of small tasks that will guide you through these steps. For the most part these tasks require you to make use of what you have learned in the sessions **Intro to R**, **Data Wrangling**, and **Statistics**. However, they will also go beyond. In these cases, you will often have to do some figuring out on your own using, for instance, the help files of individual functions. In several cases, you will also be provided with important code snippets and explanations to help you complete the tasks. 
+
+Remember: Struggle, ask for help, struggle! Good luck!
 
 | Variable| Description|
 |:------------------------------|:----------------------------------------------------------------|
@@ -33,11 +42,11 @@ Table: Variables of data sets "\^DJI.csv", "\^GDAXI.csv", "\^N225.csv"
 Table: Variables of data sets "euro-dollar.txt", "yen-dollar.txt"
 
 
-## Data I/O
+## Intro to R
 
 1. Open a new R script and save it as a new file called `finance_case_study.R`. At the top of the script, using comments, write your name and the date. Then, load the `tidyverse`package. Here's how the top of your script should look:
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r, echo = TRUE}
 ## NAME
 ## DATE
 ## Sales Data - Case Study
@@ -46,10 +55,10 @@ library(tidyverse)
 
 ```
 
-2. Load in the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from the data folder, using the `read_csv()`-function. In so doing, set an explicit `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" use a specific character string to represent missings in the data. To identify the NA-character string in the data open one of them (in a standard text viewer, e.g., *textedit*).   
+2. Import the stock index data sets, "\^DJI.csv", "\^GDAXI.csv", and "\^N225.csv", from the data folder, using the `read_csv()`-function. In so doing, explicitly set the `na`-argument to account for the fact that "\^GDAXI.csv" "\^N225.csv" contain a specific character string to represent missings in the data. To do this, you must first identify the string used to represent `NA`s. To do this open one of the files in a standard text viewer, e.g., *textedit*, and brows through the data file. When you have identfied the character string, set the `na`-argument to that character string and import the data.  
 
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # Load index data from local data folder 
 dow <- read_csv(file = '^DJI.csv')
 dax <- read_csv(file = '^GDAXI.csv', na = 'null')
@@ -57,9 +66,9 @@ nik <- read_csv(file = '^N225.csv', na = 'null')
 
 ```
 
-3. Load in the exchange rate data sets, "euro-dollar.txt" and "yen-dollar.txt", from the data folder, using the `read_delim()`-function and `\t` as the `delim`-argument (separates by *tabulator*). Observe the inferred data types and the variables names. There's something wrong. First, we want the columns to be called `Date` and `Rate` (and not be taken from the first row). To achieve this, include the `col_names`-argument and assign to it a vector that contains the variable names. Second, we want the `Date`-variable to be of type `date`. To achieve this, use the `parse_date` function  with `format = '%d %b %Y'`, which specifies the exact format the dates are formatted in, and overwrite the existing `Date`-variable.  
+3. Import the exchange rate data sets, "euro-dollar.txt" and "yen-dollar.txt", from the data folder, using the `read_delim()`-function. To account for the specific delimiter used in the data sets, set the `delim`-argument to `\t` (the *tabulator* symbol). After having read in the data, inspect the inferred data types and variables names. Something's wrong, right? We want the columns names to be something like `Date` and `Rate` (and not values taken from the first row of data). To achieve this, set the `col_names`-argument to a vector that specifies the said variable names. We also want the `Date`-variable to be of type `date`. You can achieve this using the `parse_date()`-function with the `format`-argument set to `'%d %b %Y'`, which tells R the format the dates comes in. For simplicity, simply overwrite the existing `Date`-variable the vector of `Date`-values created by `parse_date()`.  
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # Load exchange rate data from local data folder 
 eur_usd <- read_delim(file = 'euro-dollar.txt', delim = '\t', col_names = c('Date', 'Rate'))
 yen_usd <- read_delim(file = 'yen-dollar.txt', delim = '\t', col_names = c('Date', 'Rate'))
@@ -69,9 +78,9 @@ eur_usd$Date <- parse_date(eur_usd$Date, format = '%d %b %Y')
 yen_usd$Date <- parse_date(yen_usd$Date, format = '%d %b %Y')
 ```
 
-4. Get a first impression of the datasets using `print()`, `typeof()` and `str()`. What type are the data objects, what variables do they contain?
+4. Great, now that you've imported the different datasets, spend some time and get an  impression of the datasets using `print()`, `typeof()` and `str()`. What type are the data objects, what variables do they contain?
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # Inspect data
 typeof(dow) ; str(dow)
 typeof(dax) ; str(dax)
@@ -83,9 +92,11 @@ typeof(yen_usd) ; str(yen_usd)
 
 ## Data Wrangling
 
-5. Create a single data frame from all five datasets that includes only the variables containing the dates, the stock index (unadjusted) closing prices, and the exchange rates. Do this by *piping* (i.e., using `%>%`) together several `inner_join()`-functions, joining the data sets one-by-one using the `Date` variable. At the end, rename the variables appropriately using the `rename()`-function. Note, in joining two data sets you can control the naming of overlapping variable names using the `suffix`-argument of the `inner_join()`-function. Observe that `inner_join()` takes care of the fact that different dates are available in each of the data sets by only retaining dates for which all data sets provide data on.  
+5. To analyze the data is is often useful to have all relevant variables in a single data frame. Create now a single data frame containing one variable containing the dates, each stock index' (unadjusted) closing prices, and the two exchange rates. Do this by *piping* (i.e., using `%>%`) together several `inner_join()`-functions. That is, first join datasets one and two, then join the combined data set of one and two with dataset three, and so on. Set the `by`-argument to `Date`. When done, rename the variables appropriately using the `rename()`-function (which can also be *piped*, i.e., added, to the `join`-commands). 
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+Note that when joining two data sets, you can control the naming of overlapping variable names using the `suffix`-argument. Also note that `inner_join()` takes care of the fact that different dates are available in each of the data sets by only retaining dates for which all data sets provide data on.  
+
+```{r}
 # create single data frame
 data = dow %>% select('Date','Close') %>% 
   inner_join(dax %>% select('Date','Close'), by = 'Date', suffix = c('_dow','_dax')) %>%
@@ -96,9 +107,9 @@ data = dow %>% select('Date','Close') %>%
 
 ```
 
-6. Create new variables containing the change in index price and exchange rate for each variable using the `mutate`-function(). To compute the change, use the `diff()`-function. Since `diff()` will return `n - 1` change values, add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
+6. Create new variables containing the change in index price and exchange rate for each variable using the `mutate()`-function. Vectors that reflect value changes can conveniently computed using the `diff()`-function. Note that since `diff()` will return `n - 1` change values, you have to add an `NA` at the first position of the change variable à la `c(NA, diff(my_variable))`. 
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # create variables representing day-to-day changes
 data = data %>% mutate(
   Close_dow_change = c(NA, diff(Close_dow)),
@@ -110,9 +121,9 @@ data = data %>% mutate(
 
 ```
 
-7. Create a variable containing merely the year of the date variable using `mutate()` and `year()` from the `lubridate`-package (should have been installed with the `tidyverse`). First, load the `lubridate`-package.
+7. Create a variable containing merely the year of the date variable using `mutate()` and the `year()`-function from the `lubridate`-package (should have been installed with the `tidyverse`, if not install using `install.packages()`). Don't forget to load the package before using it.
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # load lubridate
 library(lubridate)
 
@@ -121,18 +132,18 @@ data = data %>% mutate(year = year(Date))
 
 ```
 
-8. Create a long version of data frame, in which variables occupy different rows rather than columns, using the `gather()`-function from the `tidyr`-package (also part of the `tidyverse`). To do this use the command below. You may have to (or want to) change the object/variable names. The first two arguments (given we used *pipes*) to the `gather`-function specify the names of the new variables, the third and fourth specify the names of the variable containing the dates and years with a leading hyphen. Check out the example in the `?gather`-help file. When done, inspect the object and compare it (visually) to the original, wide version.   
+8. Finally, create a long version of data frame that represents variables as different rows rather than columns. Do this using the `gather()`-function from the `tidyr`-package (also part of the `tidyverse`) via the command below. You may have to adjust the object/variable names. Check out the example in the `?gather`-help file. When done, inspect the object and compare it (visually) to the original, wide version.   
 
-```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r, echo = TRUE}
 # create long version of data frame
 long_data = data %>% gather(variable, value, -Date, -year)
 ```
 
 ## Statistics (& Plotting)
 
-8. Plot the price development of the three stock indices using the following command (using the long data object). The code uses a modern and very powerful plotting package called `ggplot2`, which you will be introduced to on the second weekend of the course. For the code to work, you may have to adjust the object and variable names to match the ones in your data frame. Inspecting the plot, do you see a significant drop anywhere?   
+8. Now let us visually inspect some of the relationships. Plot the price development of the three stock indices using the code below (based on the long data object). The code uses a modern and very powerful plotting package called `ggplot2`, which you will be introduced to later in the course. For the code to work, you may have to adjust the object and variable names to match the ones in your data frame. Inspecting the plot, do you see a significant drop anywhere?   
 
-```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r, echo = TRUE}
 # create long version of data frame
 temp_data <- long_data %>% filter(variable %in% c("Close_dow","Close_dax","Close_nik"))
 ggplot(data = temp_data, mapping = aes(x = Date, y = value)) + 
@@ -141,9 +152,9 @@ ggplot(data = temp_data, mapping = aes(x = Date, y = value)) +
 
 ```
 
-9. Calculate the overall stock index price change per year. Use `group_by()`, `summarize()`, and `sum()` on the stock index change variables. Remember there were `NA`'s in two of the stock index price variables. When was the biggest drop in stock index prices?
+9. What do the numbers say? Calculate the overall stock index price change per year. Use `group_by()`, `summarize()`, and `sum()` on the stock index change variables. Remember the `NA`'s in two of the stock index price variables. You have to deal with them. When was the biggest drop in stock index prices?
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 # calculate aggregate change per year
 aggregate_change <- data %>% 
   group_by(year) %>% 
@@ -156,9 +167,9 @@ aggregate_change
 
 ```
 
-10. Now that you know when the biggest drop occured, do you not wonder which stock index suffered the biggest loss? Compare the overall losses to the index price on the first trading day of that year. To do this, first identify the first date available for that year and then `filter()` the data based on the respective character string to retrieve that day's closing prices. Then divide the overall stock price change by that years first closing price. Which stock index suffered the greatest relative loss?  
+10. Now that you know the time at which the biggest drop occured, you may wonder which stock indices was most affected? Compare the overall losses in index prices on the first trading day of the respective year. To do this, identify the first date available for that year and then `filter()` to select the value for the first trading day. Then divide the overall change in in that year's stock price that the first day's closing price. Which stock index suffered the greatest relative loss?  
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 aggregate_change %>% 
   filter(year == 2008) %>% 
   select(-1) / data %>% 
@@ -167,18 +178,22 @@ aggregate_change %>%
 
 ```
 
-11. One driver behind the results observed for the last two tasks is that modern financial markets are closely intertwined, to the extend that a change in one market can bring about a change in the markets. Evaluate this aspect of financial markets by correlating the stock index change variables among each other using `cor()`. Note that `cor()` can take a data frame as an argument to produce the full correlation matrix among all variables. Also, don't forget about the `NA`s - there is an argument for `cor()` to deal with them. How closely are the stock indices related and which ones are most closely related?  
+11. The results, so far, seem tosuggest large co-dependencies between financial markets, in the sense that a change in one market can bring about changes in other markets. Evaluate this aspect of financial markets more directly by correlating the stock index change variables among each other using `cor()`. 
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+Note that `cor()` produces the full correlation matrix when provided with a data frame. Also, don't forget about the `NA`s - there is an argument for `cor()` to deal with them. Take a look at `?cor`. How closely are the stock indices related and which ones are most closely related?  
+
+```{r}
 
 data %>% 
   select(Close_dow_change, Close_dax_change, Close_nik_change) %>%
   cor(., use = 'complete.obs')
 ```
 
-12. Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. Note that here have to specify each pairwise correlation separately in order to `summarize()` the correlation for each year (rather than computing the entire correlation matrix). 
+12. Evaluate the stability of the relationships between financial markets by analyzing the correlations for each year. To do this use the `group_by()` and `summarize()`-functions.
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+Note that, in this case, you will have to specify each pairwise correlation separately. 
+
+```{r}
 
 data %>% 
   group_by(year) %>% 
@@ -189,17 +204,17 @@ data %>%
 )
 ```
 
-13. Another important index of the financial markets is the exchange rate to other currencies. Generally, it is assumed that a strong economcy translates in both a strong stock index and a strong currency relative to other currencies. First, evaluate whether changes in exchange rates correlate with each other the same way that stock indices do. 
+13. Another important index of the financial markets is the exchange rate of its currency to that of other markets. Commonly, it is assumed that a strong economcy translates in both a strong stock index and a strong currency relative to other currencies. Towards evaluating this claim, that stock index prices and exchange rates move the same way, begin by evaluating whether exchange rate changes correlate with each other the same way that stock indices do. 
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 data %>% 
   select(Rate_eur_change, Rate_yen_change) %>%
   cor(., use = 'complete.obs')
 ```
 
-14. Now evaluate whether exchange rates vary as a function of the difference between stock indices. I.e., does, for instance, a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theory has also produced an alternative hypothesis. That is, foreign investors who benefit from a rise in stock index price may be motivated to sell their holdings and exhange them for their own currency to mantain a neutral position. This would, in effect, depreciate the currency at the same time as the stock index is outperforming, thus producing a negative relationship. What do you think? Ask the data.
+14. Now evaluate directly whether exchange rates co-vary with differences between stock indices prices. For instance, does a large difference between Dow Jones and DAX translate into a strong Dollar relative to the EURO? Based on the above intuition this should be the case. However, economic theorizing has also lead to postulating the alternative hypothesis. Foreign investors who benefit from a rise in stock index price, so the logic, may be motivated to sell their holdings and exhange them for their own currency to mantain a balanced portfolio. This would, in effect, lead to a depreciation of the currency at the same time as the stock index is outperforming and thus to a negative relationship between the two variables. What do you think? Ask the data.
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 data %>% 
   summarize(
     cor_dow_dax = cor(Close_dow - Close_dax, Rate_eur, use = 'complete.obs'),
@@ -207,9 +222,9 @@ data %>%
   )
 ```
 
-15. Now, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.
+15. Finally, evaluate the stability of the above relationship for each year separately? Can you make out a stable pattern? No? I guess it depends.
 
-```{r, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+```{r}
 
 data %>% 
   group_by(year) %>% 
